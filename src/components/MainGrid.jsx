@@ -1,4 +1,3 @@
-import React from "react";
 import "../scss/MainGrid.scss";
 
 const MainGrid = ({ items }) => {
@@ -12,7 +11,7 @@ const MainGrid = ({ items }) => {
             <div className="grid__placeholder"></div>
           )}
           <div className="grid__info">
-            <h3>{item.title}</h3>
+            <h3>{item.title.length > 30 ? `${item.title.slice(0, 30)}...` : item.title}</h3>
             <p>{item.price}</p>
           </div>
         </div>

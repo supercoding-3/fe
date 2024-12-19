@@ -1,4 +1,3 @@
-import React from "react";
 import "../scss/MainList.scss";
 import ahri from "../assets/images/ahri.jpeg";
 import Search from "../components/Search";
