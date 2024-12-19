@@ -35,14 +35,6 @@ const Header = () => {
           )}
         </div>
       </header>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search"
-          className="search-bar__input"
-        />
-        <button className="search-bar__button">검색</button>
-      </div>
     </>
   );
 };

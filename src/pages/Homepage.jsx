@@ -1,12 +1,9 @@
-import Header from "../components/layout-page/Header";
-import Main from "../components/layout-page/Main";
-import Footer from "../components/layout-page/Footer";
+import MainList from "../homepage/MainList";
+
 
 const Homepage = () => {
   return ((<>
-    <header><Header/></header>
-    <main><Main/></main>
-    <footer><Footer/></footer>
+    <main><MainList/></main>
   </>))
 
 };

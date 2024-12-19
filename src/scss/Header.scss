@@ -64,29 +64,3 @@
     }
   }
 }
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 40px 240px;
-
-  &__input {
-    flex-grow: 1;
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 8px 16px;
-  }
-
-  &__button {
-    border: 1px solid gray;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #e0e0e0;
-    }
-  }
-}

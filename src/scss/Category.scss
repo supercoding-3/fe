@@ -1,0 +1,18 @@
+.category {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.category-btn {
+  background-color: #333333;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+
+  .hover {
+    background-color: #666666;
+  }
+}
