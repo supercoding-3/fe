@@ -1,5 +1,11 @@
+import MainList from "../homepage/MainList";
+
+
 const Homepage = () => {
-  return <div>Homepage</div>;
+  return ((<>
+    <main><MainList/></main>
+  </>))
+
 };
 
 export default Homepage;
