@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import profilePlaceholder from "../../assets/images/placeholder-profile.jpeg";
 import "../../scss/Header.scss";
 
@@ -6,13 +7,20 @@ const Header = () => {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setDropDownOpen(!isDropDownOpen);
+    setDropDownOpen((prev) => !prev);
+  };
+
+  const closeDropdown = () => {
+    setDropDownOpen(false);
   };
 
   return (
     <>
       <header className="header">
-        <div className="header__logo">logo</div>
+        <div className="header__logo">
+          <Link to="/">logo</Link>
+        </div>
+
         <div className="header__profile">
           <button
             className="header__profile-button"
@@ -25,11 +33,20 @@ const Header = () => {
               className="header__profile-image"
             />
           </button>
+
           {isDropDownOpen && (
             <div className="header__dropdown">
               <ul className="header__dropdown-list">
-                <li className="header__dropdown-item">로그인</li>
-                <li className="header__dropdown-item">회원가입</li>
+                <li className="header__dropdown-item">
+                  <Link to="/login" onClick={closeDropdown}>
+                    로그인
+                  </Link>
+                </li>
+                <li className="header__dropdown-item">
+                  <Link to="/signup" onClick={closeDropdown}>
+                    회원가입
+                  </Link>
+                </li>
               </ul>
             </div>
           )}
