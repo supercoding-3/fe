@@ -7,6 +7,7 @@ import AuthPage from '../pages/AuthPage';
 import AddProductPage from '../pages/AddProductPage';
 import DetailPage from '../pages/DetailPage';
 import ChatPage from '../pages/ChatPage';
+import ChatListPage from '../pages/ChatListPage';
 import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -25,7 +26,8 @@ const Router = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route element={<PrivateRoute isLogin={isLogin} />}>
             <Route path="/product/add" element={<AddProductPage />} />
-            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/chat" element={<ChatListPage />} />
+            <Route path="/chat/:id" element={<ChatPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
