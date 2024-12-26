@@ -8,8 +8,8 @@ import DetailPage from '../pages/DetailPage';
 import ChatPage from '../pages/ChatPage';
 import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
-import Login from "../components/authpage/Login";
-import SignUp from "../components/authpage/SignUp";
+import LoginPage from "../components/authpage/LoginPage";
+import SignUpPage from "../components/authpage/SignUpPage";
 
 const Router = () => {
   // TODO: useSelector로 실제 값 가져오기
@@ -20,8 +20,8 @@ const Router = () => {
       <Routes>
         <Route element={<LayoutPage />}>
           <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/product/:id" element={<DetailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route element={<PrivateRoute isLogin={isLogin} />}>

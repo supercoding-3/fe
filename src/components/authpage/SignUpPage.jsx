@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "../../scss/SignUp.scss";
 
-const SignUp = () => {
+const SignUpPage = () => {
   const {
     register,
     handleSubmit,
@@ -133,4 +133,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form";
 import "../../scss/Login.scss";
 import {Link} from "react-router-dom";
 
-const Login = () => {
+const LoginPage = () => {
   const {
     register,
     handleSubmit,
@@ -50,4 +50,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
