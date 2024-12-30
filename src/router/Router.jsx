@@ -2,15 +2,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 // pages
 import LayoutPage from '../pages/LayoutPage';
-import Homepage from '../pages/Homepage';
+import HomePage from '../pages/HomePage';
 import AddProductPage from '../pages/AddProductPage';
 import DetailPage from '../pages/DetailPage';
 import ChatPage from '../pages/ChatPage';
 import ChatListPage from '../pages/ChatListPage';
 import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
-import LoginPage from "../components/authpage/LoginPage";
-import SignUpPage from "../components/authpage/SignUpPage";
+import LoginPage from '../components/authpage/LoginPage';
+import SignUpPage from '../components/authpage/SignUpPage';
 
 const Router = () => {
   // TODO: useSelector로 실제 값 가져오기
@@ -20,7 +20,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<LayoutPage />}>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/product/:id" element={<DetailPage />} />
