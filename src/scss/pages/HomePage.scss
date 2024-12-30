@@ -1,0 +1,23 @@
+.container {
+  padding: 16px;
+}
+
+.scroll-top {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 16px;
+  right: 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #333;
+  }
+}

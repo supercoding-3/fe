@@ -1,4 +1,4 @@
-import "../scss/MainGrid.scss";
+import '../../scss/components/homepage/MainGrid.scss';
 
 const MainGrid = ({ items }) => {
   return (
@@ -11,7 +11,11 @@ const MainGrid = ({ items }) => {
             <div className="grid__placeholder"></div>
           )}
           <div className="grid__info">
-            <h3>{item.title.length > 30 ? `${item.title.slice(0, 30)}...` : item.title}</h3>
+            <h3>
+              {item.title.length > 30
+                ? `${item.title.slice(0, 30)}...`
+                : item.title}
+            </h3>
             <p>{item.price}</p>
           </div>
         </div>
