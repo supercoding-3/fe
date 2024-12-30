@@ -1,17 +1,40 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from '../../axios/axios';
 import '../../scss/components/authpage/LoginForm.scss';
 
-const LoginPage = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log('로그인 데이터:', data);
-    // TODO: 로그인 API 호출
+  const onSubmit = async (data) => {
+    const requestBody = {
+      userEmail: data.email,
+      userPassword: data.password,
+    };
+
+    try {
+      // API 호출
+      const response = await axios.post('/user/login', requestBody);
+
+      if (response.status === 200) {
+        // 로그인 성공 처리
+        alert('로그인 성공!');
+        // TODO: 사용자 정보를 저장하거나, 토큰 처리
+        navigate('/'); // 홈으로 리디렉션
+      }
+    } catch (error) {
+      if (error.response) {
+        // 서버에서 반환된 오류 메시지
+        alert(`로그인 실패: ${error.response.data.message}`);
+      } else {
+        alert('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
+    }
   };
 
   return (
@@ -55,7 +78,7 @@ const LoginPage = () => {
         <div className="sign-up">
           계정이 없으신가요?
           <span>
-            <Link to="/signUp"> 회원가입</Link>
+            <Link to="/signup"> 회원가입</Link>
           </span>
         </div>
       </div>
@@ -63,4 +86,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginForm;

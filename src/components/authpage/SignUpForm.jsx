@@ -1,8 +1,9 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import axios from '../../axios/axios';
 import '../../scss/components/authpage/SignUpForm.scss';
 
-const SignUpPage = () => {
+const SignUpForm = () => {
   const {
     register,
     handleSubmit,
@@ -10,12 +11,34 @@ const SignUpPage = () => {
     watch,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log('회원가입 데이터:', data);
-    // TODO: 회원가입 API 호출
-  };
-
+  const navigate = useNavigate();
   const password = watch('password');
+
+  const onSubmit = async (data) => {
+    const requestBody = {
+      userEmail: data.email,
+      userPassword: data.password,
+      userNickname: data.nickname,
+      userPhone: data.phone,
+      userIsDeleted: false,
+    };
+
+    try {
+      const response = await axios.post('/user/signup', requestBody, {
+        withCredentials: true,
+      });
+      if (response.status === 201) {
+        alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+        navigate('/login');
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(`회원가입 실패: ${error.response.data.message}`);
+      } else {
+        alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
+    }
+  };
 
   return (
     <div className="signup">
@@ -135,7 +158,6 @@ const SignUpPage = () => {
         </button>
       </form>
 
-      {/* 로그인 링크 */}
       <div className="redirect-login">
         이미 계정이 있으신가요? <Link to="/login">로그인</Link>
       </div>
@@ -143,4 +165,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUpForm;
