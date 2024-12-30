@@ -1,4 +1,4 @@
-import '../../scss/MainGrid.scss';
+import '../../scss/components/homepage/MainGrid.scss';
 
 const MainGrid = ({ items }) => {
   return (

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import profilePlaceholder from "../../assets/images/placeholder-profile.jpeg";
-import "../../scss/Header.scss";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
+import '../../scss/components/layoutpage/Header.scss';
 
 const Header = () => {
   const [isDropDownOpen, setDropDownOpen] = useState(false);

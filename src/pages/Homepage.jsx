@@ -1,7 +1,7 @@
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
-import '../scss/MainList.scss';
+import '../scss/pages/HomePage.scss';
 import { FaArrowUp } from 'react-icons/fa';
 
 // TODO: 이후에 삭제
@@ -24,13 +24,13 @@ const HomePage = () => {
   return (
     <>
       <Search />
-      <div className="main">
+      <div className="items">
         <Category />
         <MainGrid items={items} />
-        <button className="main__scroll-top" aria-label="위로">
-          <FaArrowUp />
-        </button>
       </div>
+      <button className="scroll-top" aria-label="위로">
+        <FaArrowUp />
+      </button>
     </>
   );
 };

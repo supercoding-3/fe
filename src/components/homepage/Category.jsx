@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../scss/Category.scss';
+import '../../scss/components/homepage/Category.scss';
 
 const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');

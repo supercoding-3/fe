@@ -1,4 +1,4 @@
-import '../../scss/Search.scss';
+import '../../scss/components/homepage/Search.scss';
 
 const Search = () => {
   return (
