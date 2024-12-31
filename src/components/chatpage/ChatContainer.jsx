@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
 
+// TODO: 실제 서버 연결 이후 제거
+import { startMockServer } from '../../mockserver/socketServer';
+
 const ChatContainer = () => {
   const [messages, setMessages] = useState([]);
   const [sendingMessage, setSendingMessage] = useState('');
@@ -11,20 +14,27 @@ const ChatContainer = () => {
   };
 
   useEffect(() => {
+    const mockServer = startMockServer();
+
     socketService.connect();
 
-    socketService.socket.on('receiveMessage', (data) => {
-      setMessages((prev) => [...prev, { text: data, sender: 'other' }]);
+    socketService.onMessage((message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
     });
 
     return () => {
+      mockServer.stop();
       socketService.disconnect();
     };
   }, []);
 
   return (
     <div>
-      <div>{messages}</div>
+      <div>
+        {messages.map((message, i) => (
+          <p key={i}>{message}</p>
+        ))}
+      </div>
       <div>
         <input
           type="text"

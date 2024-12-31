@@ -1,38 +1,41 @@
-import { io } from 'socket.io-client';
+const createSocketService = () => {
+  let socket = null;
 
-class SocketService {
-  constructor() {
-    this.socket = null;
-  }
+  const connect = () => {
+    socket = new WebSocket('ws://localhost:8080');
 
-  connect() {
-    this.socket = io('http://localhost:3001');
-
-    this.socket.on('connect', () => {
+    socket.onopen = () => {
       console.log('Connected to WebSocket server!');
-    });
+    };
 
-    this.socket.on('receiveMessage', (message) => {
-      console.log('Received message from server:', message);
-    });
+    socket.onmessage = (event) => {
+      if (messageHandler) messageHandler(event.data);
+    };
 
-    this.socket.on('disconnect', () => {
+    socket.onclose = () => {
       console.log('Disconnected from WebSocket server');
-    });
-  }
+    };
+  };
 
-  sendMessage(message) {
-    if (this.socket) {
-      this.socket.emit('sendMessage', message);
+  let messageHandler = null;
+  const onMessage = (handler) => {
+    messageHandler = handler;
+  };
+
+  const sendMessage = (message) => {
+    if (socket && socket.readyState === WebSocket.OPEN) {
+      socket.send(message);
     }
-  }
+  };
 
-  disconnect() {
-    if (this.socket) {
-      this.socket.disconnect();
+  const disconnect = () => {
+    if (socket) {
+      socket.close();
     }
-  }
-}
+  };
 
-const socketService = new SocketService();
+  return { connect, onMessage, sendMessage, disconnect };
+};
+
+const socketService = createSocketService();
 export default socketService;
