@@ -7,11 +7,12 @@ import { startMockServer } from '../../mockserver/socketServer';
 
 const ChatContainer = () => {
   const [messages, setMessages] = useState([]);
-  const [sendingMessage, setSendingMessage] = useState('');
 
-  const handleSendMessage = () => {
-    socketService.sendMessage(sendingMessage);
-    setSendingMessage('');
+  const handleSendMessage = (message) => {
+    if (message.trim()) {
+      socketService.sendMessage(message);
+      setMessages((prevMessages) => [...prevMessages, message]);
+    }
   };
 
   useEffect(() => {
@@ -36,9 +37,7 @@ const ChatContainer = () => {
           <p key={i}>{message}</p>
         ))}
       </div>
-      <div>
-        <ChatInput setMessage={setSendingMessage} />
-      </div>
+      <ChatInput onSendMessage={handleSendMessage} />
     </div>
   );
 };
