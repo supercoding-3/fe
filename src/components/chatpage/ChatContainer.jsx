@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import socketService from '../../services/socketService';
+import ChatInput from './ChatInput';
 
 // TODO: 실제 서버 연결 이후 제거
 import { startMockServer } from '../../mockserver/socketServer';
@@ -36,12 +37,7 @@ const ChatContainer = () => {
         ))}
       </div>
       <div>
-        <input
-          type="text"
-          value={sendingMessage}
-          onChange={(e) => setSendingMessage(e.target.value)}
-        />
-        <button onClick={handleSendMessage}>전송</button>
+        <ChatInput setMessage={setSendingMessage} />
       </div>
     </div>
   );
