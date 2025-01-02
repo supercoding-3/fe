@@ -8,8 +8,6 @@ export const startMockServer = () => {
 
     socket.on('message', (message) => {
       console.log('Mock server received:', message);
-
-      // Echo the message back to the client
       socket.send(`Echo: ${message}`);
     });
 
