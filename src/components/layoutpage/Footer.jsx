@@ -1,7 +1,9 @@
-const Footer = ({ className }) => {
+import '../../scss/components/layoutpage/Footer.scss';
+
+const Footer = () => {
   return (
-    <footer className={className}>
-      &copy; 2024 Team0910. All rights reserved.
+    <footer className="footer">
+      <p className="footer__text">&copy; 2024 Team0910. All rights reserved.</p>
     </footer>
   );
 };
