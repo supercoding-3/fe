@@ -6,7 +6,8 @@ $color-secondary: #cac9c9; // 보조 텍스트, 마우스 오버 시 배경색
 $color-success: #00472c; // 성공 상태 색상
 $color-error: #a30029; // 에러 상태 색상
 
-// TODO: 브레이크포인트 수정 및 적용
-// $breakpoint-sm: 576px;
-// $breakpoint-md: 768px;
-// $breakpoint-lg: 992px;
+// 브레이크 포인트
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
