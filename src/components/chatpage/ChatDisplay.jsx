@@ -1,4 +1,4 @@
-import '../../scss/components/chatpage/ChatDispaly.scss';
+import '../../scss/components/chatpage/ChatDisplay.scss';
 
 const ChatDisplay = ({ messages }) => {
   return (
