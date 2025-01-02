@@ -3,6 +3,7 @@ import axios from '../axios/axios';
 import socketService from '../services/socketService';
 import ChatDisplay from '../components/chatpage/ChatDisplay';
 import ChatInput from '../components/chatpage/ChatInput';
+import '../scss/pages/ChatPage.scss';
 
 // TODO: 실제 서버 연결 이후 제거
 import { startMockServer } from '../mockserver/socketServer';
@@ -12,8 +13,8 @@ const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('/chat');
-      setMessages(response.data);
+      // const res = await axios.get('/chat');
+      // setMessages(res.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
@@ -47,10 +48,10 @@ const ChatPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="chat-page">
       <ChatDisplay messages={messages} />
       <ChatInput onSendMessage={handleSendMessage} />
-    </>
+    </div>
   );
 };
 

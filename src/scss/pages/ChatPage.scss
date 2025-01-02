@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins';
+
+.chat-page {
+  width: 768px;
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, $color-section, $color-background);
+
+  @include mixins.respond-to(md) {
+    width: 100%;
+  }
+}

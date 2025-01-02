@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import '../../scss/components/chatpage/ChatInput.scss';
+import { IoIosSend } from 'react-icons/io';
 
 const ChatInput = ({ onSendMessage }) => {
   const [inputValue, setInputValue] = useState('');
@@ -27,13 +29,16 @@ const ChatInput = ({ onSendMessage }) => {
   };
 
   return (
-    <div>
+    <div className="chat-input">
       <textarea
+        className="chat-input__textarea"
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={sendMessage}>전송</button>
+      <button className="chat-input__button" onClick={sendMessage}>
+        <IoIosSend />
+      </button>
     </div>
   );
 };
