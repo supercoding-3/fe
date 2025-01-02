@@ -10,10 +10,11 @@ import ChatListPage from '../pages/ChatListPage';
 import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
 import AuthPage from '../pages/AuthPage';
+import {useSelector} from "react-redux";
 
 const Router = () => {
   // TODO: useSelector로 실제 값 가져오기
-  const isLogin = true;
+  const isLogin = useSelector((state) => state.user);
 
   return (
     <BrowserRouter>
