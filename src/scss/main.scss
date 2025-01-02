@@ -9,3 +9,12 @@ body {
   color: $color-primary;
   background-color: $color-background;
 }
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: $color-secondary;
+  border-radius: 10px;
+}

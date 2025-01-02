@@ -2,7 +2,7 @@ const createSocketService = () => {
   let socket = null;
 
   const connect = () => {
-    socket = new WebSocket('ws://localhost:8080');
+    socket = new WebSocket(process.env.REACT_APP_SOCKET_URL);
 
     socket.onopen = () => {
       console.log('Connected to WebSocket server!');
