@@ -1,0 +1,18 @@
+@use '../../abstracts/variables' as *;
+
+.chat-display {
+  &__message {
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 8px;
+    &-received {
+      background-color: $color-primary;
+      margin-right: auto;
+      color: #fff;
+    }
+    &-sent {
+      background-color: $color-section;
+      margin-left: auto;
+    }
+  }
+}
