@@ -1,11 +1,40 @@
-.chat-menu {
-  width: 32px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@use '../../abstracts/variables' as *;
 
-  &__button {
-    font-size: x-large;
+.chat-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  translate: 0 -100%;
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background-color: $color-primary;
+  border-radius: 10px 10px 0 0;
+  transition: all 0.1s ease;
+  opacity: 0;
+
+  &--hidden {
+    opacity: 1;
+  }
+
+  &__item {
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+      border-right: 1px solid $color-secondary;
+    }
+
+    &-button {
+      color: $color-secondary;
+      padding: 4px 0 4px 0;
+
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 }
