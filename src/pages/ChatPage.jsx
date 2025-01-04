@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from '../axios/axios';
 import socketService from '../services/socketService';
 import ChatDisplay from '../components/chatpage/ChatDisplay';
+import ChatMenu from '../components/chatpage/ChatMenu';
 import ChatInput from '../components/chatpage/ChatInput';
 import '../scss/pages/ChatPage.scss';
 
@@ -50,7 +51,10 @@ const ChatPage = () => {
   return (
     <div className="chat-page">
       <ChatDisplay messages={messages} />
-      <ChatInput onSendMessage={handleSendMessage} />
+      <div className="chat-page__bottom">
+        <ChatMenu />
+        <ChatInput onSendMessage={handleSendMessage} />
+      </div>
     </div>
   );
 };

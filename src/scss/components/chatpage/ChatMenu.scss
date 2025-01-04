@@ -1,0 +1,11 @@
+.chat-menu {
+  width: 32px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__button {
+    font-size: x-large;
+  }
+}
