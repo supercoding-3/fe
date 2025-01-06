@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from '../axios/axios';
 import ProductImageGallery from '../components/productpage/ProductImageGallery';
-import profilePlaceholder from '../assets/images/placeholder-profile.jpeg';
+import ProductAuctionChart from '../components/productpage/ProductAuctionChart';
+import ProductInfo from '../components/productpage/ProductInfo';
 
 const ProductPage = () => {
   const [productData, setProductData] = useState(null);
@@ -35,8 +36,8 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
+    // TODO: API 연결 이후 수정
     // fetchProductData();
-    // TODO: API 연결 이후 제거
     setProductData(mockData);
   }, []);
 
@@ -47,21 +48,8 @@ const ProductPage = () => {
   return (
     <>
       <ProductImageGallery images={productData.productImages} />
-      <div>
-        <div>
-          <h1>{productData.title}</h1>
-          <div>
-            <img
-              src={productData.sellerImg ?? profilePlaceholder}
-              alt="seller"
-            />
-            <span>{productData.seller}</span>
-          </div>
-        </div>
-        <div>차트가 들어갑니다</div>
-        <button>입찰</button>
-      </div>
-      <div>{productData.productDesc}</div>
+      <ProductAuctionChart />
+      <ProductInfo productData={productData} />
     </>
   );
 };

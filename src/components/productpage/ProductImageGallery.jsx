@@ -4,8 +4,8 @@ import imagePlaceholder from '../../assets/images/placeholder-image.png';
 const ProductImageGallery = ({ images }) => {
   const [mainImage, setMainImage] = useState(images[0] || '');
 
-  const selectMainImage = (image) => {
-    setMainImage('image');
+  const selectMainImage = (img) => {
+    setMainImage(img);
   };
 
   return (
