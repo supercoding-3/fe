@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from '../axios/axios';
+import '../scss/pages/ProductPage.scss';
 import ProductImageGallery from '../components/productpage/ProductImageGallery';
 import ProductAuctionChart from '../components/productpage/ProductAuctionChart';
 import ProductInfo from '../components/productpage/ProductInfo';
@@ -46,11 +47,11 @@ const ProductPage = () => {
   }
 
   return (
-    <>
+    <div className="product-page">
       <ProductImageGallery images={productData.productImages} />
       <ProductAuctionChart />
       <ProductInfo productData={productData} />
-    </>
+    </div>
   );
 };
 
