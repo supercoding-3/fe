@@ -1,4 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import '../../scss/components/productpage/AuctionChart.scss';
 
 const AuctionChart = () => {
   const today = new Date();
@@ -14,9 +15,9 @@ const AuctionChart = () => {
   ];
 
   return (
-    <div>
+    <div className="chart-container">
       <BarChart
-        width={600}
+        width={650}
         height={300}
         data={mockData}
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -25,9 +26,9 @@ const AuctionChart = () => {
         <XAxis dataKey="date" />
         <YAxis scale="log" domain={[1, 'dataMax']} />
         <Tooltip />
-        <Bar dataKey="price" fill="#8884d8" />
+        <Bar dataKey="price" fill="#333" radius={[20, 20, 0, 0]} />
       </BarChart>
-      <button>입찰</button>
+      <button className="chart-container__button">입찰</button>
     </div>
   );
 };
