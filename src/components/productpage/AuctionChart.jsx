@@ -1,4 +1,4 @@
-const ProductAuctionChart = () => {
+const AuctionChart = () => {
   return (
     <div>
       <div>차트가 들어갑니다</div>
@@ -7,4 +7,4 @@ const ProductAuctionChart = () => {
   );
 };
 
-export default ProductAuctionChart;
+export default AuctionChart;

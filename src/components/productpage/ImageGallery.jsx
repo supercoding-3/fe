@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../../scss/components/productpage/ProductImageGallery.scss';
 import imagePlaceholder from '../../assets/images/placeholder-image.png';
 
-const ProductImageGallery = ({ images }) => {
+const ImageGallery = ({ images }) => {
   const [mainImage, setMainImage] = useState(images[0] || '');
 
   const selectMainImage = (img) => {
@@ -31,4 +31,4 @@ const ProductImageGallery = ({ images }) => {
   );
 };
 
-export default ProductImageGallery;
+export default ImageGallery;
