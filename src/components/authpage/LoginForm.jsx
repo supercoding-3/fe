@@ -1,9 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from '../../axios/axios';
+import { setLogin } from '../../redux/modules/user';
 import '../../scss/components/authpage/LoginForm.scss';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -17,25 +21,23 @@ const LoginForm = () => {
       userPassword: data.password,
     };
 
-    try {
-      // API 호출
-      const response = await axios.post('/user/login', requestBody);
+    const response = await axios.post('/user/login', requestBody);
 
-      if (response.status === 200) {
-        // 로그인 성공 처리
-        alert('로그인 성공!');
-        // TODO: 사용자 정보를 저장하거나, 토큰 처리
-        navigate('/'); // 홈으로 리디렉션
-      }
-    } catch (error) {
-      if (error.response) {
-        // 서버에서 반환된 오류 메시지
-        alert(`로그인 실패: ${error.response.data.message}`);
-      } else {
-        alert('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
-      }
+    // TODO: 실패 시 예외처리 추가
+    if (response.status === 200) {
+      alert('로그인 성공!');
+      // TODO: 사용자 정보를 저장하거나, 토큰 처리
+      navigate('/');
     }
   };
+
+  // 리덕스설명 1: setLogin이라는 action을 store(store.js)에 전달
+  dispatch(setLogin('true'));
+
+  // 리덕스설명 5: 스토어 상태를 구독. 상태가 변경되면 컴포넌트는 리렌더링 됨.
+  let isLogin = false;
+  isLogin = useSelector((state) => state.user.isLogin);
+  console.log('스토어가 정상적으로 구독 되었는가?: ', isLogin);
 
   return (
     <>
