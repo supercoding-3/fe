@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../scss/components/productpage/ProductImageGallery.scss';
+import '../../scss/components/productpage/ImageGallery.scss';
 import imagePlaceholder from '../../assets/images/placeholder-image.png';
 
 const ImageGallery = ({ images }) => {
