@@ -11,6 +11,7 @@ import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
 import AuthPage from '../pages/AuthPage';
 import {useSelector} from "react-redux";
+import ProfileEdit from "../components/profilepage/ProfileEdit";
 
 const Router = () => {
   // TODO: useSelector로 실제 값 가져오기
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/signup" element={<AuthPage />} />
           <Route path="/product/:id" element={<DetailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/edit" element={<ProfileEdit />} />
           <Route element={<PrivateRoute isLogin={isLogin} />}>
             <Route path="/product/add" element={<AddProductPage />} />
             <Route path="/chat" element={<ChatListPage />} />
