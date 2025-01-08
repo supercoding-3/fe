@@ -1,16 +1,21 @@
-import profilePlaceholder from '../../assets/images/placeholder-image.png';
+import '../../scss/components/productpage/ProductInfo.scss';
+import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 
 const ProductInfo = ({ productData }) => {
   return (
-    <div>
-      <div>
-        <h1>{productData.title}</h1>
-        <div>
-          <img src={productData.sellerImg ?? profilePlaceholder} alt="seller" />
-          <span>{productData.seller}</span>
+    <div className="info">
+      <div className="info__header">
+        <h1 className="info__title">{productData.title}</h1>
+        <div className="info__seller">
+          <img
+            src={productData.sellerImg ?? profilePlaceholder}
+            alt="seller"
+            className="info__seller-img"
+          />
+          <span className="info__seller-name">{productData.seller}</span>
         </div>
       </div>
-      <div>{productData.productDesc}</div>
+      <div className="info__desc">{productData.productDesc}</div>
     </div>
   );
 };
