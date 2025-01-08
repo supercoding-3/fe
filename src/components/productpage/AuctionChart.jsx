@@ -16,17 +16,12 @@ const AuctionChart = () => {
 
   return (
     <div className="chart-container">
-      <BarChart
-        width={650}
-        height={300}
-        data={mockData}
-        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-      >
+      <BarChart width={650} height={300} data={mockData}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
+        <XAxis dataKey="date" type="category" />
         <YAxis scale="log" domain={[1, 'dataMax']} />
         <Tooltip />
-        <Bar dataKey="price" fill="#333" radius={[20, 20, 0, 0]} />
+        <Bar dataKey="price" fill="#333" radius={[20, 20, 0, 0]} barSize={20} />
       </BarChart>
       <button className="chart-container__button">입찰</button>
     </div>
