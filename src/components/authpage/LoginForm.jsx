@@ -73,7 +73,7 @@ const LoginForm = () => {
             )}
           </div>
 
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" onClick={onSubmit}>
             로그인
           </button>
         </form>

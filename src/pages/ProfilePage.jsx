@@ -6,6 +6,29 @@ import {Link} from "react-router-dom";
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('구매'); // 현재 탭 상태 ('구매' 또는 '판매')
   const [filter, setFilter] = useState('전체'); // 필터 상태 ('전체', '입찰중', ...)
+  // const [profileInfo, setProfileInfo] = useState(null); // 프로필 정보
+  // const [purchaseData, setPurchaseData] = useState([]); // 구매 데이터
+  // const [salesData, setSalesData] = useState([]); // 판매 데이터
+  // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
+  //
+  // // API 호출
+  // useEffect(() => {
+  //   const fetchProfileData = async () => {
+  //     try {
+  //       const response = await axios.get('/api/user/my-page'); // API 호출
+  //       const { profile, purchases, sales } = response.data; // 응답 데이터 구조에 따라 수정
+  //       setProfileInfo(profile); // 프로필 정보 설정
+  //       setPurchaseData(purchases); // 구매 데이터 설정
+  //       setSalesData(sales); // 판매 데이터 설정
+  //     } catch (error) {
+  //       console.error('프로필 데이터를 불러오는 데 실패했습니다:', error);
+  //     } finally {
+  //       setIsLoading(false); // 로딩 상태 종료
+  //     }
+  //   };
+  //
+  //   fetchProfileData();
+  // }, []);
 
   // 임의의 데이터 (구매 및 판매 데이터)
   const purchaseData = [
@@ -20,14 +43,12 @@ const ProfilePage = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setFilter('전체'); // 탭 변경 시 필터를 초기화
   };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
-  // 현재 탭(구매/판매)과 필터 상태에 따라 데이터를 필터링
   const filteredData =
     activeTab === '구매'
       ? purchaseData.filter((item) => filter === '전체' || item.status === filter)
@@ -35,14 +56,12 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-      {/* 상단 프로필 섹션 */}
       <div className="profile-info">
         <img src={profilePlaceholder} alt="profile" className="profile-image"/>
         <h2 className="nickname">닉네임</h2>
         <button className="edit-button"><Link to="/edit">개인정보 수정</Link></button>
       </div>
 
-      {/* 구매/판매 섹션 */}
       <div className="tabs">
         <button
           className={`tab ${activeTab === '구매' ? 'active' : ''}`}
@@ -59,7 +78,6 @@ const ProfilePage = () => {
       </div>
 
       <div className="content">
-        {/* 필터 드롭다운 */}
         <div className="filter">
           <select value={filter} onChange={handleFilterChange}>
             <option value="전체">전체</option>
@@ -69,7 +87,6 @@ const ProfilePage = () => {
           </select>
         </div>
 
-        {/* 구매/판매 리스트 */}
         <div className="list">
           {filteredData.length > 0 ? (
             filteredData.map((item) => (

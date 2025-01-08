@@ -49,17 +49,17 @@ const Header = () => {
               <ul className="header__dropdown-list">
                 {isLogin ? ( // 로그인 여부에 따른 메뉴 표시
                   <>
-                    <li className="header__dropdown-item">
-                      <span>{user?.name || '사용자 이름'}</span>
-                    </li>
-                    <li className="header__dropdown-item">
+                    <li className="header__dropdown-list-item">
                       <Link to="/profile" onClick={closeDropdown}>
                         마이페이지
                       </Link>
                     </li>
-                    <li className="header__dropdown-item">
-                      <button onClick={handleLogout}>로그아웃</button>
+                    <li>
+                      <button className="header__dropdown-list-item" onClick={handleLogout}>
+                        로그아웃
+                      </button>
                     </li>
+
                   </>
                 ) : (
                   <>
