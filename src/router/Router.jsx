@@ -4,7 +4,7 @@ import PrivateRoute from './PrivateRoute';
 import LayoutPage from '../pages/LayoutPage';
 import HomePage from '../pages/HomePage';
 import AddProductPage from '../pages/AddProductPage';
-import DetailPage from '../pages/DetailPage';
+import ProductPage from '../pages/ProductPage';
 import ChatPage from '../pages/ChatPage';
 import ChatListPage from '../pages/ChatListPage';
 import ProfilePage from '../pages/ProfilePage';
@@ -24,7 +24,7 @@ const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<AuthPage />} />
-          <Route path="/product/:id" element={<DetailPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/edit" element={<ProfileEdit />} />
           <Route element={<PrivateRoute isLogin={isLogin} />}>
