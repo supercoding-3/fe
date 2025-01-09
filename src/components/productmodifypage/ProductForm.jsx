@@ -1,11 +1,17 @@
+import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
 
-const ProductForm = ({ setProductData, productData }) => {
-  const handleSubmit = (e) => {
+const ProductForm = ({ productData }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // formData를 setProductData에 저장
     const formData = new FormData(e.target);
-    setProductData(formData);
+    try {
+      const res = await axios.post('/product/register', formData);
+      console.log('res', res);
+    } catch (err) {
+      console.error('상품 데이터를 불러오는 중 오류 발생:', err);
+    }
   };
 
   return (
@@ -14,7 +20,7 @@ const ProductForm = ({ setProductData, productData }) => {
         <img src="" alt="" className="preview__img" />
       </div>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="product-form"
       >

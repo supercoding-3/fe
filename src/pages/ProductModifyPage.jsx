@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import axios from '../axios/axios';
 import ProductForm from '../components/productmodifypage/ProductForm';
 
 const ProductModifyPage = () => {
@@ -9,9 +10,26 @@ const ProductModifyPage = () => {
 
   const pathname = location.pathname;
 
+  const fetchProductData = async () => {
+    try {
+      const res = await axios.post(`/product/${1}`, {});
+      const data = res.data;
+      setProductData(data);
+      console.log('res', res);
+    } catch (err) {
+      console.error('상품 데이터를 불러오는 중 오류 발생:', err);
+    }
+  };
+
+  useEffect(() => {
+    if (!pathname.includes('modify')) {
+      fetchProductData();
+    }
+  }, []);
+
   return (
     <>
-      <ProductForm setProductData={setProductData} productData={productData} />
+      <ProductForm productData={productData} />
     </>
   );
 };
