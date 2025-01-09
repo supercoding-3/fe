@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from '../axios/axios';
 import '../scss/pages/ProductPage.scss';
 import ImageGallery from '../components/productpage/ImageGallery';
@@ -6,6 +7,9 @@ import AuctionChart from '../components/productpage/AuctionChart';
 import ProductInfo from '../components/productpage/ProductInfo';
 
 const ProductPage = () => {
+  const location = useLocation();
+  const productId = location.pathname.split('/')[2];
+
   const [productData, setProductData] = useState(null);
 
   // TODO: 추후에 삭제
@@ -28,7 +32,7 @@ const ProductPage = () => {
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get('/products/1');
+      const res = await axios.get(`/products/${productId}`);
       const data = res.data;
       setProductData(data);
     } catch (err) {
@@ -37,9 +41,8 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-    // TODO: API 연결 이후 수정
-    // fetchProductData();
     setProductData(mockData);
+    fetchProductData();
   }, []);
 
   if (!productData) {
