@@ -19,6 +19,7 @@ const ImageGallery = ({ images }) => {
       <div className="gallery__sub">
         {images.map((img, i) => (
           <img
+            key={i}
             src={img}
             alt={`상품이미지${i + 1}`}
             role="button"

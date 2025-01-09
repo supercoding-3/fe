@@ -7,9 +7,6 @@ import ChatInput from '../components/chatpage/ChatInput';
 import '../scss/pages/ChatPage.scss';
 import { CiMenuKebab } from 'react-icons/ci';
 
-// TODO: 실제 서버 연결 이후 제거
-import { startMockServer } from '../mockserver/socketServer';
-
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,9 +32,6 @@ const ChatPage = () => {
   }, []);
 
   useEffect(() => {
-    // TODO: 실제 서버 연결 이후 제거
-    const mockServer = startMockServer();
-
     socketService.connect();
 
     socketService.onMessage((message) => {
@@ -45,7 +39,6 @@ const ChatPage = () => {
     });
 
     return () => {
-      mockServer.stop();
       socketService.disconnect();
     };
   }, []);
