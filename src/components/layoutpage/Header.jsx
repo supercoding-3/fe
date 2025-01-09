@@ -50,7 +50,9 @@ const Header = () => {
                 {isLogin ? ( // 로그인 여부에 따른 메뉴 표시
                   <>
                     <li className="header__dropdown-item">
-                      <span>{user?.name || '사용자 이름'}</span>
+                      <span className="header__dropdown-username">
+                        {user?.name}
+                      </span>
                     </li>
                     <li className="header__dropdown-item">
                       <Link to="/profile" onClick={closeDropdown}>
@@ -58,7 +60,17 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="header__dropdown-item">
-                      <button onClick={handleLogout}>로그아웃</button>
+                      <Link to="/product/create" onClick={closeDropdown}>
+                        상품 업로드
+                      </Link>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <button
+                        onClick={handleLogout}
+                        className="header__dropdown-logout"
+                      >
+                        로그아웃
+                      </button>
                     </li>
                   </>
                 ) : (
