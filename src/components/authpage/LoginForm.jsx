@@ -31,14 +31,6 @@ const LoginForm = () => {
     }
   };
 
-  // 리덕스설명 1: setLogin이라는 action을 store(store.js)에 전달
-  dispatch(setLogin('true'));
-
-  // 리덕스설명 5: 스토어 상태를 구독. 상태가 변경되면 컴포넌트는 리렌더링 됨.
-  let isLogin = false;
-  isLogin = useSelector((state) => state.user.isLogin);
-  console.log('스토어가 정상적으로 구독 되었는가?: ', isLogin);
-
   return (
     <>
       <div className="login">
