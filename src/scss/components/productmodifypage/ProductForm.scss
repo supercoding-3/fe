@@ -1,0 +1,71 @@
+@use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins';
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid $color-secondary;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+  margin: 30px auto;
+
+  @include mixins.respond-to(md) {
+    width: 100%;
+    min-width: 350px;
+  }
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__label {
+    font-weight: bold;
+    display: flex;
+    align-items: start;
+    gap: 10px;
+
+    > span {
+      flex: 1;
+    }
+  }
+
+  &__input-wrapper {
+    flex: 4;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    &--checkbox {
+      width: 32px;
+      height: 32px;
+    }
+
+    &--input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid $color-secondary;
+      border-radius: 5px;
+    }
+  }
+
+  &__input {
+    flex: 4;
+    padding: 10px;
+    border: 1px solid $color-secondary;
+    border-radius: 5px;
+  }
+
+  &__button {
+    background-color: $color-primary;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 8px;
+    height: 40px;
+  }
+}
