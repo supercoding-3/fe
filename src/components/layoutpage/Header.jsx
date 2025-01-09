@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import user, { setLogout } from '../../redux/modules/user';
+import axios from '../../axios/axios';
 import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 import '../../scss/components/layoutpage/Header.scss';
-import user, { setLogout } from '../../redux/modules/user';
-import { useState } from 'react';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,14 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    dispatch(setLogout());
-    alert('로그아웃 되었습니다.');
-    closeDropdown();
+    try {
+      axios.post('/user/logout');
+      dispatch(setLogout());
+      alert('로그아웃 되었습니다.');
+      closeDropdown();
+    } catch (err) {
+      console.error('로그아웃 중 오류:', err);
+    }
   };
 
   return (
