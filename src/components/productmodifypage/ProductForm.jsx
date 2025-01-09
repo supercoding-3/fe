@@ -1,14 +1,34 @@
+import { useState } from 'react';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
 
 const ProductForm = ({ productData }) => {
+  const [images, setImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 5) {
+      alert('이미지는 최대 5개까지 업로드할 수 있습니다.');
+      return;
+    }
+
+    setImages(files);
+
+    const previewUrls = files.map((file) => URL.createObjectURL(file));
+    setPreviews(previewUrls);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // formData를 setProductData에 저장
     const formData = new FormData(e.target);
+    const imageData = new FormData(images);
+
     try {
-      const res = await axios.post('/product/register', formData);
-      console.log('res', res);
+      const res = await axios.post('/product/register', {
+        product: formData,
+        images: imageData,
+      });
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
@@ -17,18 +37,27 @@ const ProductForm = ({ productData }) => {
   return (
     <div className="form-container">
       <div className="preview">
-        <img src="" alt="" className="preview__img" />
+        {previews.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`preview-${i}`}
+            className="preview__img"
+          />
+        ))}
       </div>
+      <input
+        type="file"
+        accept="image/png, image/jpeg, image/jpg"
+        multiple
+        onChange={handleFileChange}
+        className="product-form__form__input"
+      />
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         className="product-form"
       >
-        <input
-          type="file"
-          accept="image/png, image/jpeg, image/jpg"
-          className="product-form__form__input"
-        />
         <label className="product-form__label">
           <span>제목</span>
           <input type="text" className="product-form__input" />

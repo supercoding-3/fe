@@ -17,6 +17,17 @@
   }
 }
 
+.preview {
+  display: flex;
+  gap: 6px;
+  height: 60px;
+
+  &__img {
+    width: 16%;
+    object-fit: contain;
+  }
+}
+
 .product-form {
   display: flex;
   flex-direction: column;
