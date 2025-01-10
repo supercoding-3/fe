@@ -31,6 +31,7 @@ const Router = () => {
             <Route path="/product/edit" element={<ProductModifyPage />} />
             <Route path="/chat" element={<ChatListPage />} />
             <Route path="/chat/:id" element={<ChatPage />} />
+            <Route path="/product/edit" element={<ProfileEdit />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
