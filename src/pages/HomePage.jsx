@@ -1,68 +1,108 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
 import '../scss/pages/HomePage.scss';
 import { FaArrowUp } from 'react-icons/fa';
-// TODO: 이후에 삭제
-import ahri from '../assets/images/ahri.jpeg';
+import axios from "../axios/axios";
 
 const HomePage = () => {
-  const items = [
-    { id: 1, title: '강아지 팝니다', category: '기타', price: '100,000원', image: ahri },
-    { id: 2, title: '셔츠', category: '의류', price: '50,000원', image: '' },
-    { id: 3, title: '노트북', category: '전자제품', price: '1,000,000원', image: '' },
-    { id: 4, title: '책상', category: '가구', price: '200,000원', image: '' },
-    { id: 5, title: '화장품', category: '뷰티/미용', price: '30,000원', image: '' },
-  ];
-
-  // const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState(items);
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('전체');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isSearchPerformed, setIsSearchPerformed] = useState(false);
 
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get('/api/products/all'); // Axios로 API 호출
-  //       setItems(response.data); // 상품 데이터를 상태에 저장
-  //       setFilteredItems(response.data); // 초기 필터링 데이터 설정
-  //     } catch (error) {
-  //       console.error('상품 데이터를 불러오는 데 실패했습니다:', error);
-  //     }
-  //   };
-  //   fetchProducts();
-  // }, []);
-  const handleSearch = (searchResults) => {
-    // 검색 결과에 따라 필터링
-    const results = searchResults.filter(
-      (item) => selectedCategory === '전체' || item.category === selectedCategory
-    );
-    setFilteredItems(results);
-  };
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await axios.get('/products/all');
+        setItems(response.data);
+        setFilteredItems(response.data);
+      } catch (error) {
+        console.error('상품 데이터를 불러오는 데 실패했습니다:', error);
+        setError('상품 데이터를 불러오는 데 실패했습니다.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const handleCategoryChange = (category) => {
+    fetchAllProducts();
+  }, []);
+
+
+  const handleCategoryChange = async (category) => {
     setSelectedCategory(category);
 
     if (category === '전체') {
-      // 전체를 선택하면 모든 아이템 표시
       setFilteredItems(items);
     } else {
-      // 카테고리에 따라 필터링
-      const results = items.filter((item) => item.category === category);
-      setFilteredItems(results);
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await axios.get(`/products/category/${category}`);
+        setFilteredItems(response.data);
+        setIsSearchPerformed(false);
+      } catch (error) {
+        console.error(`"${category}" 카테고리 데이터를 불러오는 데 실패했습니다:`, error);
+        setError(`"${category}" 카테고리 데이터를 불러오는 데 실패했습니다.`);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
+  // 검색 핸들러
+  const handleSearch = async (searchQuery) => {
+    if (!searchQuery.trim()) {
+      setIsSearchPerformed(false);
+      setFilteredItems(items);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      setIsSearchPerformed(true);
+      const response = await axios.get('/products/search', {
+        params: { query: searchQuery },
+      });
+      setFilteredItems(response.data);
+    } catch (error) {
+      console.error('검색 중 오류가 발생했습니다:', error);
+      setError('검색 결과가 없습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return <p className="loading">로딩 중...</p>;
+  }
+
   return (
     <>
-      <Search items={items} onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />
       <div className="items">
         <Category onCategoryChange={handleCategoryChange} />
-        <MainGrid items={filteredItems} />
+        {error ? (
+          <p className="error-message">{error}</p>
+        ) : isSearchPerformed && filteredItems.length === 0 ? (
+          <p className="no-results">검색 결과가 없습니다.</p>
+        ) : (
+          filteredItems.length > 0 ? (
+            <MainGrid items={filteredItems} />
+          ) : (
+            <p className="no-items">현재 상품이 없습니다.</p>
+          )
+        )}
       </div>
       <button className="scroll-top" aria-label="위로">
-        <FaArrowUp/>
+        <FaArrowUp />
       </button>
     </>
   );

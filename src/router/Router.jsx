@@ -26,11 +26,11 @@ const Router = () => {
           <Route path="/signup" element={<AuthPage />} />
           <Route path="/product/:id" element={<DetailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/edit" element={<ProfileEdit />} />
           <Route element={<PrivateRoute isLogin={isLogin} />}>
             <Route path="/product/add" element={<AddProductPage />} />
             <Route path="/chat" element={<ChatListPage />} />
             <Route path="/chat/:id" element={<ChatPage />} />
+            <Route path="/product/edit" element={<ProfileEdit />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>

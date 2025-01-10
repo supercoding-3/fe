@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import '../../scss/components/homepage/Search.scss';
 
-const Search = ({ items, onSearch }) => {
+const Search = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    const results = items.filter(item =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    onSearch(results);
+    if (searchQuery.trim() === '') return;
+    onSearch(searchQuery);
   };
 
   return (

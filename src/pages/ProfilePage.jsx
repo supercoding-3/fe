@@ -1,64 +1,105 @@
-import {useState} from 'react';
+import { useEffect, useState } from 'react';
 import '../scss/components/profilepage/ProfilePage.scss';
 import profilePlaceholder from '../assets/images/placeholder-profile.jpeg';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "../axios/axios";
+import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState('구매'); // 현재 탭 상태 ('구매' 또는 '판매')
-  const [filter, setFilter] = useState('전체'); // 필터 상태 ('전체', '입찰중', ...)
-  // const [profileInfo, setProfileInfo] = useState(null); // 프로필 정보
-  // const [purchaseData, setPurchaseData] = useState([]); // 구매 데이터
-  // const [salesData, setSalesData] = useState([]); // 판매 데이터
-  // const [isLoading, setIsLoading] = useState(true); // 로딩 상태
-  //
-  // // API 호출
-  // useEffect(() => {
-  //   const fetchProfileData = async () => {
-  //     try {
-  //       const response = await axios.get('/api/user/my-page'); // API 호출
-  //       const { profile, purchases, sales } = response.data; // 응답 데이터 구조에 따라 수정
-  //       setProfileInfo(profile); // 프로필 정보 설정
-  //       setPurchaseData(purchases); // 구매 데이터 설정
-  //       setSalesData(sales); // 판매 데이터 설정
-  //     } catch (error) {
-  //       console.error('프로필 데이터를 불러오는 데 실패했습니다:', error);
-  //     } finally {
-  //       setIsLoading(false); // 로딩 상태 종료
-  //     }
-  //   };
-  //
-  //   fetchProfileData();
-  // }, []);
+  const { isLogin, userInfo } = useSelector((state) => state.user);
 
-  // 임의의 데이터 (구매 및 판매 데이터)
-  const purchaseData = [
-    {id: 1, title: '카메라', price: 30000, status: '입찰중'},
-    {id: 2, title: '노트북', price: 50000, status: '거래중'},
-  ];
+  const [activeTab, setActiveTab] = useState('구매');
+  const [filter, setFilter] = useState('전체');
+  const [profileInfo, setProfileInfo] = useState(userInfo || null);
+  const [purchaseData, setPurchaseData] = useState([]);
+  const [salesData, setSalesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const salesData = [
-    {id: 1, title: '헤드폰', price: 15000, status: '취소'},
-    {id: 2, title: '스마트폰', price: 25000, status: '거래완료'},
-  ];
+  useEffect(() => {
+    if (!isLogin) return;
+
+    const fetchProfileData = async () => {
+      setIsLoading(true);
+      try {
+
+        const profileResponse = await axios.get('/user/my-page');
+        setProfileInfo(profileResponse.data);
+
+
+        if (activeTab === '구매') {
+          const purchaseResponse = await axios.get('/user/my-page/bought', {
+            params: { status: filter === '전체' ? undefined : filter },
+          });
+          setPurchaseData(purchaseResponse.data || []);
+        } else {
+          const salesResponse = await axios.get('/user/my-page/sold', {
+            params: { status: filter === '전체' ? undefined : filter },
+          });
+          setSalesData(salesResponse.data || []);
+        }
+      } catch (error) {
+        console.error('데이터를 가져오는 데 실패했습니다:', error);
+        setError('데이터를 가져오는 데 실패했습니다. 다시 시도해주세요.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, [activeTab, filter]);
+
+  const cancelBid = async (bidId) => {
+    try {
+      await axios.post('/user/my-page/bid/cancel', { bidId });
+      alert('입찰이 취소되었습니다.');
+      setPurchaseData(purchaseData.filter((item) => item.id !== bidId));
+    } catch (error) {
+      console.error('입찰 취소 실패:', error);
+      alert('입찰 취소에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const cancelTransaction = async (transactionId) => {
+    try {
+      await axios.post('/user/my-page/transaction/cancel', { transactionId });
+      alert('낙찰이 취소되었습니다.');
+      setSalesData(salesData.filter((item) => item.id !== transactionId));
+    } catch (error) {
+      console.error('낙찰 취소 실패:', error);
+      alert('낙찰 취소에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    setFilter('전체');
   };
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
-  const filteredData =
-    activeTab === '구매'
-      ? purchaseData.filter((item) => filter === '전체' || item.status === filter)
-      : salesData.filter((item) => filter === '전체' || item.status === filter);
+  const filteredData = activeTab === '구매' ? purchaseData : salesData;
+
+  if (!isLogin) {
+    return <p className="error-message">로그인이 필요합니다.</p>;
+  }
+
+  if (isLoading) {
+    return <p className="loading">로딩 중...</p>;
+  }
+
+  if (error) {
+    return <p className="error-message">{error}</p>;
+  }
 
   return (
     <div className="profile-page">
       <div className="profile-info">
-        <img src={profilePlaceholder} alt="profile" className="profile-image"/>
-        <h2 className="nickname">닉네임</h2>
+        <img src={profileInfo?.image || profilePlaceholder} alt="profile" className="profile-image" />
+        <h2 className="nickname">{profileInfo?.nickname || '닉네임 없음'}</h2>
+        <p className="email">{profileInfo?.email || '이메일 없음'}</p>
         <button className="edit-button"><Link to="/edit">개인정보 수정</Link></button>
       </div>
 
@@ -82,7 +123,7 @@ const ProfilePage = () => {
           <select value={filter} onChange={handleFilterChange}>
             <option value="전체">전체</option>
             <option value="입찰중">입찰중</option>
-            <option value="거래중">거래중</option>
+            <option value="낙찰">낙찰</option>
             <option value="거래완료">거래완료</option>
           </select>
         </div>
@@ -91,13 +132,28 @@ const ProfilePage = () => {
           {filteredData.length > 0 ? (
             filteredData.map((item) => (
               <div key={item.id} className="list-item">
-                <img src={profilePlaceholder} alt="item" className="item-image"/>
+                <img src={item.image || profilePlaceholder} alt="item" className="item-image" />
                 <div className="item-info">
                   <p>{item.title}</p>
-                  <p>입찰액: {item.price.toLocaleString()}원</p>
+                  <p>가격: {item.price}</p>
                   <p>상태: {item.status}</p>
                 </div>
-                <button className="action-button">입찰취소</button>
+                {activeTab === '구매' && item.status === '입찰중' && (
+                  <button
+                    onClick={() => cancelBid(item.id)}
+                    className="cancel-button"
+                  >
+                    입찰 취소
+                  </button>
+                )}
+                {activeTab === '판매' && item.status === '낙찰' && (
+                  <button
+                    onClick={() => cancelTransaction(item.id)}
+                    className="cancel-button"
+                  >
+                    낙찰 취소
+                  </button>
+                )}
               </div>
             ))
           ) : (

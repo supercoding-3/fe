@@ -22,15 +22,31 @@ const SignUpForm = () => {
       userPhone: data.phone,
       userIsDeleted: false,
     };
-    const response = await axios.post('/user/signup', requestBody, {
-      withCredentials: true,
-    });
-    if (response.status === 201) {
-      alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
-      navigate('/login');
-    }
 
+    try {
+      const response = await axios.post('/user/signup', requestBody, {
+        withCredentials: true,
+      });
+
+      if (response.status === 201) {
+        alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+        navigate('/login');
+      }
+    } catch (error) {
+      if (error.response) {
+        // 서버에서 반환한 상태 코드 처리
+        if (error.response.status === 409) {
+          alert(error.response.data.message || '이미 사용 중인 이메일 또는 닉네임입니다.');
+        } else {
+          alert('회원가입 중 문제가 발생했습니다. 다시 시도해주세요.');
+        }
+      } else {
+        console.error('네트워크 또는 클라이언트 오류:', error);
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인하세요.');
+      }
+    }
   };
+
 
   return (
     <div className="signup">
