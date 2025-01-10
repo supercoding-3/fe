@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import user, { setLogout } from '../../redux/modules/user';
+import axios from '../../axios/axios';
 import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 import '../../scss/components/layoutpage/Header.scss';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.user?.isLogin);
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,6 +17,17 @@ const Header = () => {
 
   const closeDropdown = () => {
     setDropDownOpen(false);
+  };
+
+  const handleLogout = () => {
+    try {
+      axios.post('/user/logout');
+      dispatch(setLogout());
+      alert('로그아웃 되었습니다.');
+      closeDropdown();
+    } catch (err) {
+      console.error('로그아웃 중 오류:', err);
+    }
   };
 
   return (
@@ -28,7 +44,7 @@ const Header = () => {
             aria-expanded={isDropDownOpen}
           >
             <img
-              src={profilePlaceholder}
+              src={user?.profileImage || profilePlaceholder} // 로그인 상태에 따라 이미지 변경
               alt="profile"
               className="header__profile-image"
             />
@@ -37,16 +53,46 @@ const Header = () => {
           {isDropDownOpen && (
             <div className="header__dropdown">
               <ul className="header__dropdown-list">
-                <li className="header__dropdown-item">
-                  <Link to="/login" onClick={closeDropdown}>
-                    로그인
-                  </Link>
-                </li>
-                <li className="header__dropdown-item">
-                  <Link to="/signup" onClick={closeDropdown}>
-                    회원가입
-                  </Link>
-                </li>
+                {isLogin ? ( // 로그인 여부에 따른 메뉴 표시
+                  <>
+                    <li className="header__dropdown-item">
+                      <span className="header__dropdown-username">
+                        {user?.name}
+                      </span>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <Link to="/profile" onClick={closeDropdown}>
+                        마이페이지
+                      </Link>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <Link to="/product/create" onClick={closeDropdown}>
+                        상품 업로드
+                      </Link>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <button
+                        onClick={handleLogout}
+                        className="header__dropdown-logout"
+                      >
+                        로그아웃
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="header__dropdown-item">
+                      <Link to="/login" onClick={closeDropdown}>
+                        로그인
+                      </Link>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <Link to="/signup" onClick={closeDropdown}>
+                        회원가입
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           )}

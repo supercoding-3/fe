@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import {Link, useNavigate} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 import axios from '../../axios/axios';
 import '../../scss/components/authpage/SignUpForm.scss';
 
@@ -7,7 +7,7 @@ const SignUpForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
     watch,
   } = useForm();
 
@@ -22,22 +22,14 @@ const SignUpForm = () => {
       userPhone: data.phone,
       userIsDeleted: false,
     };
-
-    try {
-      const response = await axios.post('/user/signup', requestBody, {
-        withCredentials: true,
-      });
-      if (response.status === 201) {
-        alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
-        navigate('/login');
-      }
-    } catch (error) {
-      if (error.response) {
-        alert(`회원가입 실패: ${error.response.data.message}`);
-      } else {
-        alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
-      }
+    const response = await axios.post('/user/signup', requestBody, {
+      withCredentials: true,
+    });
+    if (response.status === 201) {
+      alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+      navigate('/login');
     }
+
   };
 
   return (

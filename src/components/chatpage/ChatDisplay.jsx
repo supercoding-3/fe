@@ -9,7 +9,7 @@ const ChatDisplay = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="chat-display">
+    <section className="chat-display">
       {messages.map((message, i) => (
         <p
           key={i}
@@ -23,7 +23,7 @@ const ChatDisplay = ({ messages }) => {
         </p>
       ))}
       <div ref={messagesEndRef}></div>
-    </div>
+    </section>
   );
 };
 
