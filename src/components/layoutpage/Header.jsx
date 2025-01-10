@@ -1,5 +1,5 @@
+import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import user, { setLogout } from '../../redux/modules/user';
 import axios from '../../axios/axios';
@@ -10,6 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.user?.isLogin);
   const [isDropDownOpen, setDropDownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropDownOpen((prev) => !prev);
@@ -30,36 +31,29 @@ const Header = () => {
     }
   };
 
-  return (
-    <>
-      <header className="header">
-        <div className="header__logo">
-          <Link to="/">logo</Link>
-        </div>
+  return (<>
+    <header className="header">
+      <div className="header__logo">
+        <Link to="/">logo</Link>
+      </div>
 
-        <div className="header__profile">
-          <button
-            className="header__profile-button"
-            onClick={toggleDropdown}
-            aria-expanded={isDropDownOpen}
-          >
-            <img
-              src={user?.profileImage || profilePlaceholder} // 로그인 상태에 따라 이미지 변경
-              alt="profile"
-              className="header__profile-image"
-            />
-          </button>
-
+      <div className="header__profile">
+        <button
+          className="header__profile-button"
+          onClick={toggleDropdown}
+          aria-expanded={isDropDownOpen}
+        >
+          <img
+            src={user?.profileImage || profilePlaceholder}
+            alt="profile"
+            className="header__profile-image"
+          />
+        </button>
           {isDropDownOpen && (
             <div className="header__dropdown">
               <ul className="header__dropdown-list">
                 {isLogin ? ( // 로그인 여부에 따른 메뉴 표시
                   <>
-                    <li className="header__dropdown-item">
-                      <span className="header__dropdown-username">
-                        {user?.name}
-                      </span>
-                    </li>
                     <li className="header__dropdown-item">
                       <Link to="/profile" onClick={closeDropdown}>
                         마이페이지
