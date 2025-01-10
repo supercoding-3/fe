@@ -1,0 +1,26 @@
+.info {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 0 20px 0;
+  }
+
+  &__title {
+    flex: 1;
+    word-wrap: break-word;
+  }
+
+  &__seller {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+
+  &__seller-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+}

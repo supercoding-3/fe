@@ -41,6 +41,7 @@ const LoginForm = () => {
     }
   };
 
+
   // 리덕스설명 1: setLogin이라는 action을 store(store.js)에 전달
 
   // 리덕스설명 5: 스토어 상태를 구독. 상태가 변경되면 컴포넌트는 리렌더링 됨.
