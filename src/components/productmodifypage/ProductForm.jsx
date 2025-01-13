@@ -1,7 +1,8 @@
-import { useState } from 'react';
+헐import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
+import SubmitButton from '../common/SubmitButton'
 import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
 const ProductForm = ({ productData }) => {
@@ -114,9 +115,9 @@ const ProductForm = ({ productData }) => {
             className="product-form__input"
           />
         </label>
-        <button type="submit" className="product-form__button">
+        <SubmitbButton className="product-form__button">
           {productData ? '수정' : '등록'}
-        </button>
+        </SubmitbButton>
       </form>
     </div>
   );
