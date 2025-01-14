@@ -44,6 +44,8 @@ const ProductForm = ({ productData }) => {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
   };
+  
+  const buttonName = '수정'
 
   return (
     <div className="form-container">
@@ -115,9 +117,7 @@ const ProductForm = ({ productData }) => {
             className="product-form__input"
           />
         </label>
-        <SubmitbButton className="product-form__button">
-          {productData ? '수정' : '등록'}
-        </SubmitbButton>
+        <SubmitButton buttonName={buttonName}>
       </form>
     </div>
   );
