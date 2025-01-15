@@ -1,8 +1,8 @@
-헐import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
-import SubmitButton from '../common/SubmitButton'
+import SubmitButton from '../common/SubmitButton';
 import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
 const ProductForm = ({ productData }) => {
@@ -44,8 +44,8 @@ const ProductForm = ({ productData }) => {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
   };
-  
-  const buttonName = '수정'
+
+  const buttonName = '수정';
 
   return (
     <div className="form-container">
@@ -117,7 +117,7 @@ const ProductForm = ({ productData }) => {
             className="product-form__input"
           />
         </label>
-        <SubmitButton buttonName={buttonName}>
+        <SubmitButton buttonName={buttonName} />
       </form>
     </div>
   );

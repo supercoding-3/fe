@@ -1,5 +1,5 @@
-const SubmitButton = () => {
-    return <div>SubmitButton</div>
-}
+const SubmitButton = ({ buttonName }) => {
+  return <div>{buttonName}</div>;
+};
 
-export default SubmitButton
+export default SubmitButton;
