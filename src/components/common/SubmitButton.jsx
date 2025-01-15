@@ -1,5 +1,5 @@
 const SubmitButton = ({ buttonName }) => {
-  return <div>{buttonName}</div>;
+  return <button type="submit">{buttonName}</button>;
 };
 
 export default SubmitButton;
