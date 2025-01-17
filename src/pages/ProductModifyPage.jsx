@@ -5,10 +5,9 @@ import ProductForm from '../components/productmodifypage/ProductForm';
 
 const ProductModifyPage = () => {
   const location = useLocation();
+  const pathname = location.pathname;
 
   const [productData, setProductData] = useState(null);
-
-  const pathname = location.pathname;
 
   const fetchProductData = async () => {
     try {
@@ -22,7 +21,7 @@ const ProductModifyPage = () => {
   };
 
   useEffect(() => {
-    if (!pathname.includes('modify')) {
+    if (pathname.includes('edit')) {
       fetchProductData();
     }
   }, []);
