@@ -28,7 +28,7 @@ const Router = () => {
           <Route element={<PrivateRoute isLogin={isLogin} />}>
             <Route path="/profile/edit" element={<ProfileEdit />} />
             <Route path="/product/create" element={<ProductModifyPage />} />
-            <Route path="/product/edit" element={<ProductModifyPage />} />
+            <Route path="/product/:id/edit" element={<ProductModifyPage />} />
             <Route path="/chat" element={<ChatListPage />} />
             <Route path="/chat/:id" element={<ChatPage />} />
             <Route path="/product/edit" element={<ProfileEdit />} />

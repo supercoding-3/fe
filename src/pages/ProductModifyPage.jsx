@@ -6,12 +6,13 @@ import ProductForm from '../components/productmodifypage/ProductForm';
 const ProductModifyPage = () => {
   const location = useLocation();
   const pathname = location.pathname;
+  const productId = pathname.split('/')[2];
 
   const [productData, setProductData] = useState(null);
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.post(`/product/${1}`, {});
+      const res = await axios.get(`/product/${productId}`);
       const data = res.data;
       setProductData(data);
       console.log('res', res);
