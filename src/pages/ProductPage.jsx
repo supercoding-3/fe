@@ -12,24 +12,6 @@ const ProductPage = () => {
 
   const [productData, setProductData] = useState(null);
 
-  // TODO: 추후에 삭제
-  const mockData = {
-    id: 1,
-    title: '27MK600MW 모니터 팔아요~',
-    price: 100000,
-    productDesc: '여기에 상품 설명이 들어갑니다',
-    seller: '판매자닉네임',
-    sellerImg: null,
-    productImages: [
-      'https://picsum.photos/310',
-      'https://picsum.photos/320',
-      'https://picsum.photos/330',
-      'https://picsum.photos/340',
-      'https://picsum.photos/350',
-    ],
-    chartData: [],
-  };
-
   const fetchProductData = async () => {
     try {
       const res = await axios.get(`/products/${productId}`);
@@ -41,7 +23,6 @@ const ProductPage = () => {
   };
 
   useEffect(() => {
-    setProductData(mockData);
     fetchProductData();
   }, []);
 
