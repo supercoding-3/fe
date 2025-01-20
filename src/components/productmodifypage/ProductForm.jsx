@@ -41,8 +41,7 @@ const ProductForm = ({ productData }) => {
     formData.append('images', images);
     try {
       const res = await axios.post('/product/register', formData);
-      console.log(res);
-      // TODO: 페이지 이동 추가
+      navigate('/');
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
