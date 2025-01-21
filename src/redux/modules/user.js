@@ -1,20 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setAuthStatus, clearAuthStatus } from '../../services/authStorage';
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    isLogin: true,
+    isLogin: false,
     userInfo: null,
   },
   reducers: {
     setLogin: (state, action) => {
-      console.log('payload', action.payload);
       state.isLogin = true;
       state.userInfo = action.payload;
+      setAuthStatus(true);
     },
     setLogout: (state) => {
       state.isLogin = false;
       state.userInfo = null;
+      clearAuthStatus();
     },
   },
 });

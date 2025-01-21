@@ -1,8 +1,8 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {Link, useNavigate} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import axios from '../../axios/axios';
-import {setLogin} from '../../redux/modules/user';
+import { setLogin } from '../../redux/modules/user';
 import '../../scss/components/authpage/LoginForm.scss';
 
 const LoginForm = () => {
@@ -11,7 +11,7 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm();
   const navigate = useNavigate();
 
@@ -22,14 +22,12 @@ const LoginForm = () => {
     };
     try {
       const response = await axios.post('/user/login', requestBody);
-
       if (response.status === 200) {
         alert('로그인 성공!');
         dispatch(setLogin('true'));
         navigate('/');
       }
     } catch (error) {
-      // 서버에서 반환한 상태 코드 확인
       if (error.response && error.response.status === 404) {
         alert('회원가입된 계정이 아닙니다.');
       } else if (error.response && error.response.status === 401) {
@@ -40,13 +38,6 @@ const LoginForm = () => {
       console.error('로그인 오류:', error);
     }
   };
-
-
-  // 리덕스설명 1: setLogin이라는 action을 store(store.js)에 전달
-
-  // 리덕스설명 5: 스토어 상태를 구독. 상태가 변경되면 컴포넌트는 리렌더링 됨.
-  let isLogin = false;
-  isLogin = useSelector((state) => state.user.isLogin);
 
   return (
     <>
@@ -82,7 +73,7 @@ const LoginForm = () => {
             )}
           </div>
 
-          <button type="submit" className="login-button" >
+          <button type="submit" className="login-button">
             로그인
           </button>
         </form>

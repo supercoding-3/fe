@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
 import SubmitButton from '../common/SubmitButton';
@@ -7,7 +7,9 @@ import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
 const ProductForm = ({ productData }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const [buttonName, setButtonName] = useState('등록');
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
 
@@ -39,13 +41,19 @@ const ProductForm = ({ productData }) => {
     formData.append('images', images);
     try {
       const res = await axios.post('/product/register', formData);
-      console.log(res);
+      navigate('/');
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
   };
 
-  const buttonName = '수정';
+  useEffect(() => {
+    if (location.pathname.includes('create')) {
+      setButtonName('등록');
+    } else if (location.pathname.includes('edit')) {
+      setButtonName('수정');
+    }
+  }, [location.pathname]);
 
   return (
     <div className="form-container">
