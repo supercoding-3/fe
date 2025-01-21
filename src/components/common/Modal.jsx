@@ -19,7 +19,7 @@ const Modal = ({ children, onClose, onClick }) => {
           </button>
         </header>
         {children}
-        <footer className="modal__footer">
+        {/* <footer className="modal__footer">
           <PrimaryButton
             type="button"
             buttonName="취소"
@@ -32,7 +32,7 @@ const Modal = ({ children, onClose, onClick }) => {
             onClick={onClick}
             theme="success"
           />
-        </footer>
+        </footer> */}
       </div>
     </div>,
     document.getElementById('modal')
