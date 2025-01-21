@@ -27,17 +27,13 @@ const ProfilePage = () => {
         setProfileInfo(profileResponse.data);
 
 
-        if (activeTab === '구매') {
-          const purchaseResponse = await axios.get('/user/my-page/bought', {
-            params: { status: filter === '전체' ? undefined : filter },
-          });
-          setPurchaseData(purchaseResponse.data || []);
-        } else {
-          const salesResponse = await axios.get('/user/my-page/sold', {
-            params: { status: filter === '전체' ? undefined : filter },
-          });
-          setSalesData(salesResponse.data || []);
-        }
+        // if (activeTab === '구매') {
+        //   const purchaseResponse = await axios.get('/user/my-page/bought');
+        //   setPurchaseData(purchaseResponse.data || []);
+        // } else {
+        //   const salesResponse = await axios.get('/user/my-page/sold');
+        //   setSalesData(salesResponse.data || []);
+        // }
       } catch (error) {
         console.error('데이터를 가져오는 데 실패했습니다:', error);
         setError('데이터를 가져오는 데 실패했습니다. 다시 시도해주세요.');
@@ -82,10 +78,6 @@ const ProfilePage = () => {
 
   const filteredData = activeTab === '구매' ? purchaseData : salesData;
 
-  if (!isLogin) {
-    return <p className="error-message">로그인이 필요합니다.</p>;
-  }
-
   if (isLoading) {
     return <p className="loading">로딩 중...</p>;
   }
@@ -98,9 +90,8 @@ const ProfilePage = () => {
     <div className="profile-page">
       <div className="profile-info">
         <img src={profileInfo?.image || profilePlaceholder} alt="profile" className="profile-image" />
-        <h2 className="nickname">{profileInfo?.nickname || '닉네임 없음'}</h2>
-        <p className="email">{profileInfo?.email || '이메일 없음'}</p>
-        <button className="edit-button"><Link to="/edit">개인정보 수정</Link></button>
+        <h2 className="nickname">{profileInfo?.nickname}</h2>
+        <button className="edit-button"><Link to="/profile/edit">개인정보 수정</Link></button>
       </div>
 
       <div className="tabs">
