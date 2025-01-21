@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import '../../scss/components/homepage/Search.scss';
 
-const Search = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
+const Search = ({ searchQuery, setSearchQuery, onSearch }) => {
   const handleSearch = () => {
     if (searchQuery.trim() === '') return;
     onSearch(searchQuery);
