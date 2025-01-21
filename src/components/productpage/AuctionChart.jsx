@@ -1,27 +1,42 @@
+import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import '../../scss/components/productpage/AuctionChart.scss';
 
-const AuctionChart = () => {
-  const today = new Date();
-  const dateString = today.toLocaleDateString();
+const AuctionChart = ({ allBids }) => {
+  const [bids, setBids] = useState([]);
 
-  const mockData = [
-    { date: dateString, price: 100 },
-    { date: dateString, price: 3000 },
-    { date: dateString, price: 2000 },
-    { date: dateString, price: 2780 },
-    { date: dateString, price: 1890 },
-    { date: dateString, price: 500000 },
-  ];
+  const extractBidDetails = (bids) => {
+    return bids.map(({ bidCreatedAt, bidPrice }) => {
+      const bidDate = bidCreatedAt.slice(0, 10);
+      return {
+        bidCreatedAt: bidDate,
+        bidPrice,
+      };
+    });
+  };
+
+  useEffect(() => {
+    const bids = extractBidDetails(allBids);
+    setBids(bids);
+  }, [allBids]);
+
+  if (!allBids) {
+    return <div>입찰 정보를 불러올 수 없습니다</div>;
+  }
 
   return (
     <div className="chart-container">
-      <BarChart width={650} height={300} data={mockData}>
+      <BarChart width={650} height={300} data={bids}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" type="category" />
+        <XAxis dataKey="bidCreatedAt" type="category" />
         <YAxis scale="log" domain={[1, 'dataMax']} />
         <Tooltip />
-        <Bar dataKey="price" fill="#333" radius={[20, 20, 0, 0]} barSize={20} />
+        <Bar
+          dataKey="bidPrice"
+          fill="#333"
+          radius={[20, 20, 0, 0]}
+          barSize={20}
+        />
       </BarChart>
       <button className="chart-container__button">입찰</button>
     </div>

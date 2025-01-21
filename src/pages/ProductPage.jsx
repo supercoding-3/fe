@@ -32,8 +32,8 @@ const ProductPage = () => {
 
   return (
     <div className="product-page">
-      <ImageGallery images={productData.productImages} />
-      <AuctionChart />
+      <ImageGallery images={productData.imageUrls} />
+      <AuctionChart allBids={productData.allBids} />
       <ProductInfo productData={productData} />
     </div>
   );
