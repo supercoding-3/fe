@@ -9,6 +9,10 @@ const ImageGallery = ({ images }) => {
     setMainImage(img);
   };
 
+  if (!images) {
+    return <div>이미지 파일을 찾을 수 없습니다.</div>;
+  }
+
   return (
     <div className="gallery">
       <img
