@@ -16,12 +16,14 @@ const ProductPage = () => {
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bidPrice, setBidPrice] = useState(0);
+  const [isAwarded, setIsAwarded] = useState(false);
 
   const fetchProductData = async () => {
     try {
       const res = await axios.get(`/products/${productId}`);
       const data = res.data;
       setProductData(data);
+      setIsAwarded(data.productStatus === '낙찰');
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
@@ -49,6 +51,16 @@ const ProductPage = () => {
     }
   };
 
+  const handleAwarding = async (bidId) => {
+    try {
+      await axios.post(`/products/${productId}/award`, {
+        bidId: bidId,
+      });
+    } catch (err) {
+      console.error('낙찰 중 오류 발생:', err);
+    }
+  };
+
   useEffect(() => {
     fetchProductData();
   }, []);
@@ -64,9 +76,18 @@ const ProductPage = () => {
         <AuctionChart allBids={productData.allBids} />
         <PrimaryButton
           type="button"
-          buttonName={productData.isSeller ? '낙찰' : '입찰'}
+          buttonName={
+            productData.isSeller
+              ? isAwarded
+                ? '낙찰 완료'
+                : '낙찰'
+              : isAwarded
+              ? '입찰 완료'
+              : '입찰'
+          }
           onClick={handleAuctionButton}
           isFull={true}
+          theme={isAwarded ? 'disabled' : 'primary'}
         />
         <ProductInfo productData={productData} />
       </div>
@@ -79,7 +100,17 @@ const ProductPage = () => {
               {productData.allBids.map((bid) => {
                 return (
                   <li key={bid.bidId} className="bid">
-                    {productData.isSeller && <button>낙찰</button>}
+                    {productData.isSeller && (
+                      <button
+                        className="bid__button--award"
+                        type="button"
+                        onClick={() => {
+                          handleAwarding(bid.bidId);
+                        }}
+                      >
+                        낙찰
+                      </button>
+                    )}
                     <span>{bid.bidPrice}원</span>
                     <span>{formatLocalTime(bid.bidCreatedAt)}</span>
                     <span>{bid.userNickname}</span>

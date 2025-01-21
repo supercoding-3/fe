@@ -10,7 +10,15 @@
 
 .bid {
   display: flex;
+  align-items: center;
   gap: 8px;
+
+  &__button {
+    &--award {
+      text-decoration: underline;
+      color: $color-success;
+    }
+  }
 }
 
 .bidding-form {
