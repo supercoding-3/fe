@@ -1,8 +1,10 @@
+@use '../../abstracts/variables' as *;
+
 .info {
   &__header {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 4px;
     margin: 10px 0 20px 0;
   }
 
@@ -11,16 +13,18 @@
     word-wrap: break-word;
   }
 
-  &__seller {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 2px;
+  &__category {
+    width: fit-content;
+    background-color: $color-section;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
   }
 
-  &__seller-img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+  &__desc {
+    margin: 10px 0;
+    border: 1px solid $color-secondary;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
