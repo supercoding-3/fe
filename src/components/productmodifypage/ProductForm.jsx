@@ -12,6 +12,7 @@ const ProductForm = ({ productData }) => {
   const [buttonName, setButtonName] = useState('등록');
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [isStartingBidPrice, setIsStartingBidPrice] = useState(false);
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -34,7 +35,7 @@ const ProductForm = ({ productData }) => {
     const product = {
       title: e.target.title.value,
       description: e.target.description.value,
-      startingBidPrice: e.target.startingBidPrice.value,
+      startingBidPrice: e.target.startingBidPrice.value ?? 0,
       immediatePrice: e.target.immediatePrice.value,
       category: e.target.category.value,
       productEndDate: formatEndDate,
@@ -104,11 +105,13 @@ const ProductForm = ({ productData }) => {
             <input
               type="checkbox"
               className="product-form__input-wrapper--checkbox"
+              onClick={() => setIsStartingBidPrice(!isStartingBidPrice)}
             />
             <input
               id="startingBidPrice"
               type="number"
               className="product-form__input-wrapper--input"
+              disabled={!isStartingBidPrice}
             />
           </div>
         </label>
