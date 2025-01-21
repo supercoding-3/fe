@@ -1,7 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../axios/axios';
 import ChatListCard from '../components/chatlistpage/ChatListCard';
 
 const ChatListPage = () => {
+  const [chatList, setChatList] = useState([]);
+
+  console.log(chatList);
+
   const mockData = [
     {
       id: 1,
@@ -28,6 +34,19 @@ const ChatListPage = () => {
       thumbnail: 'https://picsum.photos/200',
     },
   ];
+
+  const fetchChatList = async () => {
+    try {
+      const res = await axios.get('/chat/rooms');
+      setChatList(res.data);
+    } catch (err) {
+      console.error('채팅 목록을 불러오는 중 오류 발생:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchChatList();
+  }, []);
 
   return (
     <ul>
