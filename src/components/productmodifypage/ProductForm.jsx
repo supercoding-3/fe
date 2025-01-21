@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
-import SubmitButton from '../common/SubmitButton';
+import PrimaryButton from '../common/PrimaryButton';
 import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
 const ProductForm = ({ productData }) => {
@@ -139,7 +139,7 @@ const ProductForm = ({ productData }) => {
             className="product-form__input"
           />
         </label>
-        <SubmitButton buttonName={buttonName} />
+        <PrimaryButton type="submit" buttonName={buttonName} isFull={true} />
       </form>
     </div>
   );

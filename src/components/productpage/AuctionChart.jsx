@@ -19,27 +19,33 @@ const AuctionChart = ({ allBids }) => {
     const bids = extractBidDetails(allBids);
     setBids(bids);
   }, [allBids]);
-
   if (!allBids) {
     return <div>입찰 정보를 불러올 수 없습니다</div>;
   }
 
+  if (bids.length === 0) {
+    return (
+      <div className="help-text">
+        <p div className="help-text--no-data">
+          입찰 정보가 없습니다
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="chart-container">
-      <BarChart width={650} height={300} data={bids}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="bidCreatedAt" type="category" />
-        <YAxis scale="log" domain={[1, 'dataMax']} />
-        <Tooltip />
-        <Bar
-          dataKey="bidPrice"
-          fill="#333"
-          radius={[20, 20, 0, 0]}
-          barSize={20}
-        />
-      </BarChart>
-      <button className="chart-container__button">입찰</button>
-    </div>
+    <BarChart width={650} height={300} data={bids}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="bidCreatedAt" type="category" />
+      <YAxis scale="log" domain={[1, 'dataMax']} />
+      <Tooltip />
+      <Bar
+        dataKey="bidPrice"
+        fill="#333"
+        radius={[20, 20, 0, 0]}
+        barSize={20}
+      />
+    </BarChart>
   );
 };
 
