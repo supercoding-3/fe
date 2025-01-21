@@ -139,7 +139,7 @@ const ProductForm = ({ productData }) => {
             className="product-form__input"
           />
         </label>
-        <PrimaryButton type="submit" buttonName={buttonName} />
+        <PrimaryButton type="submit" buttonName={buttonName} isFull={true} />
       </form>
     </div>
   );
