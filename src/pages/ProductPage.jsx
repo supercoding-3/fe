@@ -7,6 +7,7 @@ import AuctionChart from '../components/productpage/AuctionChart';
 import PrimaryButton from '../components/common/PrimaryButton';
 import ProductInfo from '../components/productpage/ProductInfo';
 import Modal from '../components/common/Modal';
+import { formatLocalTime } from '../utils/formatLocalTime';
 
 const ProductPage = () => {
   const location = useLocation();
@@ -56,18 +57,22 @@ const ProductPage = () => {
       </div>
       {isModalOpen && (
         <Modal onClose={onCloseModal}>
-          <ul>
-            {productData.allBids?.map((bid) => {
-              return (
-                <li key={bid.bidId}>
-                  {productData.isSeller && <button>낙찰</button>}
-                  <span>{bid.bidPrice}</span>
-                  <span>{bid.bidCreatedAt}</span>
-                  <span>{bid.userNickname}</span>
-                </li>
-              );
-            })}
-          </ul>
+          {productData.allBids.length === 0 ? (
+            <p>입찰 내역이 없습니다</p>
+          ) : (
+            <ul>
+              {productData.allBids.map((bid) => {
+                return (
+                  <li key={bid.bidId} className="bid">
+                    {productData.isSeller && <button>낙찰</button>}
+                    <span>{bid.bidPrice}원</span>
+                    <span>{formatLocalTime(bid.bidCreatedAt)}</span>
+                    <span>{bid.userNickname}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </Modal>
       )}
     </>
