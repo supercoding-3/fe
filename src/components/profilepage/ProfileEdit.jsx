@@ -6,18 +6,19 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileEdit = () => {
-  const { userInfo } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const { isLogin } = useSelector((state) => state.user); // Redux에서 isLogin 상태 가져오기
 
+  // 기본 form 데이터 상태 초기화
   const [formData, setFormData] = useState({
-    email: userInfo?.email || '',
-    nickname: userInfo?.nickname || '',
+    email: '',
+    nickname: '',
     password: '',
     confirmPassword: '',
-    phoneNumber: userInfo?.phoneNumber || '',
+    phoneNumber: '',
   });
 
-  const [profileImage, setProfileImage] = useState(userInfo?.profileImageUrl || profilePlaceholder);
+  const [profileImage, setProfileImage] = useState(profilePlaceholder);
   const [selectedFile, setSelectedFile] = useState(null);
 
   // 입력값 변경 핸들러
@@ -49,7 +50,7 @@ const ProfileEdit = () => {
     data.append('profileImage', selectedFile);
 
     try {
-      const response = await axios.post(`/user/my-page/edit/${userInfo.id}/profile`, data, {
+      const response = await axios.post('/user/my-page/edit/profile', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -76,7 +77,7 @@ const ProfileEdit = () => {
     }
 
     try {
-      const response = await axios.put(`/user/my-page/edit/${userInfo.id}`, formData);
+      const response = await axios.patch('/user/my-page/edit/profile', formData);
       if (response.status === 200) {
         alert('회원정보가 성공적으로 수정되었습니다.');
       } else {
@@ -93,8 +94,21 @@ const ProfileEdit = () => {
     const confirmDelete = window.confirm('정말로 회원탈퇴를 진행하시겠습니까?');
     if (!confirmDelete) return;
 
+    if (!isLogin) {
+      alert('로그인 상태가 아닙니다.');
+      return;
+    }
+
+    const requestBody = {
+      userEmail: formData.email,
+      userPassword: formData.password,
+      userNickname: formData.nickname,
+      userPhone: formData.phoneNumber,
+      userIsDeleted: true,
+    };
+
     try {
-      const response = await axios.patch('/user/deactivate', { userId: userInfo.id });
+      const response = await axios.patch('/user/deactivate', requestBody);
       if (response.status === 200) {
         alert('회원탈퇴가 완료되었습니다.');
         navigate('/'); // 메인 페이지로 이동
@@ -102,7 +116,7 @@ const ProfileEdit = () => {
         alert('회원탈퇴에 실패했습니다.');
       }
     } catch (error) {
-      console.error('회원탈퇴 중 에러 발생:', error);
+      console.error('회원탈퇴 중 에러 발생:', error.response?.data || error.message);
       alert('회원탈퇴 중 문제가 발생했습니다.');
     }
   };
