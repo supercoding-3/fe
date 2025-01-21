@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import user, { setLogout } from '../../redux/modules/user';
@@ -10,7 +10,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.user?.isLogin);
   const [isDropDownOpen, setDropDownOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropDownOpen((prev) => !prev);
@@ -31,24 +30,25 @@ const Header = () => {
     }
   };
 
-  return (<>
-    <header className="header">
-      <div className="header__logo">
-        <Link to="/">logo</Link>
-      </div>
+  return (
+    <>
+      <header className="header">
+        <div className="header__logo">
+          <Link to="/">logo</Link>
+        </div>
 
-      <div className="header__profile">
-        <button
-          className="header__profile-button"
-          onClick={toggleDropdown}
-          aria-expanded={isDropDownOpen}
-        >
-          <img
-            src={user?.profileImage || profilePlaceholder}
-            alt="profile"
-            className="header__profile-image"
-          />
-        </button>
+        <div className="header__profile">
+          <button
+            className="header__profile-button"
+            onClick={toggleDropdown}
+            aria-expanded={isDropDownOpen}
+          >
+            <img
+              src={user?.profileImage || profilePlaceholder}
+              alt="profile"
+              className="header__profile-image"
+            />
+          </button>
           {isDropDownOpen && (
             <div className="header__dropdown">
               <ul className="header__dropdown-list">
@@ -62,6 +62,11 @@ const Header = () => {
                     <li className="header__dropdown-item">
                       <Link to="/product/create" onClick={closeDropdown}>
                         상품 업로드
+                      </Link>
+                    </li>
+                    <li className="header__dropdown-item">
+                      <Link to="/chat" onClick={closeDropdown}>
+                        채팅 목록
                       </Link>
                     </li>
                     <li className="header__dropdown-item">

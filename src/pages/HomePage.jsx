@@ -86,7 +86,6 @@ const HomePage = () => {
       setError(null);
       setIsSearchPerformed(true);
       const response = await axios.get(`/products/search?title=${searchQuery}`);
-      console.log('!!', response);
       setFilteredItems(response.data);
     } catch (error) {
       console.error('검색 중 오류가 발생했습니다:', error);
