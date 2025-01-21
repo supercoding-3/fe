@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import '../../scss/components/common/Modal.scss';
 import PrimaryButton from './PrimaryButton';
 import { IoIosClose } from 'react-icons/io';
 
@@ -11,14 +12,14 @@ const Modal = ({ children, onClose, onClick }) => {
 
   return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-container">
-        <header>
-          <button onClick={onClose}>
+      <div className="modal">
+        <header className="modal__header">
+          <button onClick={onClose} className="modal__header--close">
             <IoIosClose />
           </button>
         </header>
         {children}
-        <footer>
+        <footer className="modal__footer">
           <PrimaryButton
             type="button"
             buttonName="취소"
