@@ -1,8 +1,6 @@
 @use '../../abstracts/variables' as *;
 
 .primary-button {
-  background-color: $color-primary;
-  color: #fff;
   padding: 10px 20px;
   margin: 8px 0;
   border: none;
@@ -11,5 +9,25 @@
 
   &.is-full {
     width: 100%;
+  }
+
+  &.primary {
+    background-color: $color-primary;
+    color: #fff;
+  }
+
+  &.success {
+    background-color: $color-success;
+    color: #fff;
+  }
+
+  &.cancel {
+    background-color: $color-error;
+    color: #fff;
+  }
+
+  &.disabled {
+    background-color: $color-section;
+    cursor: not-allowed;
   }
 }
