@@ -29,18 +29,29 @@ const ProductForm = ({ productData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    const formatEndDate = new Date(e.target.productEndDate.value);
+    formatEndDate.setHours(23, 59, 59, 999);
     const product = {
       title: e.target.title.value,
       description: e.target.description.value,
       startingBidPrice: e.target.startingBidPrice.value,
       immediatePrice: e.target.immediatePrice.value,
       category: e.target.category.value,
-      productEndDate: e.target.productEndDate.value,
+      productEndDate: formatEndDate,
     };
-    formData.append('product', JSON.stringify(product));
-    formData.append('images', images);
+    formData.append(
+      'product',
+      new Blob([JSON.stringify(product)], { type: 'application/json' })
+    );
+    images.forEach((image) => {
+      formData.append('images', image);
+    });
     try {
-      const res = await axios.post('/product/register', formData);
+      await axios.post('/products/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       navigate('/');
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
