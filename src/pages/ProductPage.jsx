@@ -4,6 +4,7 @@ import axios from '../axios/axios';
 import '../scss/pages/ProductPage.scss';
 import ImageGallery from '../components/productpage/ImageGallery';
 import AuctionChart from '../components/productpage/AuctionChart';
+import PrimaryButton from '../components/common/PrimaryButton';
 import ProductInfo from '../components/productpage/ProductInfo';
 
 const ProductPage = () => {
@@ -34,6 +35,11 @@ const ProductPage = () => {
     <div className="product-page">
       <ImageGallery images={productData.imageUrls} />
       <AuctionChart allBids={productData.allBids} />
+      <PrimaryButton
+        type="button"
+        buttonName={productData.isSeller ? '낙찰' : '입찰'}
+        isFull={true}
+      />
       <ProductInfo productData={productData} />
     </div>
   );
