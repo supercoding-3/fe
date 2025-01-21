@@ -6,12 +6,14 @@ import ImageGallery from '../components/productpage/ImageGallery';
 import AuctionChart from '../components/productpage/AuctionChart';
 import PrimaryButton from '../components/common/PrimaryButton';
 import ProductInfo from '../components/productpage/ProductInfo';
+import Modal from '../components/common/Modal';
 
 const ProductPage = () => {
   const location = useLocation();
   const productId = location.pathname.split('/')[2];
 
   const [productData, setProductData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchProductData = async () => {
     try {
@@ -23,25 +25,39 @@ const ProductPage = () => {
     }
   };
 
+  const handleAuctionButton = () => {
+    setIsModalOpen(true);
+  };
+
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     fetchProductData();
   }, []);
+
+  console.log(isModalOpen);
 
   if (!productData) {
     return <div>로딩중...</div>;
   }
 
   return (
-    <div className="product-page">
-      <ImageGallery images={productData.imageUrls} />
-      <AuctionChart allBids={productData.allBids} />
-      <PrimaryButton
-        type="button"
-        buttonName={productData.isSeller ? '낙찰' : '입찰'}
-        isFull={true}
-      />
-      <ProductInfo productData={productData} />
-    </div>
+    <>
+      <div className="product-page">
+        <ImageGallery images={productData.imageUrls} />
+        <AuctionChart allBids={productData.allBids} />
+        <PrimaryButton
+          type="button"
+          buttonName={productData.isSeller ? '낙찰' : '입찰'}
+          onClick={handleAuctionButton}
+          isFull={true}
+        />
+        <ProductInfo productData={productData} />
+      </div>
+      {isModalOpen && <Modal onClose={onCloseModal}>???</Modal>}
+    </>
   );
 };
 
