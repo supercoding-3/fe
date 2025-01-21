@@ -12,10 +12,10 @@
   background-color: $color-primary;
   border-radius: 10px 10px 0 0;
   transition: all 0.1s ease;
-  opacity: 0;
+  opacity: 1;
 
   &--hidden {
-    opacity: 1;
+    opacity: 0;
   }
 
   &__item {
