@@ -37,8 +37,6 @@ const ProductPage = () => {
     fetchProductData();
   }, []);
 
-  console.log(isModalOpen);
-
   if (!productData) {
     return <div>로딩중...</div>;
   }
@@ -56,7 +54,22 @@ const ProductPage = () => {
         />
         <ProductInfo productData={productData} />
       </div>
-      {isModalOpen && <Modal onClose={onCloseModal}>???</Modal>}
+      {isModalOpen && (
+        <Modal onClose={onCloseModal}>
+          <ul>
+            {productData.allBids?.map((bid) => {
+              return (
+                <li key={bid.bidId}>
+                  {productData.isSeller && <button>낙찰</button>}
+                  <span>{bid.bidPrice}</span>
+                  <span>{bid.bidCreatedAt}</span>
+                  <span>{bid.userNickname}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </Modal>
+      )}
     </>
   );
 };
