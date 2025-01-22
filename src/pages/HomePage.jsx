@@ -4,7 +4,7 @@ import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
 import '../scss/pages/HomePage.scss';
 import { FaArrowUp } from 'react-icons/fa';
-import axios from "../axios/axios";
+import axios from '../axios/axios';
 
 const HomePage = () => {
   const [items, setItems] = useState([]); // 모든 상품 데이터
@@ -13,6 +13,7 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 오류 상태
   const [isSearchPerformed, setIsSearchPerformed] = useState(false); // 검색 수행 여부
+  const [searchQuery, setSearchQuery] = useState('');
 
   // 고정된 카테고리 목록
   const categories = [
@@ -61,7 +62,10 @@ const HomePage = () => {
         setFilteredItems(response.data);
         setIsSearchPerformed(false); // 카테고리 변경 시 검색 상태 초기화
       } catch (error) {
-        console.error(`"${category}" 카테고리 데이터를 불러오는 데 실패했습니다:`, error);
+        console.error(
+          `"${category}" 카테고리 데이터를 불러오는 데 실패했습니다:`,
+          error
+        );
         setError(`"${category}" 카테고리 데이터를 불러오는 데 실패했습니다.`);
       } finally {
         setIsLoading(false);
@@ -81,9 +85,7 @@ const HomePage = () => {
       setIsLoading(true);
       setError(null);
       setIsSearchPerformed(true);
-      const response = await axios.get('/products/search', {
-        params: { title:'string' },
-      });
+      const response = await axios.get(`/products/search?title=${searchQuery}`);
       setFilteredItems(response.data);
     } catch (error) {
       console.error('검색 중 오류가 발생했습니다:', error);
@@ -99,7 +101,11 @@ const HomePage = () => {
 
   return (
     <>
-      <Search onSearch={handleSearch} />
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        onSearch={handleSearch}
+      />
       <div className="items">
         <Category
           categories={categories} // 고정된 카테고리를 전달
@@ -109,12 +115,10 @@ const HomePage = () => {
           <p className="error-message">{error}</p>
         ) : isSearchPerformed && filteredItems.length === 0 ? (
           <p className="no-results">검색 결과가 없습니다.</p>
+        ) : filteredItems.length > 0 ? (
+          <MainGrid items={filteredItems} />
         ) : (
-          filteredItems.length > 0 ? (
-            <MainGrid items={filteredItems} />
-          ) : (
-            <p className="no-items">현재 상품이 없습니다.</p>
-          )
+          <p className="no-items">현재 상품이 없습니다.</p>
         )}
       </div>
       <button className="scroll-top" aria-label="위로">

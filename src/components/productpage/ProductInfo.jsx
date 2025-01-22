@@ -1,8 +1,6 @@
 import '../../scss/components/productpage/ProductInfo.scss';
 
 const ProductInfo = ({ productData }) => {
-  console.log(productData);
-
   if (!productData) {
     return <div>상품 정보를 불러올 수 없습니다</div>;
   }
