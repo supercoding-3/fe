@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axios/axios';
+import '../scss/pages/ChatListPage.scss';
 import ChatListCard from '../components/chatlistpage/ChatListCard';
 
 const ChatListPage = () => {
   const [chatList, setChatList] = useState([]);
-
-  console.log(chatList);
 
   const mockData = [
     {
@@ -49,7 +48,7 @@ const ChatListPage = () => {
   }, []);
 
   return (
-    <ul>
+    <ul className="chat-list">
       {mockData.map((chatData, i) => (
         <li key={i}>
           <Link to={`/chat/${chatData.id}`}>

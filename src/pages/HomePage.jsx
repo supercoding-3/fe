@@ -1,34 +1,21 @@
 import { useEffect, useState } from 'react';
+import axios from '../axios/axios';
+import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
-import '../scss/pages/HomePage.scss';
+import { PRODUCT_CATEGORY } from '../constants/productCategory';
 import { FaArrowUp } from 'react-icons/fa';
-import axios from '../axios/axios';
 
 const HomePage = () => {
-  const [items, setItems] = useState([]); // 모든 상품 데이터
-  const [filteredItems, setFilteredItems] = useState([]); // 필터링된 상품 데이터
-  const [selectedCategory, setSelectedCategory] = useState('전체'); // 선택된 카테고리
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태
-  const [error, setError] = useState(null); // 오류 상태
-  const [isSearchPerformed, setIsSearchPerformed] = useState(false); // 검색 수행 여부
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('전체');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isSearchPerformed, setIsSearchPerformed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 고정된 카테고리 목록
-  const categories = [
-    '전체',
-    '의류',
-    '전자제품',
-    '가구',
-    '아동상품',
-    '뷰티_미용',
-    '취미생활',
-    '식품',
-    '기타',
-  ];
-
-  // 기본 상품 데이터 가져오기
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
@@ -53,14 +40,16 @@ const HomePage = () => {
     setSelectedCategory(category);
 
     if (category === '전체') {
-      setFilteredItems(items); // 전체 카테고리 선택 시 모든 상품 표시
+      setFilteredItems(items);
     } else {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await axios.get(`/products/category/${category}`); // 카테고리별 상품 가져오기
+        const response = await axios.get(
+          `/products/category/${selectedCategory}`
+        );
         setFilteredItems(response.data);
-        setIsSearchPerformed(false); // 카테고리 변경 시 검색 상태 초기화
+        setIsSearchPerformed(false);
       } catch (error) {
         console.error(
           `"${category}" 카테고리 데이터를 불러오는 데 실패했습니다:`,
@@ -108,8 +97,8 @@ const HomePage = () => {
       />
       <div className="items">
         <Category
-          categories={categories} // 고정된 카테고리를 전달
-          onCategoryChange={handleCategoryChange} // 카테고리 변경 핸들러 연결
+          categories={PRODUCT_CATEGORY}
+          onCategoryChange={handleCategoryChange}
         />
         {error ? (
           <p className="error-message">{error}</p>

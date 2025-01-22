@@ -1,5 +1,5 @@
-import '../../scss/components/homepage/MainGrid.scss';
 import { Link } from 'react-router-dom';
+import '../../scss/components/homepage/MainGrid.scss';
 
 const MainGrid = ({ items }) => {
   return (
