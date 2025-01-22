@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '../axios/axios';
 import '../scss/pages/ProductPage.scss';
 import ImageGallery from '../components/productpage/ImageGallery';
@@ -10,8 +10,10 @@ import Modal from '../components/common/Modal';
 import { formatLocalTime } from '../utils/formatLocalTime';
 
 const ProductPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const productId = location.pathname.split('/')[2];
+  const pathname = location.pathname;
+  const productId = pathname.split('/')[2];
 
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,6 +63,16 @@ const ProductPage = () => {
     }
   };
 
+  const deleteProduct = async () => {
+    console.log('deleteProduct');
+    try {
+      await axios.delete(`/products/${productId}`);
+      navigate('/');
+    } catch (err) {
+      console.error('삭제 중 오류 발생:', err);
+    }
+  };
+
   useEffect(() => {
     fetchProductData();
   }, []);
@@ -72,6 +84,13 @@ const ProductPage = () => {
   return (
     <>
       <div className="product-page">
+        {productData.isSeller && (
+          <div className="product-page__buttons">
+            <button onClick={deleteProduct}>삭제</button>
+            <span>/</span>
+            <Link to={`${pathname}/edit`}>수정</Link>
+          </div>
+        )}
         <ImageGallery images={productData.imageUrls} />
         <AuctionChart allBids={productData.allBids} />
         <PrimaryButton

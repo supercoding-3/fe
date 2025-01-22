@@ -6,6 +6,17 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
+
+  &__buttons {
+    font-size: 14px;
+    display: flex;
+    justify-content: right;
+    gap: 2px;
+
+    > button {
+      font-size: 14px;
+    }
+  }
 }
 
 .bid {

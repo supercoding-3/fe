@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import user, { setLogout } from '../../redux/modules/user';
 import axios from '../../axios/axios';
-import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 import '../../scss/components/layoutpage/Header.scss';
+import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const Header = () => {
           {isDropDownOpen && (
             <div className="header__dropdown">
               <ul className="header__dropdown-list">
-                {isLogin ? ( // 로그인 여부에 따른 메뉴 표시
+                {isLogin ? (
                   <>
                     <li className="header__dropdown-item">
                       <Link to="/profile" onClick={closeDropdown}>

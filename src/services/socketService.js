@@ -1,8 +1,10 @@
 const createSocketService = () => {
   let socket = null;
 
-  const connect = () => {
-    socket = new WebSocket(process.env.REACT_APP_SOCKET_URL);
+  const connect = (transactionId) => {
+    socket = new WebSocket(
+      `${process.env.REACT_APP_SOCKET_URL}/chat/room/${transactionId}`
+    );
 
     socket.onopen = () => {
       console.log('Connected to WebSocket server!');
@@ -22,6 +24,11 @@ const createSocketService = () => {
     messageHandler = handler;
   };
 
+  const sendJsonMessage = (jsonObject) => {
+    const message = JSON.stringify(jsonObject);
+    sendMessage(message);
+  };
+
   const sendMessage = (message) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(message);
@@ -34,7 +41,7 @@ const createSocketService = () => {
     }
   };
 
-  return { connect, onMessage, sendMessage, disconnect };
+  return { connect, onMessage, sendMessage, sendJsonMessage, disconnect };
 };
 
 const socketService = createSocketService();
