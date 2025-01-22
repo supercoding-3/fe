@@ -1,4 +1,5 @@
 import '../../scss/components/homepage/Search.scss';
+import PrimaryButton from '../common/PrimaryButton';
 
 const Search = ({ searchQuery, setSearchQuery, onSearch }) => {
   const handleSearch = () => {
@@ -10,14 +11,12 @@ const Search = ({ searchQuery, setSearchQuery, onSearch }) => {
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search"
+        placeholder="상품 제목을 검색하세요"
         className="search-bar__input"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button className="search-bar__button" onClick={handleSearch}>
-        검색
-      </button>
+      <PrimaryButton type="button" buttonName="검색" onClick={handleSearch} />
     </div>
   );
 };
