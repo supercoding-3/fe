@@ -15,10 +15,11 @@
 
   &__sub {
     height: 10vh;
-    max-width: 100%;
+    max-width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    gap: 2%;
     padding: 4px 0;
     margin-top: 8px;
     overflow: hidden;
