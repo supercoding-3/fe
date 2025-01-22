@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../../scss/components/homepage/MainGrid.scss';
 
 const MainGrid = ({ items }) => {
+  console.log(items);
   return (
     <div className="grid">
       {items.map((item) => (

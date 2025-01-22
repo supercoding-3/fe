@@ -4,13 +4,11 @@ import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
-import { PRODUCT_CATEGORY } from '../constants/productCategory';
 import { FaArrowUp } from 'react-icons/fa';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('전체');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isSearchPerformed, setIsSearchPerformed] = useState(false);
@@ -35,19 +33,14 @@ const HomePage = () => {
     fetchAllProducts();
   }, []);
 
-  // 카테고리 변경 핸들러
   const handleCategoryChange = async (category) => {
-    setSelectedCategory(category);
-
     if (category === '전체') {
       setFilteredItems(items);
     } else {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await axios.get(
-          `/products/category/${selectedCategory}`
-        );
+        const response = await axios.get(`/products/category/${category}`);
         setFilteredItems(response.data);
         setIsSearchPerformed(false);
       } catch (error) {
@@ -62,7 +55,6 @@ const HomePage = () => {
     }
   };
 
-  // 검색 핸들러
   const handleSearch = async (searchQuery) => {
     if (!searchQuery.trim()) {
       setIsSearchPerformed(false);
@@ -96,10 +88,7 @@ const HomePage = () => {
         onSearch={handleSearch}
       />
       <div className="items">
-        <Category
-          categories={PRODUCT_CATEGORY}
-          onCategoryChange={handleCategoryChange}
-        />
+        <Category onCategoryChange={handleCategoryChange} />
         {error ? (
           <p className="error-message">{error}</p>
         ) : isSearchPerformed && filteredItems.length === 0 ? (
@@ -110,9 +99,10 @@ const HomePage = () => {
           <p className="no-items">현재 상품이 없습니다.</p>
         )}
       </div>
-      <button className="scroll-top" aria-label="위로">
+      {/* TODO: 기능 추가 */}
+      {/* <button className="scroll-top" aria-label="위로">
         <FaArrowUp />
-      </button>
+      </button> */}
     </>
   );
 };

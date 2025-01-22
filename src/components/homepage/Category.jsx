@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import '../../scss/components/homepage/Category.scss';
+import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
-const Category = ({ categories, onCategoryChange }) => {
+const Category = ({ onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -12,7 +13,7 @@ const Category = ({ categories, onCategoryChange }) => {
   const selectCategory = (category) => {
     setSelectedCategory(category);
     setIsDropdownOpen(false);
-    onCategoryChange(category); // 선택한 카테고리를 부모 컴포넌트로 전달
+    onCategoryChange(category);
   };
 
   return (
@@ -22,7 +23,13 @@ const Category = ({ categories, onCategoryChange }) => {
       </button>
       {isDropdownOpen && (
         <ul className="category-dropdown">
-          {categories.map((category) => (
+          <li
+            className="category-dropdown-item"
+            onClick={() => selectCategory('전체')}
+          >
+            전체
+          </li>
+          {PRODUCT_CATEGORY.map((category) => (
             <li
               key={category}
               className="category-dropdown-item"
