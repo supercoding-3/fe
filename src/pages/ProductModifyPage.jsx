@@ -12,7 +12,7 @@ const ProductModifyPage = () => {
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get(`/product/${productId}`);
+      const res = await axios.get(`/products/${productId}`);
       const data = res.data;
       setProductData(data);
     } catch (err) {
@@ -26,11 +26,7 @@ const ProductModifyPage = () => {
     }
   }, []);
 
-  return (
-    <>
-      <ProductForm productData={productData} />
-    </>
-  );
+  return <ProductForm productData={productData} />;
 };
 
 export default ProductModifyPage;
