@@ -1,38 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axios/axios';
-import '../scss/pages/ChatListPage.scss';
 import ChatListCard from '../components/chatlistpage/ChatListCard';
+import EmptyState from '../components/common/EmptyState';
 
 const ChatListPage = () => {
   const [chatList, setChatList] = useState([]);
-
-  const mockData = [
-    {
-      id: 1,
-      title: '27MK600MW 모니터 팔아요~',
-      price: 100000,
-      seller: '상대방 닉네임',
-      sellerImg: null,
-      thumbnail: 'https://picsum.photos/300',
-    },
-    {
-      id: 2,
-      title: '27MK600MW 모니터 팔아요~',
-      price: 100000,
-      seller: '상대방 닉네임',
-      sellerImg: null,
-      thumbnail: 'https://picsum.photos/100',
-    },
-    {
-      id: 3,
-      title: '27MK600MW 모니터 팔아요~',
-      price: 100000,
-      seller: '상대방 닉네임',
-      sellerImg: null,
-      thumbnail: 'https://picsum.photos/200',
-    },
-  ];
 
   const fetchChatList = async () => {
     try {
@@ -47,9 +20,13 @@ const ChatListPage = () => {
     fetchChatList();
   }, []);
 
+  if (chatList.length === 0) {
+    return <EmptyState />;
+  }
+
   return (
     <ul className="chat-list">
-      {mockData.map((chatData, i) => (
+      {chatList.map((chatData, i) => (
         <li key={i}>
           <Link to={`/chat/${chatData.id}`}>
             <ChatListCard chatData={chatData} />
