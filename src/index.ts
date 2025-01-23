@@ -4,7 +4,7 @@ import store from './redux/store/store';
 import App from './App';
 import './scss/main.scss';
 
-const container = document.getElementById('root');
+const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
 
 root.render(
