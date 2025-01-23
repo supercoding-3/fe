@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axios/axios';
 import ChatListCard from '../components/chatlistpage/ChatListCard';
+import EmptyState from '../components/common/EmptyState';
 
 const ChatListPage = () => {
   const [chatList, setChatList] = useState([]);
@@ -20,11 +21,7 @@ const ChatListPage = () => {
   }, []);
 
   if (chatList.length === 0) {
-    return (
-      <div>
-        <p>채팅 목록이 없습니다</p>
-      </div>
-    );
+    return <EmptyState />;
   }
 
   return (
