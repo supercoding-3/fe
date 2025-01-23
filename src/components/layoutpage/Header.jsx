@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import user, { setLogout } from '../../redux/modules/user';
 import axios from '../../axios/axios';
 import '../../scss/components/layoutpage/Header.scss';
+import { PiRecycleDuotone } from 'react-icons/pi';
 import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
 
 const Header = () => {
@@ -34,7 +35,9 @@ const Header = () => {
     <>
       <header className="header">
         <div className="header__logo">
-          <Link to="/">logo</Link>
+          <Link to="/">
+            <PiRecycleDuotone />
+          </Link>
         </div>
 
         <div className="header__profile">

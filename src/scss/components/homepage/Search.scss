@@ -1,25 +1,15 @@
+@use '../../abstracts/variables' as *;
+
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 40px 450px;
+  justify-content: center;
+  gap: 8px;
 
   &__input {
-    flex-grow: 1;
-    border: 2px solid black;
+    width: 50%;
+    border: 1px solid $color-secondary;
     border-radius: 8px;
     padding: 8px 16px;
-  }
-
-  &__button {
-    border: 1px solid gray;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #e0e0e0;
-    }
   }
 }
