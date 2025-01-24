@@ -4,8 +4,8 @@ import store from './redux/store/store';
 import App from './App';
 import './scss/main.scss';
 
-const container = document.getElementById('root') as HTMLElement;
-const root = createRoot(container);
+const container = document.getElementById('root');
+const root = createRoot(container as HTMLElement);
 
 root.render(
   <Provider store={store}>
