@@ -3,7 +3,7 @@ import { getAuthStatus } from './services/authStorage';
 import { setLogin } from './redux/reducers/user';
 import Router from './router/Router';
 
-function App(): boolean {
+function App() {
   const dispatch = useDispatch();
 
   const isAuthenticated = getAuthStatus();
