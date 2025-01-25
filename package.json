@@ -44,5 +44,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-redux": "^7.1.34",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/recharts": "^1.8.29",
+    "@types/sass": "^1.45.0",
+    "@types/socket.io-client": "^3.0.0"
   }
 }

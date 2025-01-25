@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
-// import { getAuthStatus } from './services/authStorage';
+import { getAuthStatus } from './services/authStorage';
 import { setLogin } from './redux/reducers/user';
-// import Router from './router/Router';
+import Router from './router/Router';
 
-function App() {
+function App(): boolean {
   const dispatch = useDispatch();
 
   const isAuthenticated = getAuthStatus();
