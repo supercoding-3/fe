@@ -12,10 +12,9 @@ const ProductModifyPage = () => {
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get(`/product/${productId}`);
+      const res = await axios.get(`/products/${productId}`);
       const data = res.data;
       setProductData(data);
-      console.log('res', res);
     } catch (err) {
       console.error('상품 데이터를 불러오는 중 오류 발생:', err);
     }
@@ -27,11 +26,7 @@ const ProductModifyPage = () => {
     }
   }, []);
 
-  return (
-    <>
-      <ProductForm productData={productData} />
-    </>
-  );
+  return <ProductForm productData={productData} />;
 };
 
 export default ProductModifyPage;
