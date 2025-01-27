@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from '../../axios/axios';
-import { setLogin } from '../../redux/modules/user';
+import { setLogin } from '../../redux/reducers/user';
 import '../../scss/components/authpage/LoginForm.scss';
 
 const LoginForm = () => {

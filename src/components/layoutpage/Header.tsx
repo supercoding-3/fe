@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import user, { setLogout } from '../../redux/modules/user';
+import user, { setLogout } from '../../redux/reducers/user';
 import axios from '../../axios/axios';
 import '../../scss/components/layoutpage/Header.scss';
 import { PiRecycleDuotone } from 'react-icons/pi';
