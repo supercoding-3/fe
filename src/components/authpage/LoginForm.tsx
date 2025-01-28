@@ -2,7 +2,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from '../../axios/axios';
+import { AxiosError } from 'axios';
 import { setLogin } from '../../redux/reducers/user';
+import { LoginFormData } from 'types/Auth';
 import '../../scss/components/authpage/LoginForm.scss';
 
 const LoginForm = () => {
@@ -12,10 +14,10 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormData>();
   const navigate = useNavigate();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: LoginFormData) => {
     const requestBody = {
       userEmail: data.email,
       userPassword: data.password,
@@ -28,14 +30,15 @@ const LoginForm = () => {
         navigate('/');
       }
     } catch (error) {
-      if (error.response && error.response.status === 404) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 404) {
         alert('회원가입된 계정이 아닙니다.');
-      } else if (error.response && error.response.status === 401) {
+      } else if (axiosError.response?.status === 401) {
         alert('비밀번호가 일치하지 않습니다.');
       } else {
         alert('로그인 중 문제가 발생했습니다. 다시 시도해주세요.');
       }
-      console.error('로그인 오류:', error);
+      console.error('로그인 오류:', axiosError);
     }
   };
 
