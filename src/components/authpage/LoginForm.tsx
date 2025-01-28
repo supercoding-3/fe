@@ -8,6 +8,7 @@ import { LoginFormData } from 'types/Auth';
 import '../../scss/components/authpage/LoginForm.scss';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -15,7 +16,6 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>();
-  const navigate = useNavigate();
 
   const onSubmit = async (data: LoginFormData) => {
     const requestBody = {
