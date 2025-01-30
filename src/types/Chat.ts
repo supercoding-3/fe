@@ -11,3 +11,12 @@ export interface ChatData {
   message: string;
   messageType: MessageType.CHAT | MessageType.ENTER | MessageType.LEAVE;
 }
+
+export interface ChatListCardProps {
+  id: number;
+  thumbnail: string;
+  title: string;
+  price: number;
+  sellerImg: string;
+  seller: string;
+}
