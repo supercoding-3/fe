@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from '../axios/axios';
+import { ChatData } from 'types/Chat';
 import '../scss/pages/ChatPage.scss';
 import socketService from '../services/socketService';
 import ChatDisplay from '../components/chatpage/ChatDisplay';
@@ -13,7 +14,7 @@ const ChatPage = () => {
   const pathname = location.pathname;
   const transactionId = pathname.split('/')[2];
 
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<ChatData[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fetchMessages = async () => {
@@ -25,16 +26,19 @@ const ChatPage = () => {
     }
   };
 
-  const handleSendMessage = (message) => {
-    if (message.trim()) {
+  const handleSendMessage = (chatData: ChatData) => {
+    if (chatData.message.trim()) {
       const messageData = {
-        sender: 'user7@example.com',
-        receiver: 'user8@example.com',
-        message: message,
-        messageType: 'CHAT',
+        sender: chatData.sender,
+        receiver: chatData.receiver,
+        message: chatData.message,
+        messageType: chatData.messageType,
       };
       socketService.sendJsonMessage(messageData);
-      setMessages((prevMessages) => [...prevMessages, message]);
+
+      if (chatData.messageType === 'CHAT') {
+        setMessages((prevMessages: ChatData[]) => [...prevMessages, message]);
+      }
     }
   };
 
