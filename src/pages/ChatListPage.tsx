@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axios/axios';
+import { ChatData } from 'types/Chat';
 import ChatListCard from '../components/chatlistpage/ChatListCard';
 import EmptyState from '../components/common/EmptyState';
 
 const ChatListPage = () => {
-  const [chatList, setChatList] = useState([]);
+  const [chatList, setChatList] = useState<ChatData[]>([]);
 
   const fetchChatList = async () => {
     try {
