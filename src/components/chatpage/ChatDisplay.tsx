@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import '../../scss/components/chatpage/ChatDisplay.scss';
+import { ChatData } from 'types/Chat';
 
-const ChatDisplay = ({ messages }) => {
-  const messagesEndRef = useRef(null);
+const ChatDisplay = ({ messages }: { messages: ChatData[] }) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -13,13 +14,16 @@ const ChatDisplay = ({ messages }) => {
       {messages.map((message, i) => (
         <p
           key={i}
-          className={`chat-display__message ${
-            message.includes('Echo')
-              ? 'chat-display__message-received'
-              : 'chat-display__message-sent'
-          }`}
+          className={
+            'chat-display__message'
+            //   `${
+            //   message.includes('Echo')
+            //     ? 'chat-display__message-received'
+            //     : 'chat-display__message-sent'
+            // }`
+          }
         >
-          {message}
+          {message.message}
         </p>
       ))}
       <div ref={messagesEndRef}></div>
