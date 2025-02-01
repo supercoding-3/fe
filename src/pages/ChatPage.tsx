@@ -15,6 +15,7 @@ const ChatPage = () => {
   const transactionId = pathname.split('/')[2];
 
   const [messages, setMessages] = useState<ChatData[]>([]);
+  const [inputValue, setInputValue] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fetchMessages = async () => {
@@ -26,25 +27,26 @@ const ChatPage = () => {
     }
   };
 
-  const handleSendMessage = (chatData: ChatData) => {
-    if (chatData.message.trim()) {
+  const handleSendMessage = () => {
+    // TODO: 채팅정보 가져오기
+    if (inputValue.trim()) {
       const messageData = {
-        sender: chatData.sender,
-        receiver: chatData.receiver,
-        message: chatData.message,
-        messageType: chatData.messageType,
+        // sender: chatData.sender,
+        // receiver: chatData.receiver,
+        message: inputValue,
+        // messageType: chatData.messageType,
       };
       socketService.sendJsonMessage(messageData);
-
-      if (chatData.messageType === 'CHAT') {
-        setMessages((prevMessages: ChatData[]) => [...prevMessages, message]);
-      }
     }
   };
 
   useEffect(() => {
     fetchMessages();
   }, []);
+
+  useEffect(() => {
+    handleSendMessage();
+  }, [inputValue]);
 
   useEffect(() => {
     socketService.connect(transactionId);
@@ -76,7 +78,7 @@ const ChatPage = () => {
         >
           <CiMenuKebab />
         </button>
-        <ChatInput onSendMessage={handleSendMessage} />
+        <ChatInput onSendMessage={setInputValue} />
       </div>
     </div>
   );
