@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { getAuthStatus } from './services/authStorage';
-import { setLogin } from './redux/modules/user';
+import { setLogin } from './redux/reducers/user';
 import Router from './router/Router';
 
 function App() {
