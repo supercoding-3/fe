@@ -7,13 +7,15 @@ import ChatDisplay from '../components/chatpage/ChatDisplay';
 import ChatMenu from '../components/chatpage/ChatMenu';
 import ChatInput from '../components/chatpage/ChatInput';
 import { CiMenuKebab } from 'react-icons/ci';
+import { ChatData } from 'types/Chat';
 
 const ChatPage = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const transactionId = pathname.split('/')[2];
 
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<ChatData[]>([]);
+  const [inputValue, setInputValue] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fetchMessages = async () => {
@@ -25,22 +27,26 @@ const ChatPage = () => {
     }
   };
 
-  const handleSendMessage = (message) => {
-    if (message.trim()) {
+  const handleSendMessage = () => {
+    // TODO: 채팅정보 가져오기
+    if (inputValue.trim()) {
       const messageData = {
-        sender: 'user7@example.com',
-        receiver: 'user8@example.com',
-        message: message,
-        messageType: 'CHAT',
+        // sender: chatData.sender,
+        // receiver: chatData.receiver,
+        message: inputValue,
+        // messageType: chatData.messageType,
       };
       socketService.sendJsonMessage(messageData);
-      setMessages((prevMessages) => [...prevMessages, message]);
     }
   };
 
   useEffect(() => {
     fetchMessages();
   }, []);
+
+  useEffect(() => {
+    handleSendMessage();
+  }, [inputValue]);
 
   useEffect(() => {
     socketService.connect(transactionId);
@@ -72,7 +78,7 @@ const ChatPage = () => {
         >
           <CiMenuKebab />
         </button>
-        <ChatInput onSendMessage={handleSendMessage} />
+        <ChatInput onSendMessage={setInputValue} />
       </div>
     </div>
   );

@@ -2,7 +2,11 @@ import { useState } from 'react';
 import '../../scss/components/chatpage/ChatInput.scss';
 import { IoIosSend } from 'react-icons/io';
 
-const ChatInput = ({ onSendMessage }) => {
+const ChatInput = ({
+  onSendMessage,
+}: {
+  onSendMessage: (inputValue: string) => void;
+}) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => {

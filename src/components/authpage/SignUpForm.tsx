@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from '../../axios/axios';
+import { AxiosError } from 'axios';
+import { SignUpFormData } from 'types/Auth';
 import '../../scss/components/authpage/SignUpForm.scss';
 
 // 폼 데이터 타입 정의
