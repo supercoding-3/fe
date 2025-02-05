@@ -1,6 +1,6 @@
 import '../../scss/components/chatpage/ChatMenu.scss';
 
-const ChatMenu = ({ isMenuOpen }) => {
+const ChatMenu = ({ isMenuOpen }: { isMenuOpen: boolean }) => {
   return (
     <ul className={`chat-menu ${isMenuOpen ? '' : 'chat-menu--hidden'}`}>
       <li className="chat-menu__item">
