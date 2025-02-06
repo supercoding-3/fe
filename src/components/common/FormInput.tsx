@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileData, FormInputProps } from 'types/FieldData';
+import { FormInputProps } from 'types/FieldData';
 import formatPhoneNumber from '../../utils/formatPhoneNumber';
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -10,7 +10,7 @@ const FormInput: React.FC<FormInputProps> = ({
   onFileChange,
 }) => {
   const [isValid, setIsValid] = useState(true);
-  const [imageBase64, setImageBase64] = useState<FileData>(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = e.target;
@@ -25,8 +25,10 @@ const FormInput: React.FC<FormInputProps> = ({
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setImageBase64(reader.result);
-          if (onFileChange) onFileChange(reader.result);
+          if (typeof reader.result === 'string') {
+            setImageBase64(reader.result);
+            if (onFileChange) onFileChange(reader.result);
+          }
         };
         reader.readAsDataURL(file);
       }

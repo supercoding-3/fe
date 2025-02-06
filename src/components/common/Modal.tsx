@@ -2,9 +2,10 @@ import ReactDOM from 'react-dom';
 import '../../scss/components/common/Modal.scss';
 import PrimaryButton from './PrimaryButton';
 import { IoIosClose } from 'react-icons/io';
+import { ModalProps } from 'types/Modal';
 
-const Modal = ({ children, onClose, onClick }) => {
-  const handleOverlayClick = (e) => {
+const Modal: React.FC<ModalProps> = ({ children, onClose, onClick }) => {
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -19,23 +20,27 @@ const Modal = ({ children, onClose, onClick }) => {
           </button>
         </header>
         {children}
-        {/* <footer className="modal__footer">
-          <PrimaryButton
-            type="button"
-            buttonName="취소"
-            onClick={onClose}
-            theme="cancel"
-          />
-          <PrimaryButton
-            type="button"
-            buttonName="확인"
-            onClick={onClick}
-            theme="success"
-          />
-        </footer> */}
+        <footer className="modal__footer">
+          {onClose && (
+            <PrimaryButton
+              type="button"
+              buttonName="취소"
+              onClick={onClose}
+              theme="cancel"
+            />
+          )}
+          {onClick && (
+            <PrimaryButton
+              type="button"
+              buttonName="확인"
+              onClick={onClick}
+              theme="success"
+            />
+          )}
+        </footer>
       </div>
     </div>,
-    document.getElementById('modal')
+    document.getElementById('modal') as HTMLElement
   );
 };
 
