@@ -1,6 +1,7 @@
 import '../../scss/components/productpage/ProductInfo.scss';
+import { ProductData } from 'types/Product';
 
-const ProductInfo = ({ productData }) => {
+const ProductInfo = ({ productData }: { productData: ProductData }) => {
   if (!productData) {
     return <div>상품 정보를 불러올 수 없습니다</div>;
   }

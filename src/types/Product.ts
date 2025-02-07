@@ -1,3 +1,8 @@
+export interface Bid {
+  bidCreatedAt: string;
+  bidPrice: number;
+}
+
 export interface ProductData {
   productId?: number;
   title: string;
@@ -6,9 +11,8 @@ export interface ProductData {
   immediatePrice: number;
   category: string;
   productEndDate?: string;
-}
-
-export interface Bid {
-  bidCreatedAt: string;
-  bidPrice: number;
+  productStatus?: string;
+  isSeller: boolean;
+  imageUrls?: string[];
+  allBids?: Bid[];
 }

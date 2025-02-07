@@ -8,6 +8,7 @@ import PrimaryButton from '../components/common/PrimaryButton';
 import ProductInfo from '../components/productpage/ProductInfo';
 import Modal from '../components/common/Modal';
 import { formatLocalTime } from '../utils/formatLocalTime';
+import { ProductData } from 'types/Product';
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ProductPage = () => {
   const pathname = location.pathname;
   const productId = pathname.split('/')[2];
 
-  const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState<ProductData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [bidPrice, setBidPrice] = useState(0);
   const [isAwarded, setIsAwarded] = useState(false);
@@ -23,7 +24,7 @@ const ProductPage = () => {
   const fetchProductData = async () => {
     try {
       const res = await axios.get(`/products/${productId}`);
-      const data = res.data;
+      const data: ProductData = res.data;
       setProductData(data);
       setIsAwarded(data.productStatus === '낙찰');
     } catch (err) {
@@ -40,7 +41,12 @@ const ProductPage = () => {
   };
 
   const handleBidding = async () => {
-    if (bidPrice <= 0 || productData?.startingBidPrice > bidPrice) {
+    if (
+      productData &&
+      (bidPrice <= 0 ||
+        (productData.startingBidPrice !== undefined &&
+          productData.startingBidPrice > bidPrice))
+    ) {
       alert('입찰가는 입찰시작가보다 커야 합니다');
     }
     try {
@@ -53,7 +59,7 @@ const ProductPage = () => {
     }
   };
 
-  const handleAwarding = async (bidId) => {
+  const handleAwarding = async (bidId: number) => {
     try {
       await axios.post(`/products/${productId}/award`, {
         bidId: bidId,
@@ -91,8 +97,8 @@ const ProductPage = () => {
             <Link to={`${pathname}/edit`}>수정</Link>
           </div>
         )}
-        <ImageGallery images={productData.imageUrls} />
-        <AuctionChart allBids={productData.allBids} />
+        <ImageGallery images={productData.imageUrls || []} />
+        <AuctionChart allBids={productData.allBids || []} />
         <PrimaryButton
           type="button"
           buttonName={

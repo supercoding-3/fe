@@ -6,7 +6,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import { ProductData } from 'types/Product';
 import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
-const ProductForm: React.FC<{ productData?: ProductData }> = ({
+const ProductForm: React.FC<{ productData: ProductData | null }> = ({
   productData,
 }) => {
   const navigate = useNavigate();

@@ -4,13 +4,13 @@ import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
-import { FaArrowUp } from 'react-icons/fa';
+// import { FaArrowUp } from 'react-icons/fa';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>('');
   const [isSearchPerformed, setIsSearchPerformed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -18,7 +18,7 @@ const HomePage = () => {
     const fetchAllProducts = async () => {
       try {
         setIsLoading(true);
-        setError(null);
+        setError('');
         const response = await axios.get('/products/all');
         setItems(response.data);
         setFilteredItems(response.data);
@@ -33,13 +33,13 @@ const HomePage = () => {
     fetchAllProducts();
   }, []);
 
-  const handleCategoryChange = async (category) => {
+  const handleCategoryChange = async (category: string) => {
     if (category === '전체') {
       setFilteredItems(items);
     } else {
       try {
         setIsLoading(true);
-        setError(null);
+        setError('');
         const response = await axios.get(`/products/category/${category}`);
         setFilteredItems(response.data);
         setIsSearchPerformed(false);
@@ -55,7 +55,7 @@ const HomePage = () => {
     }
   };
 
-  const handleSearch = async (searchQuery) => {
+  const handleSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       setIsSearchPerformed(false);
       setFilteredItems(items);
@@ -64,7 +64,7 @@ const HomePage = () => {
 
     try {
       setIsLoading(true);
-      setError(null);
+      setError('');
       setIsSearchPerformed(true);
       const response = await axios.get(`/products/search?title=${searchQuery}`);
       setFilteredItems(response.data);
