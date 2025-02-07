@@ -7,3 +7,8 @@ export interface ProductData {
   category: string;
   productEndDate?: string;
 }
+
+export interface Bid {
+  bidCreatedAt: string;
+  bidPrice: number;
+}
