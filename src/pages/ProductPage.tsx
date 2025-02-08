@@ -118,11 +118,11 @@ const ProductPage = () => {
       </div>
       {isModalOpen && productData.isSeller && (
         <Modal onClose={onCloseModal}>
-          {productData.allBids.length === 0 ? (
+          {productData.allBids?.length === 0 ? (
             <p>입찰 내역이 없습니다</p>
           ) : (
             <ul>
-              {productData.allBids.map((bid) => {
+              {productData.allBids?.map((bid) => {
                 return (
                   <li key={bid.bidId} className="bid">
                     {productData.isSeller && (
@@ -138,7 +138,6 @@ const ProductPage = () => {
                     )}
                     <span>{bid.bidPrice}원</span>
                     <span>{formatLocalTime(bid.bidCreatedAt)}</span>
-                    <span>{bid.userNickname}</span>
                   </li>
                 );
               })}
@@ -156,7 +155,7 @@ const ProductPage = () => {
             <input
               type="number"
               value={bidPrice}
-              onChange={(e) => setBidPrice(e.target.value)}
+              onChange={(e) => setBidPrice(Number(e.target.value))}
               required
               className="bidding-form__input"
             />

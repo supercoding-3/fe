@@ -1,4 +1,5 @@
 export interface Bid {
+  bidId: number;
   bidCreatedAt: string;
   bidPrice: number;
 }
