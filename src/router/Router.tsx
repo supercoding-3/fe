@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
+import { RootState } from 'redux/store/store';
 // pages
 import LayoutPage from '../pages/LayoutPage';
 import HomePage from '../pages/HomePage';
@@ -14,7 +15,7 @@ import AuthPage from '../pages/AuthPage';
 import ProfileEdit from '../components/profilepage/ProfileEdit';
 
 const Router = () => {
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state: RootState) => state.user.isLogin);
 
   return (
     <BrowserRouter>

@@ -17,7 +17,7 @@ const AuctionChart = ({ allBids }: { allBids: Bid[] }) => {
   };
 
   useEffect(() => {
-    const bids = extractBidDetails(allBids);
+    const bids = extractBidDetails(allBids) as Bid[];
     setBids(bids);
   }, [allBids]);
   if (!allBids) {
