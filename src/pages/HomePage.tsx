@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from '../axios/axios';
 import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
