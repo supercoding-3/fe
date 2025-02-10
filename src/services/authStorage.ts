@@ -1,6 +1,6 @@
 const AUTH_KEY = 'isAuthenticated';
 
-export const setAuthStatus = (status) => {
+export const setAuthStatus = (status: boolean) => {
   localStorage.setItem(AUTH_KEY, JSON.stringify(status));
 };
 

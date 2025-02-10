@@ -1,5 +1,13 @@
 import '../../scss/components/common/PrimaryButton.scss';
 
+interface PrimaryButtonProps {
+  type: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  buttonName: string;
+  onClick?: () => void;
+  isFull?: boolean;
+  theme?: 'primary' | 'success' | 'cancel' | 'disabled';
+}
+
 /**
  * 공용 버튼 컴포넌트
  * @param {string} type
@@ -8,7 +16,7 @@ import '../../scss/components/common/PrimaryButton.scss';
  * @param {boolean} isFull
  * @param {'primary' | 'success' | 'cancel' | 'disabled'} theme
  */
-const PrimaryButton = ({
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   type,
   buttonName,
   onClick,

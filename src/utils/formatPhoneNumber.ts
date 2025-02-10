@@ -1,4 +1,9 @@
-const formatPhoneNumber = (phoneNumber) => {
+/**
+ * 휴대폰 번호를 전화번호 형식으로 변환
+ * @param {string} phoneNumber - 휴대폰 번호
+ * @returns {string} 전화번호 형식
+ */
+const formatPhoneNumber = (phoneNumber: string) => {
   const cleaned = ('' + phoneNumber).replace(/\D/g, '');
 
   // 휴대폰 번호 형식 (010-xxxx-xxxx)

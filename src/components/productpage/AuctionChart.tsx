@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import '../../scss/components/productpage/AuctionChart.scss';
+import { Bid } from 'types/Product';
 
-const AuctionChart = ({ allBids }) => {
-  const [bids, setBids] = useState([]);
+const AuctionChart = ({ allBids }: { allBids: Bid[] }) => {
+  const [bids, setBids] = useState<Bid[]>([]);
 
-  const extractBidDetails = (bids) => {
+  const extractBidDetails = (bids: Bid[]) => {
     return bids.map(({ bidCreatedAt, bidPrice }) => {
       const bidDate = bidCreatedAt.slice(0, 10);
       return {
@@ -16,7 +17,7 @@ const AuctionChart = ({ allBids }) => {
   };
 
   useEffect(() => {
-    const bids = extractBidDetails(allBids);
+    const bids = extractBidDetails(allBids) as Bid[];
     setBids(bids);
   }, [allBids]);
   if (!allBids) {
@@ -26,9 +27,7 @@ const AuctionChart = ({ allBids }) => {
   if (bids.length === 0) {
     return (
       <div className="help-text">
-        <p div className="help-text--no-data">
-          입찰 정보가 없습니다
-        </p>
+        <p className="help-text--no-data">입찰 정보가 없습니다</p>
       </div>
     );
   }

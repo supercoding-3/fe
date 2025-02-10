@@ -2,10 +2,10 @@ import { useState } from 'react';
 import '../../scss/components/productpage/ImageGallery.scss';
 import imagePlaceholder from '../../assets/images/placeholder-image.png';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images }: { images: string[] }) => {
   const [mainImage, setMainImage] = useState(images[0] || '');
 
-  const selectMainImage = (img) => {
+  const selectMainImage = (img: string) => {
     setMainImage(img);
   };
 

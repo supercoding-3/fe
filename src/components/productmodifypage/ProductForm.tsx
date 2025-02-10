@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../axios/axios';
 import '../../scss/components/productmodifypage/ProductForm.scss';
 import PrimaryButton from '../common/PrimaryButton';
+import { ProductData } from 'types/Product';
 import { PRODUCT_CATEGORY } from '../../constants/productCategory';
 
-const ProductForm = ({ productData }) => {
+const ProductForm: React.FC<{ productData: ProductData | null }> = ({
+  productData,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,12 +21,12 @@ const ProductForm = ({ productData }) => {
     productEndDate: '',
   });
   const [buttonName, setButtonName] = useState('등록');
-  const [images, setImages] = useState([]);
-  const [previews, setPreviews] = useState([]);
+  const [images, setImages] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
   const [isStartingBidPrice, setIsStartingBidPrice] = useState(false);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files ? Array.from(e.target.files) : [];
     if (files.length > 5) {
       alert('이미지는 최대 5개까지 업로드할 수 있습니다.');
       return;
@@ -35,15 +38,19 @@ const ProductForm = ({ productData }) => {
     setPreviews(previewUrls);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { id, value } = e.target;
     setFormFields((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    const formatEndDate = new Date(e.target.productEndDate?.value);
+    const form = e.target as HTMLFormElement;
+    const formatEndDate = new Date(form.productEndDate?.value);
     formatEndDate.setHours(23, 59, 59, 999);
     const product = {
       title: formFields.title,
@@ -53,11 +60,14 @@ const ProductForm = ({ productData }) => {
       category: formFields.category,
       productEndDate: formatEndDate,
     };
+
+    const formData = new FormData();
     formData.append(
       'product',
       new Blob([JSON.stringify(product)], { type: 'application/json' })
     );
     if (location.pathname.includes('edit')) {
+      if (!productData) return;
       formData.delete('productEndDate');
       try {
         await axios.patch(`/products/${productData.productId}/edit`, formData, {
@@ -200,7 +210,7 @@ const ProductForm = ({ productData }) => {
             id="description"
             value={formFields.description}
             onChange={handleInputChange}
-            rows="10"
+            rows={10}
             className="product-form__input"
           />
         </label>

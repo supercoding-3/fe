@@ -5,10 +5,13 @@ import SignUpForm from '../components/authpage/SignUpForm';
 const AuthPage = () => {
   const location = useLocation();
 
-  if (location.pathname === '/login') {
-    return <LoginForm />;
-  } else if (location.pathname === '/signup') {
-    return <SignUpForm />;
+  switch (location.pathname) {
+    case '/login':
+      return <LoginForm />;
+    case '/signup':
+      return <SignUpForm />;
+    default:
+      return <div>잘못된 접근입니다.</div>;
   }
 };
 

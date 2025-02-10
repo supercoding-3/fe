@@ -1,11 +1,18 @@
 import { useState } from 'react';
+import { FormInputProps } from 'types/FieldData';
 import formatPhoneNumber from '../../utils/formatPhoneNumber';
 
-const FormInput = ({ label, fieldData, regex, helpText, onFileChange }) => {
+const FormInput: React.FC<FormInputProps> = ({
+  label,
+  fieldData,
+  regex,
+  helpText,
+  onFileChange,
+}) => {
   const [isValid, setIsValid] = useState(true);
-  const [imageBase64, setImageBase64] = useState(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
 
-  const handleInputValue = (e) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = e.target;
 
     if (fieldData.type === 'tel') {
@@ -13,13 +20,15 @@ const FormInput = ({ label, fieldData, regex, helpText, onFileChange }) => {
       e.target.value = value;
     }
 
-    if (fieldData.type === 'file') {
+    if (fieldData.type === 'file' && e.target.files) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setImageBase64(reader.result);
-          if (onFileChange) onFileChange(reader.result);
+          if (typeof reader.result === 'string') {
+            setImageBase64(reader.result);
+            if (onFileChange) onFileChange(reader.result);
+          }
         };
         reader.readAsDataURL(file);
       }

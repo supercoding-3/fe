@@ -51,7 +51,7 @@ const ChatPage = () => {
   useEffect(() => {
     socketService.connect(transactionId);
 
-    socketService.onMessage((data) => {
+    socketService.onMessage((data: string) => {
       try {
         const parsedData = JSON.parse(data);
         if (parsedData.messageType === 'CHAT') {
