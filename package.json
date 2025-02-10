@@ -56,6 +56,9 @@
     "@types/recharts": "^1.8.29",
     "@types/sass": "^1.45.0",
     "@types/socket.io-client": "^3.0.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "gh-pages": "^6.3.0"
   },
   "homepage": "https://supercoding-3.github.io/fe"
