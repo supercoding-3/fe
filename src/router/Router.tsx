@@ -18,7 +18,7 @@ const Router = () => {
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
       <Routes>
         <Route element={<LayoutPage />}>
           <Route path="/" element={<HomePage />} />
