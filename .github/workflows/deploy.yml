@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
@@ -29,6 +30,10 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Create CNAME file for dev branch
+        if: github.ref == 'refs/heads/dev'
+        run: echo "dev-${{ github.repository }}.github.io" > build/CNAME
 
       - name: Deploy to GitHub Pages
         if: success()
