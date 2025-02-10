@@ -14,25 +14,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: 버전 정보 추출
+        id: extract_version_name
+        run: |
+          VERSION=$(echo "${{ github.event.head_commit.message }}" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' || echo "")
+          if [[ -z "$VERSION" ]]; then
+            echo "No version found. Skipping release."
+            exit 0
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Release 생성
+        if: env.VERSION != ''
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          release_name: ${{ env.VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Node.js 설정
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Dependencies 설치
         run: npm ci
 
-      - name: Build project
+      - name: Build
         run: CI=false npm run build
 
-      - name: Create CNAME file for dev branch
+      - name: dev 브랜치용 CNAME 생성
         if: github.ref == 'refs/heads/dev'
         run: echo "dev-${{ github.repository }}.github.io" > build/CNAME
 
-      - name: Deploy to GitHub Pages
+      - name: GitHub Pages로 배포
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
