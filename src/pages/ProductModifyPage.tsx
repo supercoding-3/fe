@@ -25,7 +25,7 @@ const ProductModifyPage = () => {
     if (pathname.includes('edit')) {
       fetchProductData();
     }
-  }, []);
+  }, [pathname]);
 
   return <ProductForm productData={productData} />;
 };

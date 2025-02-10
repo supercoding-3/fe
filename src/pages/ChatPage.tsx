@@ -42,7 +42,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     fetchMessages();
-  }, []);
+  }, [transactionId]);
 
   useEffect(() => {
     handleSendMessage();
@@ -65,7 +65,7 @@ const ChatPage = () => {
     return () => {
       socketService.disconnect();
     };
-  }, []);
+  }, [transactionId]);
 
   return (
     <div className="chat-page">

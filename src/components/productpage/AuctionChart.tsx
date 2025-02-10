@@ -20,6 +20,7 @@ const AuctionChart = ({ allBids }: { allBids: Bid[] }) => {
     const bids = extractBidDetails(allBids) as Bid[];
     setBids(bids);
   }, [allBids]);
+
   if (!allBids) {
     return <div>입찰 정보를 불러올 수 없습니다</div>;
   }

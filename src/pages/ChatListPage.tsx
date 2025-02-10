@@ -17,9 +17,7 @@ const ChatListPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchChatList();
-  }, []);
+  fetchChatList();
 
   if (chatList.length === 0) {
     return <EmptyState />;

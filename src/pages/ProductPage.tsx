@@ -81,7 +81,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     fetchProductData();
-  }, []);
+  }, [productId]);
 
   if (!productData) {
     return <div>로딩중...</div>;

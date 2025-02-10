@@ -14,24 +14,22 @@ const HomePage = () => {
   const [isSearchPerformed, setIsSearchPerformed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-      try {
-        setIsLoading(true);
-        setError('');
-        const response = await axios.get('/products/all');
-        setItems(response.data);
-        setFilteredItems(response.data);
-      } catch (error) {
-        console.error('상품 데이터를 불러오는 데 실패했습니다:', error);
-        setError('상품 데이터를 불러오는 데 실패했습니다.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchAllProducts = async () => {
+    try {
+      setIsLoading(true);
+      setError('');
+      const response = await axios.get('/products/all');
+      setItems(response.data);
+      setFilteredItems(response.data);
+    } catch (error) {
+      console.error('상품 데이터를 불러오는 데 실패했습니다:', error);
+      setError('상품 데이터를 불러오는 데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchAllProducts();
-  }, []);
+  fetchAllProducts();
 
   const handleCategoryChange = async (category: string) => {
     if (category === '전체') {
