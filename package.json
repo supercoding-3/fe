@@ -25,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/recharts": "^1.8.29",
     "@types/sass": "^1.45.0",
-    "@types/socket.io-client": "^3.0.0"
-  }
+    "@types/socket.io-client": "^3.0.0",
+    "gh-pages": "^6.3.0"
+  },
+  "homepage": "https://supercoding-3.github.io/fe"
 }
