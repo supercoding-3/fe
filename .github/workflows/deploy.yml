@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
@@ -48,9 +47,13 @@ jobs:
       - name: Build
         run: CI=false npm run build
 
-      - name: dev 브랜치용 CNAME 생성
-        if: github.ref == 'refs/heads/dev'
-        run: echo "dev-${{ github.repository }}.github.io" > build/CNAME
+      - name: main 브랜치 GitHub Pages로 배포
+        if: github.ref == 'refs/heads/main' && success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
 
       - name: GitHub Pages로 배포
         if: success()
