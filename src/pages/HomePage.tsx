@@ -4,7 +4,7 @@ import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
 import MainGrid from '../components/homepage/MainGrid';
 import Category from '../components/homepage/Category';
-// import { FaArrowUp } from 'react-icons/fa';
+import { FaArrowUp } from 'react-icons/fa';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
@@ -98,9 +98,9 @@ const HomePage = () => {
         )}
       </div>
       {/* TODO: 기능 추가 */}
-      {/* <button className="scroll-top" aria-label="위로">
+      <button className="scroll-top" aria-label="위로">
         <FaArrowUp />
-      </button> */}
+      </button>
     </>
   );
 };

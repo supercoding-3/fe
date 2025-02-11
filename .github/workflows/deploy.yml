@@ -57,9 +57,18 @@ jobs:
         if: github.ref == 'refs/heads/dev'
         run: echo "https://dev-supercoding-3.github.io/fe/" > build/CNAME
 
-      - name: GitHub Pages로 배포
-        if: success()
+      - name: main 브랜치 GitHub Pages로 배포
+        if: github.ref == 'refs/heads/main' && success()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build
+          publish_branch: gh-pages
+
+      - name: dev 브랜치 GitHub Pages로 배포
+        if: github.ref == 'refs/heads/dev' && success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
