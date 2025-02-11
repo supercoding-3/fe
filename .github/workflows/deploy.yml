@@ -49,9 +49,13 @@ jobs:
       - name: Build
         run: CI=false npm run build
 
+      - name: main 브랜치용 CNAME 생성
+        if: github.ref == 'refs/heads/main'
+        run: echo "https://supercoding-3.github.io/fe/" > build/CNAME
+
       - name: dev 브랜치용 CNAME 생성
         if: github.ref == 'refs/heads/dev'
-        run: echo "dev-${{ github.repository }}.github.io" > build/CNAME
+        run: echo "https://dev-supercoding-3.github.io/fe/" > build/CNAME
 
       - name: GitHub Pages로 배포
         if: success()
