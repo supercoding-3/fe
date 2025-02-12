@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../axios/axios';
 import '../scss/pages/HomePage.scss';
 import Search from '../components/homepage/Search';
@@ -28,8 +28,6 @@ const HomePage = () => {
       setIsLoading(false);
     }
   };
-
-  fetchAllProducts();
 
   const handleCategoryChange = async (category: string) => {
     if (category === '전체') {
@@ -73,6 +71,10 @@ const HomePage = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   if (isLoading) {
     return <p className="loading">로딩 중...</p>;
