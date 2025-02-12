@@ -36,6 +36,9 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: .env 파일을 빌드 폴더에 복사
+        run: cp .env build/.env
+
       - name: Node.js 설정
         uses: actions/setup-node@v3
         with:
