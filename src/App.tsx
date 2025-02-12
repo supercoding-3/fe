@@ -12,6 +12,7 @@ function App() {
     dispatch(setLogin('true'));
   }
 
+  // TODO: 테스트 후 삭제
   console.log(process.env.REACT_APP_ENDPOINT);
 
   return (
