@@ -14,14 +14,12 @@ const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // useForm에서 타입 정의
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  // onSubmit 함수 타입 정의
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     const requestBody = {
       userEmail: data.email,

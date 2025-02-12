@@ -42,7 +42,6 @@ const SignUpForm: React.FC = () => {
       }
     } catch (error: any) {
       if (error.response) {
-        // 서버에서 반환한 상태 코드 처리
         if (error.response.status === 409) {
           alert(
             error.response.data.message ||
