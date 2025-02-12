@@ -47,6 +47,9 @@ jobs:
       - name: Build
         run: CI=false npm run build
 
+      - name: CNAME 파일을 build 폴더에 추가
+        run: echo "bidit.store" > build/CNAME
+
       - name: main 브랜치 GitHub Pages로 배포
         if: github.ref == 'refs/heads/main' && success()
         uses: peaceiris/actions-gh-pages@v3
@@ -54,6 +57,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
+          add_to_branch: true
 
       - name: GitHub Pages로 배포
         if: success()
