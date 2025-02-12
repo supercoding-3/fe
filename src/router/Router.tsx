@@ -17,11 +17,8 @@ import ProfileEdit from '../components/profilepage/ProfileEdit';
 const Router = () => {
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
 
-  const publicUrl = process.env.REACT_APP_PUBLIC_URL || '';
-  const basename = publicUrl.endsWith('/') ? publicUrl.slice(0, -1) : publicUrl;
-
   return (
-    <BrowserRouter basename={basename}>
+    <BrowserRouter>
       <Routes>
         <Route element={<LayoutPage />}>
           <Route path="/" element={<HomePage />} />
