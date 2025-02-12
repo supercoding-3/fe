@@ -12,6 +12,8 @@ function App() {
     dispatch(setLogin('true'));
   }
 
+  console.log(process.env.REACT_APP_API_ENDPOINT);
+
   return (
     <div className="app">
       <Router />
