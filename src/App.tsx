@@ -12,7 +12,7 @@ function App() {
     dispatch(setLogin('true'));
   }
 
-  console.log(process.env.REACT_APP_API_ENDPOINT);
+  console.log(process.env.REACT_APP_ENDPOINT);
 
   return (
     <div className="app">
