@@ -70,7 +70,6 @@ const ProductPage = () => {
   };
 
   const deleteProduct = async () => {
-    console.log('deleteProduct');
     try {
       await axios.delete(`/products/${productId}`);
       navigate('/');

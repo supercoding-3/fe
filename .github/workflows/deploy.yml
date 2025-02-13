@@ -29,7 +29,7 @@ jobs:
         if: env.VERSION != ''
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REACT_APP_GH_TOKEN }}
         with:
           tag_name: ${{ env.VERSION }}
           release_name: ${{ env.VERSION }}
@@ -44,20 +44,36 @@ jobs:
       - name: Dependencies 설치
         run: npm ci
 
+      - name: 환경변수 설정 및 .env.production 생성
+        run: |
+          echo "REACT_APP_GH_TOKEN=${{ secrets.REACT_APP_GH_TOKEN }}" >> .env.production
+          echo "REACT_APP_PUBLIC_URL=${{ secrets.REACT_APP_PUBLIC_URL }}" >> .env.production
+          echo "REACT_APP_ENDPOINT=${{ secrets.REACT_APP_ENDPOINT }}" >> .env.production
+          echo "REACT_APP_SOCKET_URL=${{ secrets.REACT_APP_SOCKET_URL }}" >> .env.production
+
       - name: Build
+        env:
+          REACT_APP_GH_TOKEN: ${{ secrets.REACT_APP_GH_TOKEN }}
+          REACT_APP_PUBLIC_URL: ${{ secrets.REACT_APP_PUBLIC_URL }}
+          REACT_APP_ENDPOINT: ${{ secrets.REACT_APP_ENDPOINT }}
+          REACT_APP_SOCKET_URL: ${{ secrets.REACT_APP_SOCKET_URL }}
         run: CI=false npm run build
+
+      - name: CNAME 파일을 build 폴더에 추가
+        run: echo "bidit.store" > build/CNAME
 
       - name: main 브랜치 GitHub Pages로 배포
         if: github.ref == 'refs/heads/main' && success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.REACT_APP_GH_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
+          add_to_branch: true
 
       - name: GitHub Pages로 배포
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.REACT_APP_GH_TOKEN }}
           publish_dir: ./build
