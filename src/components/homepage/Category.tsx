@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import '../../scss/components/homepage/Category.scss';
-import { PRODUCT_CATEGORY } from '../../constants/productCategory';
+import '@/scss/components/homepage/Category.scss';
+import { PRODUCT_CATEGORY } from '@/constants/productCategory';
 
 interface CategoryProps {
   onCategoryChange: (category: string) => void;

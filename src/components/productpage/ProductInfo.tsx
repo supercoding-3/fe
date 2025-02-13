@@ -1,5 +1,5 @@
-import '../../scss/components/productpage/ProductInfo.scss';
-import { ProductData } from 'types/Product';
+import '@/scss/components/productpage/ProductInfo.scss';
+import { ProductData } from '@/types/Product';
 
 const ProductInfo = ({ productData }: { productData: ProductData }) => {
   if (!productData) {

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import axios from '../axios/axios';
-import '../scss/pages/HomePage.scss';
-import Search from '../components/homepage/Search';
-import MainGrid from '../components/homepage/MainGrid';
-import Category from '../components/homepage/Category';
 import { FaArrowUp } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import '@/scss/pages/HomePage.scss';
+import Search from '@/components/homepage/Search';
+import MainGrid from '@/components/homepage/MainGrid';
+import Category from '@/components/homepage/Category';
+import axios from '@/axios/axios';
 
 const HomePage = () => {
   const [items, setItems] = useState([]);

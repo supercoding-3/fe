@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from '../../axios/axios';
-import '../../scss/components/authpage/LoginForm.scss';
-import { setLogin } from '../../redux/reducers/user';
+import '@/scss/components/authpage/LoginForm.scss';
+import axios from '@/axios/axios';
+import { setLogin } from '@/redux/reducers/user';
 
 interface LoginFormInputs {
   email: string;

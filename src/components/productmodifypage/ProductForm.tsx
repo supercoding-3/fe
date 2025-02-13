@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from '../../axios/axios';
-import '../../scss/components/productmodifypage/ProductForm.scss';
-import PrimaryButton from '../common/PrimaryButton';
-import { ProductData } from 'types/Product';
-import { PRODUCT_CATEGORY } from '../../constants/productCategory';
+import '@/scss/components/productmodifypage/ProductForm.scss';
+import PrimaryButton from '@/components/common/PrimaryButton';
+import axios from '@/axios/axios';
+import { ProductData } from '@/types/Product';
+import { PRODUCT_CATEGORY } from '@/constants/productCategory';
 
 const ProductForm: React.FC<{ productData: ProductData | null }> = ({
   productData,

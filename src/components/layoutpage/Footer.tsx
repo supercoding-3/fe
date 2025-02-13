@@ -1,4 +1,4 @@
-import '../../scss/components/layoutpage/Footer.scss';
+import '@/scss/components/layoutpage/Footer.scss';
 
 const Footer = () => {
   return (

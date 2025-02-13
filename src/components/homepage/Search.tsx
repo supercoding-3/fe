@@ -1,5 +1,5 @@
-import '../../scss/components/homepage/Search.scss';
-import PrimaryButton from '../common/PrimaryButton';
+import '@/scss/components/homepage/Search.scss';
+import PrimaryButton from '@/components/common/PrimaryButton';
 
 interface SearchProps {
   searchQuery: string;
