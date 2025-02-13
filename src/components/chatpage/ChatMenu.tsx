@@ -1,4 +1,4 @@
-import '../../scss/components/chatpage/ChatMenu.scss';
+import '@/scss/components/chatpage/ChatMenu.scss';
 
 const ChatMenu = ({ isMenuOpen }: { isMenuOpen: boolean }) => {
   return (

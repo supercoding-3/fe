@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import '../../scss/components/chatpage/ChatDisplay.scss';
-import { ChatData } from 'types/Chat';
+import '@/scss/components/chatpage/ChatDisplay.scss';
+import { ChatData } from '@/types/Chat';
 
 const ChatDisplay = ({ messages }: { messages: ChatData[] }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);

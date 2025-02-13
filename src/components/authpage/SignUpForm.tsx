@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from '../../axios/axios';
-import '../../scss/components/authpage/SignUpForm.scss';
+import '@/scss/components/authpage/SignUpForm.scss';
+import axios from '@/axios/axios';
 
 interface SignUpFormInputs {
   email: string;

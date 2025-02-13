@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../scss/components/homepage/MainGrid.scss';
+import '@/scss/components/homepage/MainGrid.scss';
 
 interface Item {
   productId: string | number;

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../../types/User';
+import { UserState } from '@/types/User';
 
 const initialState: UserState = {
   isLogin: false,

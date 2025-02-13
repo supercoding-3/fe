@@ -1,8 +1,8 @@
-import ReactDOM from 'react-dom';
-import '../../scss/components/common/Modal.scss';
-import PrimaryButton from './PrimaryButton';
 import { IoIosClose } from 'react-icons/io';
-import { ModalProps } from 'types/Modal';
+import ReactDOM from 'react-dom';
+import '@/scss/components/common/Modal.scss';
+import PrimaryButton from '@/components/common/PrimaryButton';
+import { ModalProps } from '@/types/Modal';
 
 const Modal: React.FC<ModalProps> = ({ children, onClose, onClick }) => {
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {

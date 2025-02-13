@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from '../axios/axios';
-import ProductForm from '../components/productmodifypage/ProductForm';
-import { ProductData } from 'types/Product';
+import { useState, useEffect } from 'react';
+import ProductForm from '@/components/productmodifypage/ProductForm';
+import axios from '@/axios/axios';
+import { ProductData } from '@/types/Product';
 
 const ProductModifyPage = () => {
   const location = useLocation();

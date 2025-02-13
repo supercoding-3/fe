@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from '../axios/axios';
-import '../scss/pages/ChatPage.scss';
-import socketService from '../services/socketService';
-import ChatDisplay from '../components/chatpage/ChatDisplay';
-import ChatMenu from '../components/chatpage/ChatMenu';
-import ChatInput from '../components/chatpage/ChatInput';
 import { CiMenuKebab } from 'react-icons/ci';
-import { ChatData } from 'types/Chat';
+import { useEffect, useState } from 'react';
+import '@/scss/pages/ChatPage.scss';
+import ChatDisplay from '@/components/chatpage/ChatDisplay';
+import ChatMenu from '@/components/chatpage/ChatMenu';
+import ChatInput from '@/components/chatpage/ChatInput';
+import socketService from '@/services/socketService';
+import axios from '@/axios/axios';
+import { ChatData } from '@/types/Chat';
 
 const ChatPage = () => {
   const location = useLocation();
