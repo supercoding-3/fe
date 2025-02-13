@@ -1,18 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PrivateRoute from './PrivateRoute';
-import { RootState } from 'redux/store/store';
-// pages
-import LayoutPage from '../pages/LayoutPage';
-import HomePage from '../pages/HomePage';
-import ProductModifyPage from '../pages/ProductModifyPage';
-import ProductPage from '../pages/ProductPage';
-import ChatPage from '../pages/ChatPage';
-import ChatListPage from '../pages/ChatListPage';
-import ProfilePage from '../pages/ProfilePage';
-import NotFoundPage from '../pages/NotFoundPage';
-import AuthPage from '../pages/AuthPage';
-import ProfileEdit from '../components/profilepage/ProfileEdit';
+/** pages */
+import LayoutPage from '@/pages/LayoutPage';
+import HomePage from '@/pages/HomePage';
+import ProductModifyPage from '@/pages/ProductModifyPage';
+import ProductPage from '@/pages/ProductPage';
+import ChatPage from '@/pages/ChatPage';
+import ChatListPage from '@/pages/ChatListPage';
+import ProfilePage from '@/pages/ProfilePage';
+import NotFoundPage from '@/pages/NotFoundPage';
+import AuthPage from '@/pages/AuthPage';
+import ProfileEdit from '@/components/profilepage/ProfileEdit';
+/**********/
+import PrivateRoute from '@/router/PrivateRoute';
+import { RootState } from '@/redux/store/store';
 
 const Router = () => {
   const isLogin = useSelector((state: RootState) => state.user.isLogin);

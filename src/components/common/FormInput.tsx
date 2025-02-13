@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { FormInputProps } from 'types/FieldData';
-import formatPhoneNumber from '../../utils/formatPhoneNumber';
+import formatPhoneNumber from '@/utils/formatPhoneNumber';
+import { FormInputProps } from '@/types/FieldData';
 
 const FormInput: React.FC<FormInputProps> = ({
   label,

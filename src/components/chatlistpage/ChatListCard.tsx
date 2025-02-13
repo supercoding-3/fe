@@ -1,6 +1,6 @@
-import { ChatListCardProps } from 'types/Chat';
-import '../../scss/components/chatlistpage/ChatListCard.scss';
-import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
+import '@/scss/components/chatlistpage/ChatListCard.scss';
+import { ChatListCardProps } from '@/types/Chat';
+import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 
 const ChatListCard = ({ chatData }: { chatData: ChatListCardProps }) => {
   return (

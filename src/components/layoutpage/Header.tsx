@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from '../../axios/axios';
-import '../../scss/components/layoutpage/Header.scss';
 import { PiRecycleDuotone } from 'react-icons/pi';
-import { setLogout } from '../../redux/reducers/user';
-import profilePlaceholder from '../../assets/images/placeholder-profile.jpeg';
+import { useState } from 'react';
+import axios from '@/axios/axios';
+import '@/scss/components/layoutpage/Header.scss';
+import { setLogout } from '@/redux/reducers/user';
+import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 
 interface UserState {
   isLogin: boolean;

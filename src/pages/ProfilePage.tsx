@@ -1,9 +1,9 @@
-import { useEffect, useState, ChangeEvent } from 'react';
-import '../scss/components/profilepage/ProfilePage.scss';
-import profilePlaceholder from '../assets/images/placeholder-profile.jpeg';
 import { Link } from 'react-router-dom';
-import axios from '../axios/axios';
 import { useSelector } from 'react-redux';
+import { useEffect, useState, ChangeEvent } from 'react';
+import '@/scss/components/profilepage/ProfilePage.scss';
+import axios from '@/axios/axios';
+import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 
 interface UserState {
   isLogin: boolean;

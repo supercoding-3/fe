@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import '../../scss/components/productpage/AuctionChart.scss';
-import { Bid } from 'types/Product';
+import { useEffect, useState } from 'react';
+import '@/scss/components/productpage/AuctionChart.scss';
+import { Bid } from '@/types/Product';
 
 const AuctionChart = ({ allBids }: { allBids: Bid[] }) => {
   const [bids, setBids] = useState<Bid[]>([]);

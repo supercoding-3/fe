@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import '../../scss/components/chatpage/ChatInput.scss';
 import { IoIosSend } from 'react-icons/io';
+import { useState } from 'react';
+import '@/scss/components/chatpage/ChatInput.scss';
 
 const ChatInput = ({
   onSendMessage,

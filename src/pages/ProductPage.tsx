@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from '../axios/axios';
-import '../scss/pages/ProductPage.scss';
-import ImageGallery from '../components/productpage/ImageGallery';
-import AuctionChart from '../components/productpage/AuctionChart';
-import PrimaryButton from '../components/common/PrimaryButton';
-import ProductInfo from '../components/productpage/ProductInfo';
-import Modal from '../components/common/Modal';
-import { formatLocalTime } from '../utils/formatLocalTime';
-import { ProductData } from 'types/Product';
+import { useEffect, useState } from 'react';
+import '@/scss/pages/ProductPage.scss';
+import ImageGallery from '@/components/productpage/ImageGallery';
+import AuctionChart from '@/components/productpage/AuctionChart';
+import PrimaryButton from '@/components/common/PrimaryButton';
+import ProductInfo from '@/components/productpage/ProductInfo';
+import Modal from '@/components/common/Modal';
+import axios from '@/axios/axios';
+import { ProductData } from '@/types/Product';
+import { formatLocalTime } from '@/utils/formatLocalTime';
 
 const ProductPage = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Header from '../components/layoutpage/Header';
-import Footer from '../components/layoutpage/Footer';
-import '../scss/pages/LayoutPage.scss';
+import '@/scss/pages/LayoutPage.scss';
+import Header from '@/components/layoutpage/Header';
+import Footer from '@/components/layoutpage/Footer';
 
 const LayoutPage = () => {
   return (

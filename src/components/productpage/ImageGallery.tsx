@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import '../../scss/components/productpage/ImageGallery.scss';
-import imagePlaceholder from '../../assets/images/placeholder-image.png';
+import '@/scss/components/productpage/ImageGallery.scss';
+import imagePlaceholder from '@/assets/images/placeholder-image.png';
 
 const ImageGallery = ({ images }: { images: string[] }) => {
   const [mainImage, setMainImage] = useState(images[0] || '');

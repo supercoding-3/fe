@@ -1,4 +1,4 @@
-import '../../scss/components/common/PrimaryButton.scss';
+import '@/scss/components/common/PrimaryButton.scss';
 
 interface PrimaryButtonProps {
   type: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
