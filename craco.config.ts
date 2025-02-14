@@ -23,7 +23,7 @@ const config: CracoConfig = {
     sass: {
       loaderOptions: {
         additionalData: `
-        @use 'src/scss/base/mixins' as *;
+        @use 'src/scss/base/mixins' as mixins;
         @use 'src/scss/base/variables' as *;
       `,
       },
