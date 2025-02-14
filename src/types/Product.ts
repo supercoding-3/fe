@@ -16,4 +16,5 @@ export interface ProductData {
   isSeller: boolean;
   imageUrls?: string[];
   allBids?: Bid[];
+  price?: number;
 }

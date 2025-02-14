@@ -2,7 +2,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import '@/scss/pages/HomePage.scss';
 import Search from '@/components/homepage/Search';
-import MainGrid from '@/components/homepage/MainGrid';
+import ProductList from '@/components/homepage/ProductList';
 import Category from '@/components/homepage/Category';
 import axios from '@/axios/axios';
 
@@ -10,20 +10,16 @@ const HomePage = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string>('');
-  const [isSearchPerformed, setIsSearchPerformed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const fetchAllProducts = async () => {
     try {
       setIsLoading(true);
-      setError('');
       const response = await axios.get('/products/all');
       setItems(response.data);
       setFilteredItems(response.data);
     } catch (error) {
       console.error('상품 데이터를 불러오는 데 실패했습니다:', error);
-      setError('상품 데이터를 불러오는 데 실패했습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -35,16 +31,13 @@ const HomePage = () => {
     } else {
       try {
         setIsLoading(true);
-        setError('');
         const response = await axios.get(`/products/category/${category}`);
         setFilteredItems(response.data);
-        setIsSearchPerformed(false);
       } catch (error) {
         console.error(
           `"${category}" 카테고리 데이터를 불러오는 데 실패했습니다:`,
           error
         );
-        setError(`"${category}" 카테고리 데이터를 불러오는 데 실패했습니다.`);
       } finally {
         setIsLoading(false);
       }
@@ -53,20 +46,16 @@ const HomePage = () => {
 
   const handleSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {
-      setIsSearchPerformed(false);
       setFilteredItems(items);
       return;
     }
 
     try {
       setIsLoading(true);
-      setError('');
-      setIsSearchPerformed(true);
       const response = await axios.get(`/products/search?title=${searchQuery}`);
       setFilteredItems(response.data);
     } catch (error) {
       console.error('검색 중 오류가 발생했습니다:', error);
-      setError('검색 결과가 없습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -89,15 +78,7 @@ const HomePage = () => {
       />
       <div className="items">
         <Category onCategoryChange={handleCategoryChange} />
-        {error ? (
-          <p className="error-message">{error}</p>
-        ) : isSearchPerformed && filteredItems.length === 0 ? (
-          <p className="no-results">검색 결과가 없습니다.</p>
-        ) : filteredItems.length > 0 ? (
-          <MainGrid items={filteredItems} />
-        ) : (
-          <p className="no-items">현재 상품이 없습니다.</p>
-        )}
+        <ProductList products={filteredItems} />
       </div>
       {/* TODO: 기능 추가 */}
       <button className="scroll-top" aria-label="위로">
