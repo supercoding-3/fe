@@ -1,5 +1,5 @@
-@use '../../abstracts/variables' as *;
-@use '../../abstracts/mixins';
+@use '../../base/variables' as *;
+@use '../../base/mixins';
 
 .form-container {
   display: flex;
