@@ -1,10 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '@/axios/axios';
 import { UserState } from '@/types/User';
 
 const initialState: UserState = {
   isLogin: false,
   user: null,
 };
+
+export const __fetchUser = createAsyncThunk('fetchUser', async (_, api) => {
+  try {
+    const resp = await axios.get('/auth/me');
+    return resp.data;
+  } catch (error) {
+    return api.rejectWithValue('Unauthorized');
+  }
+});
 
 export const userSlice = createSlice({
   name: 'user',
@@ -18,6 +28,16 @@ export const userSlice = createSlice({
       state.isLogin = false;
       state.user = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(__fetchUser.fulfilled, (state, action) => {
+      state.isLogin = true;
+      state.user = action.payload;
+    });
+    builder.addCase(__fetchUser.rejected, (state) => {
+      state.isLogin = false;
+      state.user = null;
+    });
   },
 });
 
