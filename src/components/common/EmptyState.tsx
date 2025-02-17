@@ -1,11 +1,13 @@
-import { FaRegFaceGrinBeamSweat } from 'react-icons/fa6';
+import { FaRegSadCry } from 'react-icons/fa';
 import '@/scss/components/common/EmptyState.scss';
 
-const EmptyState = ({ message = '결과가 없습니다' }) => {
+const EmptyState = ({ message = '앗! 아무것도 없어요!' }) => {
   return (
     <div className="empty-state">
-      <FaRegFaceGrinBeamSweat />
-      <p>{message}</p>
+      <span className="empty-state__icon">
+        <FaRegSadCry />
+      </span>
+      <p className="empty-state__message">{message}</p>
     </div>
   );
 };

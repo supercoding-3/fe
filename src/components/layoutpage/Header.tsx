@@ -1,26 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PiRecycleDuotone } from 'react-icons/pi';
 import { useState } from 'react';
 import axios from '@/axios/axios';
 import '@/scss/components/layoutpage/Header.scss';
+import DropdownMenu from '@/components/common/Dropdown';
 import { setLogout } from '@/redux/reducers/user';
+import { RootState } from '@/redux/store/store';
+import { MenuItem } from '@/types/Menu';
+import logo from '@/assets/images/logo.png';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 
-interface UserState {
-  isLogin: boolean;
-  profileImage?: string;
-}
-
-const Header: React.FC = () => {
+const Header = () => {
   const dispatch = useDispatch();
 
-  const isLogin = useSelector(
-    (state: { user: UserState }) => state.user.isLogin
-  );
-  const profileImage = useSelector(
-    (state: { user: UserState }) => state.user.profileImage
-  );
+  const { isLogin, user } = useSelector((state: RootState) => state.user);
 
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -44,11 +37,30 @@ const Header: React.FC = () => {
     }
   };
 
+  const loggedInMenu: MenuItem[] = [
+    { label: '마이페이지', path: '/profile', isLink: true },
+    { label: '상품 업로드', path: '/product/create', isLink: true },
+    { label: '채팅 목록', path: '/chat', isLink: true },
+    {
+      label: '로그아웃',
+      path: '',
+      isLink: false,
+      onClick: handleLogout || noop,
+    },
+  ];
+
+  const loggedOutMenu: MenuItem[] = [
+    { label: '로그인', path: '/login', isLink: true },
+    { label: '회원가입', path: '/signup', isLink: true },
+  ];
+
+  const menuList = isLogin ? loggedInMenu : loggedOutMenu;
+
   return (
     <header className="header">
       <div className="header__logo">
         <Link to="/">
-          <PiRecycleDuotone />
+          <img src={logo} alt="logo" className="header__logo" />
         </Link>
       </div>
 
@@ -59,56 +71,13 @@ const Header: React.FC = () => {
           aria-expanded={isDropDownOpen}
         >
           <img
-            src={profileImage || profilePlaceholder}
+            src={user?.profileUrl || profilePlaceholder}
             alt="profile"
             className="header__profile-image"
           />
         </button>
         {isDropDownOpen && (
-          <div className="header__dropdown">
-            <ul className="header__dropdown-list">
-              {isLogin ? (
-                <>
-                  <li className="header__dropdown-item">
-                    <Link to="/profile" onClick={closeDropdown}>
-                      마이페이지
-                    </Link>
-                  </li>
-                  <li className="header__dropdown-item">
-                    <Link to="/product/create" onClick={closeDropdown}>
-                      상품 업로드
-                    </Link>
-                  </li>
-                  <li className="header__dropdown-item">
-                    <Link to="/chat" onClick={closeDropdown}>
-                      채팅 목록
-                    </Link>
-                  </li>
-                  <li className="header__dropdown-item">
-                    <button
-                      onClick={handleLogout}
-                      className="header__dropdown-logout"
-                    >
-                      로그아웃
-                    </button>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="header__dropdown-item">
-                    <Link to="/login" onClick={closeDropdown}>
-                      로그인
-                    </Link>
-                  </li>
-                  <li className="header__dropdown-item">
-                    <Link to="/signup" onClick={closeDropdown}>
-                      회원가입
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
+          <DropdownMenu menuList={menuList} closeDropdown={closeDropdown} />
         )}
       </div>
     </header>

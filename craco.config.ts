@@ -19,6 +19,16 @@ const config: CracoConfig = {
       '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
+  style: {
+    sass: {
+      loaderOptions: {
+        additionalData: `
+        @use 'src/scss/base/mixins' as mixins;
+        @use 'src/scss/base/variables' as *;
+      `,
+      },
+    },
+  },
 };
 
 export default config;
