@@ -1,16 +1,15 @@
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Router from '@/router/Router';
-import { setLogin } from '@/redux/reducers/user';
-import { getAuthStatus } from '@/services/authStorage';
+import { __fetchUser } from '@/redux/reducers/user';
+import { AppDispatch } from '@/redux/store/store';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const isAuthenticated = getAuthStatus();
-
-  if (isAuthenticated) {
-    dispatch(setLogin('true'));
-  }
+  useEffect(() => {
+    dispatch(__fetchUser());
+  }, [dispatch]);
 
   return (
     <div className="app">

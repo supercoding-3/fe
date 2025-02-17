@@ -1,6 +1,5 @@
 @use 'base/reset';
-@use 'abstracts/variables' as *;
-@use 'abstracts/fonts';
+@use 'base/fonts';
 
 body {
   font-family: 'Pretendard', sans-serif;

@@ -6,9 +6,11 @@
   &__main {
     flex: 1;
     height: 100%;
+    padding: clamp(1rem, 2vw, 2rem);
   }
 
-  .header {
-    height: 64px;
+  .header,
+  .footer {
+    padding: 0.5rem;
   }
 }
