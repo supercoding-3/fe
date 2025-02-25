@@ -4,6 +4,8 @@ import EmptyState from '@/components/common/EmptyState';
 import { ProductData } from '@/types/Product';
 
 const ProductList = ({ products }: { products: ProductData[] }) => {
+  console.log(products);
+
   if (products.length === 0) {
     return <EmptyState />;
   }
@@ -13,9 +15,9 @@ const ProductList = ({ products }: { products: ProductData[] }) => {
       {products.map((product) => (
         <Link to={`/product/${product.productId}`} key={product.productId}>
           <div className="grid__card">
-            {product.imageUrls ? (
+            {product.img ? (
               <img
-                src={product.imageUrls[0]}
+                src={product.img}
                 alt={product.title}
                 className="grid__image"
               />

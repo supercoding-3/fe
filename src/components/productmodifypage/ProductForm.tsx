@@ -17,7 +17,7 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
     description: '',
     startingBidPrice: 0,
     immediatePrice: 0,
-    category: '',
+    category: PRODUCT_CATEGORY[0],
     productEndDate: '',
   });
   const [buttonName, setButtonName] = useState('등록');
@@ -66,6 +66,7 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
       'product',
       new Blob([JSON.stringify(product)], { type: 'application/json' })
     );
+
     if (location.pathname.includes('edit')) {
       if (!productData) return;
       formData.delete('productEndDate');
@@ -107,7 +108,7 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
           description: productData.description || '',
           startingBidPrice: productData.startingBidPrice || 0,
           immediatePrice: productData.immediatePrice || 0,
-          category: productData.category || PRODUCT_CATEGORY[0],
+          category: productData.category,
           productEndDate: productData.productEndDate
             ? new Date(productData.productEndDate).toISOString().slice(0, 10)
             : '',
@@ -200,7 +201,9 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
             onChange={handleInputChange}
           >
             {PRODUCT_CATEGORY.map((category, i) => (
-              <option key={i}>{category}</option>
+              <option key={i} value={category}>
+                {category}
+              </option>
             ))}
           </select>
         </label>
