@@ -4,8 +4,6 @@ import EmptyState from '@/components/common/EmptyState';
 import { ProductData } from '@/types/Product';
 
 const ProductList = ({ products }: { products: ProductData[] }) => {
-  console.log(products);
-
   if (products.length === 0) {
     return <EmptyState />;
   }
