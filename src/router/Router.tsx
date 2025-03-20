@@ -19,7 +19,7 @@ const Router = () => {
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route element={<LayoutPage />}>
           <Route path="/" element={<HomePage />} />
