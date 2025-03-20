@@ -1,5 +1,3 @@
-import '@/scss/components/layoutpage/Footer.scss';
-
 const Footer = () => {
   return (
     <footer className="footer">
