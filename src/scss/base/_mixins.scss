@@ -13,6 +13,10 @@
     @media (min-width: $breakpoint-lg) {
       @content;
     }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
   } @else {
     @error "Invalid breakpoint: #{$breakpoint}.";
   }

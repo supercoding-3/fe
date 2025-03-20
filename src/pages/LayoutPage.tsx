@@ -1,13 +1,16 @@
 import { Outlet } from 'react-router-dom';
+import '@/scss/pages/layout-page.scss';
+import Header from '@/components/layout-page/Header';
+import Footer from '@/components/layout-page/Footer';
 
 const LayoutPage = () => {
   return (
     <div className="layout-page">
-      <header></header>
-      <main className="layout-page__main">
+      <div className="layout-page__content">
+        <Header />
         <Outlet />
-      </main>
-      <footer></footer>
+        <Footer />
+      </div>
     </div>
   );
 };
