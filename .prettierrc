@@ -1,7 +1,7 @@
 {
   "plugins": ["prettier-plugin-import-sort"],
   "importOrder": ["^react$", "^@?\\w", "^(src|@)/", "^[./]"],
-  "importOrderSeparation": true,
+  "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
   "trailingComma": "es5",
   "tabWidth": 2,
