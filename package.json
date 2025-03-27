@@ -59,8 +59,11 @@
     "@types/sass": "^1.45.0",
     "@types/socket.io-client": "^3.0.0",
     "eslint": "^8.57.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "prettier-plugin-import-sort": "^0.0.7"
   }
 }
