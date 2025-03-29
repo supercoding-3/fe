@@ -1,5 +1,9 @@
 @use 'variables' as *;
 
+@mixin border {
+  border: 0.5px solid $color-secondary;
+}
+
 @mixin text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;

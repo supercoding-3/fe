@@ -1,14 +1,15 @@
-.layout-page {
+.layout {
   width: 100vw;
-  min-height: 100vh;
-  background-color: aqua;
+  height: 100vh;
 
   &__content {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     min-width: 320px;
     max-width: 600px;
     margin: 0 auto;
-    background-color: beige;
+    @include mixins.border;
+    border-top: none;
+    border-bottom: none;
   }
 }

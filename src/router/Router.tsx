@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 /* routers */
 import PrivateRoute from '@/router/PrivateRoute';
 /* layouts */
-import LayoutPage from '@/components/layout/Layout';
+import Layout from '@/components/layout/Layout';
 /* pages */
 import HomePage from '@/pages/HomePage';
 import AuthPage from '@/pages/AuthPage';
@@ -17,7 +17,7 @@ const Router = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route element={<LayoutPage />}>
+        <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<AuthPage />} />
