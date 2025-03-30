@@ -37,4 +37,12 @@ export const userApi = {
       throw new Error('Error logging in');
     }
   },
+  signup: async (payload: AuthForm) => {
+    try {
+      const response = await axios.post('api/user/signup', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error signing up');
+    }
+  },
 };

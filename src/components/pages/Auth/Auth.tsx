@@ -30,6 +30,11 @@ const Auth = () => {
     e.preventDefault();
 
     try {
+      if (pathname === 'signup') {
+        await userApi.signup(formValues);
+        navigate('/login');
+        return;
+      }
       const response = await userApi.login(formValues);
       dispatch(setLogin(response));
       navigate('/');
