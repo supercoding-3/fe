@@ -1,7 +1,7 @@
 import './input.scss';
 
-const Input = ({...props}) => {
-  return <input {...props} className="input"/>;
+const Input = ({ ...props }) => {
+  return <input className="input" {...props} />;
 };
 
 export default Input;

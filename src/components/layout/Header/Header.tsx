@@ -4,10 +4,10 @@ import './header.scss';
 
 const Header = () => {
   return (
-    <header className="header">
+    <div className="header">
       <Input type="text" placeholder="검색어를 입력하세요" />
       <MdMenu />
-    </header>
+    </div>
   );
 };
 
