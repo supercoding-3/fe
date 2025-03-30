@@ -15,8 +15,8 @@ const Loading = () => {
 
   return (
     <div className="loading">
-      <img src={spinner} alt="spinner" className="loading__spinner" />
-      <p className="loading__text">로딩 중{dots}</p>
+      <img src={spinner} alt="spinner" />
+      <p>로딩 중{dots}</p>
     </div>
   );
 };
