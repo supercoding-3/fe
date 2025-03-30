@@ -1,2 +1,22 @@
 .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  &__input {
+    flex: 1;
+  }
+
+  &__menu-button {
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      font-size: 1.6rem;
+    }
+  }
 }

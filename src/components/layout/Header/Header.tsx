@@ -5,8 +5,12 @@ import './header.scss';
 const Header = () => {
   return (
     <div className="header">
-      <Input type="text" placeholder="검색어를 입력하세요" />
-      <MdMenu />
+      <div className="header__input">
+        <Input type="text" placeholder="검색어를 입력하세요" />
+      </div>
+      <button className="header__menu-button">
+        <MdMenu />
+      </button>
     </div>
   );
 };
