@@ -6,8 +6,13 @@ export interface AuthForm {
 }
 
 export interface User {
+  profileImageUrl: string | null;
+  userCreatedAt: string;
   userEmail: string;
+  userId: number;
+  userIsDeleted: boolean;
+  userNickname: string;
   userPassword: string;
-  userNickname?: string;
-  userPhone?: string;
+  userPhone: string;
+  userUpdatedAt: string;
 }
