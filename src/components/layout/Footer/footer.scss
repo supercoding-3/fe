@@ -12,6 +12,12 @@
     flex-direction: column;
     align-items: center;
 
+    &--active {
+      svg {
+        color: $color-background;
+      }
+    }
+
     svg {
       font-size: 1.5rem;
     }
