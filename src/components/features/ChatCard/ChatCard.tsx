@@ -2,6 +2,7 @@ import './chat-card.scss';
 import { ChatRoom } from '@/types';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 
+// TODO: className 수정
 const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
   return (
     <div className="chat-card">

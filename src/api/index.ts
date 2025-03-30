@@ -18,6 +18,14 @@ export const userApi = {
       throw new Error('Error signing up');
     }
   },
+  checkLogin: async () => {
+    try {
+      const response = await axios.get('api/user/check-login');
+      return response.data;
+    } catch (error) {
+      throw new Error('Error checking login status');
+    }
+  },
 };
 
 export const productApi = {

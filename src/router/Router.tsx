@@ -1,14 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store/store';
-/* routers */
 import PrivateRoute from '@/router/PrivateRoute';
-/* layouts */
 import Layout from '@/components/layout/Layout';
-/* pages */
-import { Home, Auth, ProductModify, ChatList } from '@/components/pages';
+import {
+  Home,
+  Auth,
+  ProductModify,
+  ChatList,
+  MyPage,
+} from '@/components/pages';
 import ChatPage from '@/pages/ChatPage';
-import MyPage from '@/pages/MyPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import ProductPage from '@/pages/ProductPage';
 
