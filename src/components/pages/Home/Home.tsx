@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './home.scss';
+import { Header } from '@/components/layout';
 import { Error } from '@/components/pages';
-import { EmptyState, ProductCard } from '@/components/ui';
 import { Search } from '@/components/features';
+import { EmptyState, ProductCard } from '@/components/ui';
 import { productApi } from '@/api';
 import { Product } from '@/types';
 
@@ -43,9 +44,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <header className="home__search">
+      <Header>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      </header>
+      </Header>
       <section className="home__content">
         {products.length > 0 ? (
           products.map((product) => (

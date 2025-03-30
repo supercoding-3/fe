@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { IoArrowForwardCircle } from 'react-icons/io5';
 import './auth.scss';
-import { Button, Input } from '@/components/ui';
+import { Button, Input, FormError } from '@/components/ui';
 import logo from '@/assets/images/logo.png';
 import { AUTH_FORM_LOGIN, AUTH_FORM_SIGNUP } from '@/constants/authForm';
 import { userApi } from '@/api';
@@ -51,7 +51,7 @@ const Auth = () => {
   return (
     <div className="auth">
       <div className="auth__title">
-        <img src={logo} alt="logo" className="auth__logo" />
+        <img src={logo} alt="logo" />
         <div></div>
         <h1>{pathname.toUpperCase()}</h1>
       </div>
@@ -75,7 +75,7 @@ const Auth = () => {
         <IoArrowForwardCircle />
         {linkMessage}
       </Link>
-      {error && <p className="auth__error">{error}</p>}
+      {error && <FormError>{error}</FormError>}
     </div>
   );
 };

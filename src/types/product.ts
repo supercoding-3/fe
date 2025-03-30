@@ -7,6 +7,16 @@ export interface Product {
   productStatus: string;
 }
 
+export interface ProductForm {
+  images: File[];
+  title: string;
+  description: string;
+  startingBidPrice: number;
+  immediatePrice: number;
+  productEndDate: string;
+  category: string;
+}
+
 // TODO: 제거
 // export interface ProductData {
 //   productId?: number;

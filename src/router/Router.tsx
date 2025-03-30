@@ -6,12 +6,11 @@ import PrivateRoute from '@/router/PrivateRoute';
 /* layouts */
 import Layout from '@/components/layout/Layout';
 /* pages */
-import { Home, Auth } from '@/components/pages';
+import { Home, Auth, ProductModify } from '@/components/pages';
 import ChatListPage from '@/pages/ChatListPage';
 import ChatPage from '@/pages/ChatPage';
 import MyPage from '@/pages/MyPage';
 import NotFoundPage from '@/pages/NotFoundPage';
-import ProductModifyPage from '@/pages/ProductModifyPage';
 import ProductPage from '@/pages/ProductPage';
 
 const Router = () => {
@@ -26,8 +25,8 @@ const Router = () => {
           <Route path="/signup" element={<Auth />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route element={<PrivateRoute isLogin={isLoggedIn} />}>
-            <Route path="/product/create" element={<ProductModifyPage />} />
-            <Route path="/product/:id/edit" element={<ProductModifyPage />} />
+            <Route path="/product/create" element={<ProductModify />} />
+            <Route path="/product/:id/edit" element={<ProductModify />} />
             <Route path="/chat" element={<ChatListPage />} />
             <Route path="/chat/:id" element={<ChatPage />} />
             <Route path="/mypage" element={<MyPage />} />
