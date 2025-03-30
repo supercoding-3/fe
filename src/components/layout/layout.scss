@@ -11,19 +11,22 @@
   border-bottom: none;
 
   > * {
-    padding: 0.5rem;
-  }
+    padding: 1.2rem;
 
-  &__header,
-  &__footer {
-    height: 3.5rem;
-    background-color: $color-section;
-    display: flex;
-    align-items: center;
+    @media (min-width: $breakpoint) {
+      padding: 2rem;
+    }
   }
 
   &__main {
     flex: 1;
     overflow-y: scroll;
+  }
+
+  &__footer {
+    height: 3.5rem;
+    background-color: $color-section;
+    display: flex;
+    align-items: center;
   }
 }

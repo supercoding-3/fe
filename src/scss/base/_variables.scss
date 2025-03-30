@@ -5,5 +5,10 @@ $color-primary: #333333; // 기본 텍스트, 강조
 $color-secondary: #cac9c9; // 보조색
 
 // 레이아웃
-$layout-sm: 320px;
-$layout-md: 600px;
+$breakpoint: 480px;
+
+// 스타일
+$radius: 0.5rem;
+$shadow:
+  rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+  rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
