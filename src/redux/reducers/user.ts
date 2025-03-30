@@ -1,47 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '@/axios/axios';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isLogin: false,
+  isLoggedIn: false,
   user: null,
 };
-
-export const __fetchUser = createAsyncThunk('fetchUser', async (_, api) => {
-  try {
-    const resp = await axios.get('/user/check-login');
-
-    if (!resp.data) {
-      return api.rejectWithValue('Unauthorized');
-    }
-
-    return resp.data;
-  } catch (error) {
-    return api.rejectWithValue('Unauthorized');
-  }
-});
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setLogin: (state, action) => {
-      state.isLogin = true;
+      state.isLoggedIn = true;
       state.user = action.payload;
     },
     setLogout: (state) => {
-      state.isLogin = false;
+      state.isLoggedIn = false;
       state.user = null;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(__fetchUser.fulfilled, (state, action) => {
-      state.isLogin = true;
-      state.user = action.payload;
-    });
-    builder.addCase(__fetchUser.rejected, (state) => {
-      state.isLogin = false;
-      state.user = null;
-    });
   },
 });
 

@@ -1,1 +1,2 @@
-export { Product } from './product';
+export * from './product';
+export * from './user';
