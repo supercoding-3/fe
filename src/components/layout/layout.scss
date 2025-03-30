@@ -14,7 +14,8 @@
     padding: 0.5rem;
   }
 
-  &__header {
+  &__header,
+  &__footer {
     height: 3.5rem;
     background-color: $color-section;
     display: flex;
@@ -24,10 +25,5 @@
   &__main {
     flex: 1;
     overflow-y: scroll;
-  }
-
-  &__footer {
-    height: 4rem;
-    background-color: $color-section;
   }
 }

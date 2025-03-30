@@ -1,17 +1,17 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-/* routers */
-import PrivateRoute from '@/router/PrivateRoute';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 /* layouts */
 import Layout from '@/components/layout/Layout';
+import AuthPage from '@/pages/AuthPage';
+import ChatListPage from '@/pages/ChatListPage';
+import ChatPage from '@/pages/ChatPage';
 /* pages */
 import HomePage from '@/pages/HomePage';
-import AuthPage from '@/pages/AuthPage';
+import MyPage from '@/pages/MyPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 import ProductModifyPage from '@/pages/ProductModifyPage';
 import ProductPage from '@/pages/ProductPage';
-import ChatPage from '@/pages/ChatPage';
-import ChatListPage from '@/pages/ChatListPage';
-import ProfilePage from '@/pages/ProfilePage';
-import NotFoundPage from '@/pages/NotFoundPage';
+/* routers */
+import PrivateRoute from '@/router/PrivateRoute';
 
 const Router = () => {
   return (
@@ -22,7 +22,7 @@ const Router = () => {
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<AuthPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/mypage" element={<MyPage />} />
           <Route element={<PrivateRoute isLogin={true} />}>
             <Route path="/product/create" element={<ProductModifyPage />} />
             <Route path="/product/:id/edit" element={<ProductModifyPage />} />
