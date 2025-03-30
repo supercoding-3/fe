@@ -1,5 +1,24 @@
 import axios from '@/axios/axios';
-import { Product, AuthForm } from '@/types';
+import { AuthForm, Product, ProductForm } from '@/types';
+
+export const userApi = {
+  login: async (payload: AuthForm) => {
+    try {
+      const response = await axios.post('api/user/login', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error logging in');
+    }
+  },
+  signup: async (payload: AuthForm) => {
+    try {
+      const response = await axios.post('api/user/signup', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error signing up');
+    }
+  },
+};
 
 export const productApi = {
   getAll: async (): Promise<Product[]> => {
@@ -26,23 +45,16 @@ export const productApi = {
       throw new Error(`Error fetching product with ID ${id}`);
     }
   },
-};
-
-export const userApi = {
-  login: async (payload: AuthForm) => {
+  createProduct: async (payload: FormData): Promise<Product> => {
     try {
-      const response = await axios.post('api/user/login', payload);
+      const response = await axios.post('api/products/register', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return response.data;
     } catch (error) {
-      throw new Error('Error logging in');
-    }
-  },
-  signup: async (payload: AuthForm) => {
-    try {
-      const response = await axios.post('api/user/signup', payload);
-      return response.data;
-    } catch (error) {
-      throw new Error('Error signing up');
+      throw new Error('Error creating product');
     }
   },
 };
