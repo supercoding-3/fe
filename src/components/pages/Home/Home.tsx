@@ -9,6 +9,7 @@ import { Product } from '@/types';
 const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -19,9 +20,22 @@ const Home = () => {
         setError('상품 데이터를 가져오는 중에 오류가 발생했습니다');
       }
     };
-
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    if (searchTerm === '') return;
+
+    const searchProducts = async () => {
+      try {
+        const fetchedProducts = await productApi.search(`title=${searchTerm}`);
+        setProducts(fetchedProducts);
+      } catch (error) {
+        setError('상품 데이터를 검색하는 중에 오류가 발생했습니다');
+      }
+    };
+    searchProducts();
+  }, [searchTerm]);
 
   if (error) {
     return <Error errorMessage={error} />;
@@ -30,7 +44,7 @@ const Home = () => {
   return (
     <div className="home">
       <header className="home__search">
-        <Search />
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
       <section className="home__content">
         {products.length > 0 ? (
