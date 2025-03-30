@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './home.scss';
 import { Header } from '@/components/layout';
 import { Error } from '@/components/pages';
-import { Search } from '@/components/features';
-import { EmptyState, ProductCard } from '@/components/ui';
+import { Search, ProductCard } from '@/components/features';
+import { EmptyState } from '@/components/ui';
 import { productApi } from '@/api';
 import { Product } from '@/types';
 
