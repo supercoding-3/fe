@@ -1,5 +1,5 @@
 import axios from '@/axios/axios';
-import { AuthForm, Product, ProductForm } from '@/types';
+import { AuthForm, Product } from '@/types';
 
 export const userApi = {
   login: async (payload: AuthForm) => {
@@ -61,6 +61,17 @@ export const productApi = {
       await axios.patch(`api/products/${id}/edit`, payload);
     } catch (error) {
       throw new Error(`Error editing product with ID ${id}`);
+    }
+  },
+};
+
+export const chatApi = {
+  getUserRooms: async () => {
+    try {
+      const response = await axios.get('api/chat/rooms');
+      return response.data;
+    } catch (error) {
+      throw new Error('Error fetching chat list');
     }
   },
 };
