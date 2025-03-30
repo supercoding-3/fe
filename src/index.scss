@@ -1,5 +1,5 @@
-@use '@/scss/base/reset';
-@use '@/scss/base/fonts';
+@use './scss/base/reset';
+@use './scss/base/fonts';
 
 body {
   font-family: 'Pretendard', sans-serif;
@@ -9,11 +9,25 @@ body {
   background-color: $color-background;
 }
 
-/* 스크롤바 */
-::-webkit-scrollbar {
-  width: 10px;
+button {
+  cursor: pointer;
 }
-::-webkit-scrollbar-thumb {
-  background: $color-secondary;
-  border-radius: 10px;
+
+input,
+textarea,
+select {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
