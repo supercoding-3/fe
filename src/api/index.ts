@@ -45,16 +45,22 @@ export const productApi = {
       throw new Error(`Error fetching product with ID ${id}`);
     }
   },
-  createProduct: async (payload: FormData): Promise<Product> => {
+  createProduct: async (payload: FormData) => {
     try {
-      const response = await axios.post('api/products/register', payload, {
+      axios.post('api/products/register', payload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      return response.data;
     } catch (error) {
       throw new Error('Error creating product');
+    }
+  },
+  editProduct: async (id: string, payload: FormData) => {
+    try {
+      await axios.patch(`api/products/${id}/edit`, payload);
+    } catch (error) {
+      throw new Error(`Error editing product with ID ${id}`);
     }
   },
 };

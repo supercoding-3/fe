@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
 import { IoIosArrowBack } from 'react-icons/io';
 import './product-modify.scss';
@@ -12,6 +12,7 @@ import { productApi } from '@/api';
 
 const ProductModify = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [error, setError] = useState<string | null>(null);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -73,6 +74,12 @@ const ProductModify = () => {
       setError('상품 수정 중에 오류가 발생했습니다');
     }
   };
+
+  useEffect(() => {
+    if (location.pathname === '/product/edit') {
+      // TODO: 이전 값 보내야함
+    }
+  }, []);
 
   return (
     <div className="product-modify">
