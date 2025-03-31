@@ -7,12 +7,12 @@ import {
   Home,
   Auth,
   ProductModify,
+  Product,
   ChatList,
   MyPage,
 } from '@/components/pages';
 import ChatPage from '@/pages/ChatPage';
 import NotFoundPage from '@/pages/NotFoundPage';
-import ProductPage from '@/pages/ProductPage';
 
 const Router = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
@@ -24,7 +24,7 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/signup" element={<Auth />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route element={<PrivateRoute isLogin={isLoggedIn} />}>
             <Route path="/product/create" element={<ProductModify />} />
             <Route path="/product/:id/edit" element={<ProductModify />} />

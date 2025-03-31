@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './home.scss';
-import { Header } from '@/components/layout';
 import { Error } from '@/components/pages';
 import { Search, ProductCard } from '@/components/features';
 import { EmptyState } from '@/components/ui';
@@ -45,10 +44,12 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Header>
+      <header className="home__header">
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      </Header>
-      <section className="home__content">
+      </header>
+      <section
+        className={`home__content ${products.length > 0 ? 'home__content--has-data' : ''}`}
+      >
         {products.length > 0 ? (
           products.map((product) => (
             <ProductCard key={product.productId} product={product} />

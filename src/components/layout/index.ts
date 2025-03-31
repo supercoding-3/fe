@@ -1,2 +1,2 @@
 export { default } from './Layout';
-export { default as Header } from './Header/Header';
+export { default as HeaderNavigation } from './HeaderNavigation/HeaderNavigation';

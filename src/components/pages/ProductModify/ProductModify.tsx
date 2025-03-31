@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
-import { IoIosArrowBack } from 'react-icons/io';
 import './product-modify.scss';
-import { Header } from '@/components/layout';
+import { HeaderNavigation } from '@/components/layout';
 import { Input, Button, FormError } from '@/components/ui';
 import { PRODUCT_FORM } from '@/constants/productForm';
 import { PRODUCT_CATEGORY } from '@/constants/productCategory';
@@ -83,11 +82,7 @@ const ProductModify = () => {
 
   return (
     <div className="product-modify">
-      <Header>
-        <Link to="/" className="product-modify__back">
-          <IoIosArrowBack /> 홈
-        </Link>
-      </Header>
+      <HeaderNavigation />
       <div className="product-modify__preview">
         <label>
           <LuImagePlus />
