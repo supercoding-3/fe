@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './product.scss';
 import { Error } from '@/components/pages';
 import { HeaderNavigation } from '@/components/layout';
-import { ImageGallery } from '@/components/features';
+import { ImageGallery, BidChart } from '@/components/features';
 import { productApi } from '@/api';
 import { ProductDetail } from '@/types';
 import spinner from '@/assets/images/spinner.svg';
@@ -57,6 +57,7 @@ const Product = () => {
               <p className="product-desc">{productDetail.description}</p>
             </div>
           </div>
+          <BidChart />
         </section>
       )}
     </div>

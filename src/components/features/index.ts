@@ -1,3 +1,4 @@
+export { default as BidChart } from './BidChart/BidChart';
 export { default as ChatCard } from './ChatCard/ChatCard';
 export { default as ImageGallery } from './ImageGallery/ImageGallery';
 export { default as ProductCard } from './ProductCard/ProductCard';
