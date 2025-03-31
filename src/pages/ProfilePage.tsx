@@ -42,7 +42,7 @@ const ProfilePage: React.FC = () => {
     const fetchProfileData = async () => {
       setIsLoading(true);
       try {
-        const profileResponse = await axios.get('/user/my-page');
+        const profileResponse = await axios.get('api/user/my-page');
         setProfileInfo(profileResponse.data);
       } catch (error) {
         console.error('데이터를 가져오는 데 실패했습니다:', error);
@@ -57,7 +57,7 @@ const ProfilePage: React.FC = () => {
 
   const cancelBid = async (bidId: string | number) => {
     try {
-      await axios.post('/user/my-page/bid/cancel', { bidId });
+      await axios.post('api/user/my-page/bid/cancel', { bidId });
       alert('입찰이 취소되었습니다.');
       setPurchaseData((prev) => prev.filter((item) => item.id !== bidId));
     } catch (error) {
@@ -68,7 +68,9 @@ const ProfilePage: React.FC = () => {
 
   const cancelTransaction = async (transactionId: string | number) => {
     try {
-      await axios.post('/user/my-page/transaction/cancel', { transactionId });
+      await axios.post('api/user/my-page/transaction/cancel', {
+        transactionId,
+      });
       alert('낙찰이 취소되었습니다.');
       setSalesData((prev) => prev.filter((item) => item.id !== transactionId));
     } catch (error) {

@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
       userPassword: data.password,
     };
     try {
-      const response = await axios.post('/user/login', requestBody);
+      const response = await axios.post('api/user/login', requestBody);
       if (response.status === 200) {
         alert('로그인 성공!');
         dispatch(setLogin('true'));

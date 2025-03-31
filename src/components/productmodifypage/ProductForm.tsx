@@ -71,11 +71,15 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
       if (!productData) return;
       formData.delete('productEndDate');
       try {
-        await axios.patch(`/products/${productData.productId}/edit`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        await axios.patch(
+          `api/products/${productData.productId}/edit`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
         navigate('/');
       } catch (err) {
         console.error('상품 데이터를 불러오는 중 오류 발생:', err);
@@ -86,7 +90,7 @@ const ProductForm: React.FC<{ productData: ProductData | null }> = ({
       formData.append('images', image);
     });
     try {
-      await axios.post('/products/register', formData, {
+      await axios.post('api/products/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

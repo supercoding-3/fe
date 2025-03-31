@@ -32,7 +32,7 @@ const SignUpForm: React.FC = () => {
     };
 
     try {
-      const response = await axios.post('/user/signup', requestBody, {
+      const response = await axios.post('api/user/signup', requestBody, {
         withCredentials: true,
       });
 

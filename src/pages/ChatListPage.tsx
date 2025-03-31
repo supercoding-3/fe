@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ChatListCard from '@/components/chatlistpage/ChatListCard';
 import EmptyState from '@/components/common/EmptyState';
@@ -10,14 +10,18 @@ const ChatListPage = () => {
 
   const fetchChatList = async () => {
     try {
-      const res = await axios.get('/chat/rooms');
+      const res = await axios.get('api/chat/rooms');
       setChatList(res.data);
     } catch (err) {
       console.error('채팅 목록을 불러오는 중 오류 발생:', err);
     }
   };
 
-  fetchChatList();
+  useEffect(() => {
+    fetchChatList();
+  }, []);
+
+  console.log(chatList);
 
   if (chatList.length === 0) {
     return <EmptyState />;
@@ -27,7 +31,7 @@ const ChatListPage = () => {
     <ul className="chat-list">
       {chatList.map((chatData, i) => (
         <li key={i}>
-          <Link to={`/chat/${chatData.id}`}>
+          <Link to={`/chat/${chatData.chatRoomId}`}>
             <ChatListCard chatData={chatData} />
           </Link>
         </li>

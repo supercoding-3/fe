@@ -20,7 +20,7 @@ const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await axios.get(`/chat/room/${transactionId}`);
+      const res = await axios.get(`api/chat/room/${transactionId}`);
       setMessages(res.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -31,10 +31,10 @@ const ChatPage = () => {
     // TODO: 채팅정보 가져오기
     if (inputValue.trim()) {
       const messageData = {
-        // sender: chatData.sender,
-        // receiver: chatData.receiver,
-        message: inputValue,
-        // messageType: chatData.messageType,
+        sender: 'test2@test.com',
+        receiver: 'test1@test.com',
+        message: '안녕하세요!',
+        messageType: 'CHAT',
       };
       socketService.sendJsonMessage(messageData);
     }

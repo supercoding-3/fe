@@ -15,7 +15,7 @@ const HomePage = () => {
   const fetchAllProducts = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/products/all');
+      const response = await axios.get('api/products/all');
       setItems(response.data);
       setFilteredItems(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ const HomePage = () => {
     } else {
       try {
         setIsLoading(true);
-        const response = await axios.get(`/products/category/${category}`);
+        const response = await axios.get(`api/products/category/${category}`);
         setFilteredItems(response.data);
       } catch (error) {
         console.error(
@@ -52,7 +52,9 @@ const HomePage = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.get(`/products/search?title=${searchQuery}`);
+      const response = await axios.get(
+        `api/products/search?title=${searchQuery}`
+      );
       setFilteredItems(response.data);
     } catch (error) {
       console.error('검색 중 오류가 발생했습니다:', error);

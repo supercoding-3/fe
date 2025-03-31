@@ -23,7 +23,7 @@ const ProductPage = () => {
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get(`/products/${productId}`);
+      const res = await axios.get(`api/products/${productId}`);
       const data: ProductData = res.data;
       setProductData(data);
       setIsAwarded(data.productStatus === '낙찰');
@@ -50,7 +50,7 @@ const ProductPage = () => {
       alert('입찰가는 입찰시작가보다 커야 합니다');
     }
     try {
-      await axios.post(`/products/${productId}/bid`, {
+      await axios.post(`api/products/${productId}/bid`, {
         bidPrice: bidPrice,
       });
       fetchProductData();
@@ -61,7 +61,7 @@ const ProductPage = () => {
 
   const handleAwarding = async (bidId: number) => {
     try {
-      await axios.post(`/products/${productId}/award`, {
+      await axios.post(`api/products/${productId}/award`, {
         bidId: bidId,
       });
     } catch (err) {
@@ -71,7 +71,7 @@ const ProductPage = () => {
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`/products/${productId}`);
+      await axios.delete(`api/products/${productId}`);
       navigate('/');
     } catch (err) {
       console.error('삭제 중 오류 발생:', err);
@@ -106,8 +106,8 @@ const ProductPage = () => {
                 ? '낙찰 완료'
                 : '낙찰'
               : isAwarded
-              ? '입찰 완료'
-              : '입찰'
+                ? '입찰 완료'
+                : '입찰'
           }
           onClick={handleAuctionButton}
           isFull={true}

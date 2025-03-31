@@ -27,7 +27,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/user/logout');
+      await axios.post('api/user/logout');
       dispatch(setLogout());
       alert('로그아웃 되었습니다.');
       closeDropdown();

@@ -59,7 +59,7 @@ const ProfileEdit: React.FC = () => {
     data.append('profileImage', selectedFile);
 
     try {
-      const response = await axios.post('/user/my-page/edit/profile', data, {
+      const response = await axios.post('api/user/my-page/edit/profile', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -86,7 +86,7 @@ const ProfileEdit: React.FC = () => {
 
     try {
       const response = await axios.patch(
-        '/user/my-page/edit/profile',
+        'api/user/my-page/edit/profile',
         formData
       );
       if (response.status === 200) {
@@ -118,7 +118,7 @@ const ProfileEdit: React.FC = () => {
     };
 
     try {
-      const response = await axios.patch('/user/deactivate', requestBody);
+      const response = await axios.patch('api/user/deactivate', requestBody);
       if (response.status === 200) {
         alert('회원탈퇴가 완료되었습니다.');
         navigate('/');

@@ -13,7 +13,7 @@ const ProductModifyPage = () => {
 
   const fetchProductData = async () => {
     try {
-      const res = await axios.get(`/products/${productId}`);
+      const res = await axios.get(`api/products/${productId}`);
       const data = res.data;
       setProductData(data);
     } catch (err) {

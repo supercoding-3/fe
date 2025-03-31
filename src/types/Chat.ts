@@ -13,7 +13,7 @@ export interface ChatData {
 }
 
 export interface ChatListCardProps {
-  id: number;
+  chatRoomId: number;
   thumbnail: string;
   title: string;
   price: number;

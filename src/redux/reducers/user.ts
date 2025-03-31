@@ -9,7 +9,7 @@ const initialState: UserState = {
 
 export const __fetchUser = createAsyncThunk('fetchUser', async (_, api) => {
   try {
-    const resp = await axios.get('/user/check-login');
+    const resp = await axios.get('api/user/check-login');
 
     if (!resp.data) {
       return api.rejectWithValue('Unauthorized');
