@@ -1,5 +1,5 @@
 import axios from '@/axios/axios';
-import { AuthForm, Product } from '@/types';
+import { AuthForm, Product, ProductDetail } from '@/types';
 
 export const userApi = {
   signup: async (payload: AuthForm) => {
@@ -53,7 +53,7 @@ export const productApi = {
       throw new Error('Error fetching products');
     }
   },
-  getById: async (id: string): Promise<Product> => {
+  getById: async (id: string): Promise<ProductDetail> => {
     try {
       const response = await axios.get(`api/products/${id}`);
       return response.data;

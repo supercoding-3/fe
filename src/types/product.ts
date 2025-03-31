@@ -21,3 +21,25 @@ export interface ProductForm {
   productEndDate: string;
   category: string;
 }
+
+export interface Bid {
+  bidId: number;
+  userNickname: string;
+  bidPrice: number;
+  bidCreatedAt: string;
+}
+
+export interface ProductDetail {
+  productId: number;
+  title: string;
+  description: string;
+  startingBidPrice: number;
+  immediatePrice: number;
+  category: string;
+  productStatus: string;
+  bidStatus: string;
+  imageUrls: string[];
+  latestBid: Bid;
+  allBids: Bid[];
+  isSeller: boolean;
+}
