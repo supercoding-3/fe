@@ -2,14 +2,6 @@ import axios from '@/axios/axios';
 import { AuthForm, Product } from '@/types';
 
 export const userApi = {
-  login: async (payload: AuthForm) => {
-    try {
-      const response = await axios.post('api/user/login', payload);
-      return response.data;
-    } catch (error) {
-      throw new Error('Error logging in');
-    }
-  },
   signup: async (payload: AuthForm) => {
     try {
       const response = await axios.post('api/user/signup', payload);
@@ -18,12 +10,28 @@ export const userApi = {
       throw new Error('Error signing up');
     }
   },
+  login: async (payload: AuthForm) => {
+    try {
+      const response = await axios.post('api/user/login', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error logging in');
+    }
+  },
   checkLogin: async () => {
     try {
       const response = await axios.get('api/user/check-login');
       return response.data;
     } catch (error) {
       throw new Error('Error checking login status');
+    }
+  },
+  getProducts: async () => {
+    try {
+      const response = await axios.get('api/user/my-page');
+      return response.data;
+    } catch (error) {
+      throw new Error('Error fetching users products');
     }
   },
 };

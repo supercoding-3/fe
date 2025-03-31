@@ -7,6 +7,11 @@ export interface Product {
   productStatus: string;
 }
 
+export interface MyPageProduct {
+  bidProducts: Product[] | [];
+  soldProducts: Product[] | [];
+}
+
 export interface ProductForm {
   images: File[];
   title: string;
@@ -16,20 +21,3 @@ export interface ProductForm {
   productEndDate: string;
   category: string;
 }
-
-// TODO: 제거
-// export interface ProductData {
-//   productId?: number;
-//   title: string;
-//   description: string;
-//   startingBidPrice?: number;
-//   immediatePrice: number;
-//   category: string;
-//   productEndDate?: string;
-//   productStatus?: string;
-//   isSeller: boolean;
-//   imageUrls?: string[];
-//   img?: string;
-//   allBids?: Bid[];
-//   price?: number;
-// }

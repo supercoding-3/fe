@@ -85,7 +85,7 @@ const ProductModify = () => {
     <div className="product-modify">
       <Header>
         <Link to="/" className="product-modify__back">
-          <IoIosArrowBack /> 홈으로
+          <IoIosArrowBack /> 홈
         </Link>
       </Header>
       <div className="product-modify__preview">
