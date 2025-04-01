@@ -61,7 +61,7 @@ export const productApi = {
       throw new Error(`Error fetching product with ID ${id}`);
     }
   },
-  createProduct: async (payload: FormData) => {
+  create: async (payload: FormData) => {
     try {
       axios.post('api/products/register', payload, {
         headers: {
@@ -72,11 +72,18 @@ export const productApi = {
       throw new Error('Error creating product');
     }
   },
-  editProduct: async (id: string, payload: FormData) => {
+  edit: async (id: string, payload: FormData) => {
     try {
       await axios.patch(`api/products/${id}/edit`, payload);
     } catch (error) {
       throw new Error(`Error editing product with ID ${id}`);
+    }
+  },
+  delete: async (id: number) => {
+    try {
+      await axios.delete(`api/products/${id}`);
+    } catch (error) {
+      throw new Error(`Error deleting product with ID ${id}`);
     }
   },
 };

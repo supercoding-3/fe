@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './product.scss';
 import { Error } from '@/components/pages';
-import { HeaderNavigation } from '@/components/layout';
-import { ImageGallery, BidChart } from '@/components/features';
+import { ProductHeader, ImageGallery, BidChart } from '@/components/features';
 import { productApi } from '@/api';
 import { ProductDetail } from '@/types';
+// TODO: 공용컴포넌트로 만들기
 import spinner from '@/assets/images/spinner.svg';
 
 const Product = () => {
@@ -37,30 +37,30 @@ const Product = () => {
     getProduct();
   }, []);
 
-  console.log(productDetail);
-
   if (error) {
     return <Error errorMessage={error} />;
   }
 
   return (
-    <div>
-      <HeaderNavigation />
-      {loading ? (
-        <img src={spinner} alt="spinner" />
-      ) : (
-        <section className="product-detail">
-          <div className="product-info-wrapper">
-            <ImageGallery images={productDetail.imageUrls} />
-            <div className="product-info-wrapper__content">
-              <h1 className="product-title">{productDetail.title}</h1>
-              <p className="product-desc">{productDetail.description}</p>
+    <>
+      <div>
+        <ProductHeader product={productDetail} />
+        {loading ? (
+          <img src={spinner} alt="spinner" />
+        ) : (
+          <section className="product-detail">
+            <div className="product-info-wrapper">
+              <ImageGallery images={productDetail.imageUrls} />
+              <div className="product-info-wrapper__content">
+                <h1 className="product-title">{productDetail.title}</h1>
+                <p className="product-desc">{productDetail.description}</p>
+              </div>
             </div>
-          </div>
-          <BidChart />
-        </section>
-      )}
-    </div>
+            <BidChart />
+          </section>
+        )}
+      </div>
+    </>
   );
 };
 

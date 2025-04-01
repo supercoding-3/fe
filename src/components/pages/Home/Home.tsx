@@ -32,8 +32,9 @@ const Home = () => {
   useEffect(() => {
     if (searchTerm === '') {
       getProducts();
+    } else {
+      searchProducts();
     }
-    searchProducts();
   }, [searchTerm]);
 
   if (error) {
@@ -46,7 +47,9 @@ const Home = () => {
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
       <section
-        className={`home__content ${products.length > 0 ? 'home__content--has-data' : ''}`}
+        className={`home__content ${
+          products.length > 0 ? 'home__content--has-data' : ''
+        }`}
       >
         {products.length > 0 ? (
           products.map((product) => (

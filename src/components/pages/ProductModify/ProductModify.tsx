@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
 import './product-modify.scss';
-import { HeaderNavigation } from '@/components/layout';
+import { ProductHeader } from '@/components/features';
 import { Input, Button, FormError } from '@/components/ui';
 import { PRODUCT_FORM } from '@/constants/productForm';
 import { PRODUCT_CATEGORY } from '@/constants/productCategory';
@@ -11,7 +11,6 @@ import { productApi } from '@/api';
 
 const ProductModify = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [error, setError] = useState<string | null>(null);
   const [images, setImages] = useState<File[]>([]);
@@ -66,22 +65,16 @@ const ProductModify = () => {
         formData.append('images', image);
       });
 
-      await productApi.createProduct(formData);
+      await productApi.create(formData);
       navigate('/');
     } catch (error) {
       setError('상품 수정 중에 오류가 발생했습니다');
     }
   };
 
-  useEffect(() => {
-    if (location.pathname === '/product/edit') {
-      // TODO: 이전 값 보내야함
-    }
-  }, [location.pathname]);
-
   return (
     <div className="product-modify">
-      <HeaderNavigation />
+      <ProductHeader />
       <div className="product-modify__preview">
         <label>
           <LuImagePlus />
