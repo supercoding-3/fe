@@ -14,8 +14,8 @@ const ProductModify = () => {
   const location = useLocation();
 
   const [error, setError] = useState<string | null>(null);
-  const [previews, setPreviews] = useState<string[]>([]);
   const [images, setImages] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
   const [formValues, setFormValues] = useState<ProductForm>({} as ProductForm);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,19 +24,17 @@ const ProductModify = () => {
       setError('이미지는 최대 5개까지 업로드할 수 있습니다');
       return;
     }
+    setError(null);
     setImages(files);
-    const previewUrls = files.map((file) => URL.createObjectURL(file));
-    setPreviews(previewUrls);
+    setPreviews(files.map((file) => URL.createObjectURL(file)));
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  const handleFormChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormValues((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormValues((prev) => ({ ...prev, category: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,26 +45,27 @@ const ProductModify = () => {
       return;
     }
 
-    const formData = new FormData();
-
-    const date = new Date(formValues.productEndDate);
-    date.setHours(23, 59, 59, 999);
-
-    formData.append(
-      'product',
-      new Blob(
-        [JSON.stringify({ ...formValues, productEndDate: date.toISOString() })],
-        {
-          type: 'application/json',
-        }
-      )
-    );
-
-    images.forEach((image) => {
-      formData.append('images', image);
-    });
-
     try {
+      const formData = new FormData();
+      const productData = {
+        ...formValues,
+        productEndDate: new Date(formValues.productEndDate).setHours(
+          23,
+          59,
+          59,
+          999
+        ),
+      };
+      formData.append(
+        'product',
+        new Blob([JSON.stringify(productData)], {
+          type: 'application/json',
+        })
+      );
+      images.forEach((image) => {
+        formData.append('images', image);
+      });
+
       await productApi.createProduct(formData);
       navigate('/');
     } catch (error) {
@@ -78,7 +77,7 @@ const ProductModify = () => {
     if (location.pathname === '/product/edit') {
       // TODO: 이전 값 보내야함
     }
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div className="product-modify">
@@ -93,23 +92,24 @@ const ProductModify = () => {
         ))}
       </div>
       <form onSubmit={handleSubmit} className="product-modify__form">
-        {PRODUCT_FORM.map((input) => (
-          <label key={input.id}>
-            {input.label}
+        {PRODUCT_FORM.map(({ id, label, ...rest }) => (
+          <label key={id}>
+            {label}
             <Input
-              {...input}
-              value={formValues[input.id as keyof ProductForm] || ''}
-              onChange={handleInputChange}
+              {...rest}
+              id={id}
+              value={formValues[id as keyof ProductForm] || ''}
+              onChange={handleFormChange}
             />
           </label>
         ))}
         <div className="description">
-          <div className="description__label">
-            <label htmlFor="description">상품 소개</label>
+          <div className="description__category">
+            <label htmlFor="category">상품 소개</label>
             <select
               id="category"
               value={formValues.category || ''}
-              onChange={handleCategoryChange}
+              onChange={handleFormChange}
             >
               {PRODUCT_CATEGORY.map((category, i) => (
                 <option key={i} value={category}>
@@ -121,8 +121,8 @@ const ProductModify = () => {
           <textarea
             id="description"
             rows={10}
-            className="description__input"
-            onChange={handleInputChange}
+            className="description__text"
+            onChange={handleFormChange}
           />
         </div>
         <Button>확인</Button>

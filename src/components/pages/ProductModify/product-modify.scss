@@ -59,14 +59,14 @@
 }
 
 .description {
-  &__label {
+  &__category {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
   }
 
-  &__input {
+  &__text {
     width: 100%;
     border: 1px solid $color-secondary;
     border-radius: 4px;
