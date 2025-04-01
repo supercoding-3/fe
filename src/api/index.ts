@@ -1,5 +1,5 @@
-import axios from '@/axios/axios';
 import { AuthForm, Product, ProductDetail } from '@/types';
+import axios from './axios';
 
 export const userApi = {
   signup: async (payload: AuthForm) => {

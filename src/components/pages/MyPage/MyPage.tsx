@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store/store';
+import { RootState } from '@/redux/store';
 import './my-page.scss';
 import { Error } from '@/components/pages';
 import { EmptyState, Tab } from '@/components/ui';

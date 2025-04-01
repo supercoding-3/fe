@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store/store';
+import { RootState } from '@/redux/store';
 import PrivateRoute from '@/router/PrivateRoute';
 import Layout from '@/components/layout/Layout';
 import {
