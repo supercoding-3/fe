@@ -10,21 +10,18 @@ function App() {
 
   const [showLoading, setShowLoading] = useState(true);
 
-  const checkLogin = async () => {
-    let timer: NodeJS.Timeout;
-
-    try {
-      const response = await userApi.checkLogin();
-      dispatch(setLogin(response));
-    } catch (error) {
-      dispatch(setLogout());
-    } finally {
-      timer = setTimeout(() => setShowLoading(false), 2000);
-    }
-    return () => clearTimeout(timer);
-  };
-
   useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const response = await userApi.checkLogin();
+        dispatch(response ? setLogin(response) : setLogout());
+      } catch {
+        dispatch(setLogout());
+      } finally {
+        setTimeout(() => setShowLoading(false), 2000);
+      }
+    };
+
     checkLogin();
   }, []);
 
