@@ -8,6 +8,11 @@
     background-color: $color-primary;
   }
 
+  &--secondary {
+    color: $color-primary;
+    background-color: $color-secondary;
+  }
+
   &--disabled {
     background-color: $color-secondary;
     cursor: not-allowed;

@@ -1,16 +1,11 @@
 import './button.scss';
 
-/**
- * 공용 버튼 컴포넌트
- * @param {'primary' | 'disabled'} theme
- * @param {boolean} isFull
- */
 const Button = ({
   theme = 'primary',
   isFull = true,
   ...props
 }: {
-  theme?: 'primary' | 'disabled';
+  theme?: 'primary' | 'secondary' | 'disabled';
   isFull?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
