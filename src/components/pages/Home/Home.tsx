@@ -30,11 +30,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getProducts();
-  }, []);
-
-  useEffect(() => {
-    if (searchTerm === '') return;
+    if (searchTerm === '') {
+      getProducts();
+    }
     searchProducts();
   }, [searchTerm]);
 
