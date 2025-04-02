@@ -3,7 +3,7 @@
  * @param isoString
  * @returns 1999-12-31 23:59:59
  */
-export const formatLocalTime = (isoString: string) => {
+const toLocalTime = (isoString: string) => {
   const date = new Date(isoString);
 
   return date.toLocaleString('ko-KR', {
@@ -17,3 +17,5 @@ export const formatLocalTime = (isoString: string) => {
     hour12: true,
   });
 };
+
+export default toLocalTime;

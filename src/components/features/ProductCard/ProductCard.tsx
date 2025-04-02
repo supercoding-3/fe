@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './product-card.scss';
 import { Product } from '@/types';
-import { formatLocaleString } from '@/utils/formatLocaleString';
+import { toLocalNumber } from '@/utils';
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -16,9 +16,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <p className="info-title">{product.title}</p>
           <div className="info-price">
             <p className="info-price__label">최고 입찰가</p>
-            <p className="info-price__value">
-              {formatLocaleString(product.price)}
-            </p>
+            <p className="info-price__value">{toLocalNumber(product.price)}</p>
           </div>
         </div>
       </article>

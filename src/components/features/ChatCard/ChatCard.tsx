@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './chat-card.scss';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
-import { formatLocaleString } from '@/utils/formatLocaleString';
+import { toLocalNumber } from '@/utils';
 import { ChatRoom } from '@/types';
 
 const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
@@ -15,7 +15,7 @@ const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
       <div className="chat-card__info">
         <div className="chat-card__info--product">
           <p>{roomInfo.productName}</p>
-          <span>{formatLocaleString(roomInfo.productPrice)}원</span>
+          <span>{toLocalNumber(roomInfo.productPrice)}원</span>
         </div>
         <div className="chat-card__info--trader">
           <img
