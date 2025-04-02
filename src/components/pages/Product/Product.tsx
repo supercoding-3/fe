@@ -37,30 +37,29 @@ const Product = () => {
     getProduct();
   }, []);
 
+  console.log(productDetail);
+
   if (error) {
     return <Error errorMessage={error} />;
   }
 
+  if (loading) {
+    return <img src={spinner} alt="spinner" />;
+  }
+
   return (
-    <>
+    <div className="product-container">
+      <ProductHeader product={productDetail} />
+      <ImageGallery images={productDetail.imageUrls} />
       <div>
-        <ProductHeader product={productDetail} />
-        {loading ? (
-          <img src={spinner} alt="spinner" />
-        ) : (
-          <section className="product-detail">
-            <div className="product-info-wrapper">
-              <ImageGallery images={productDetail.imageUrls} />
-              <div className="product-info-wrapper__content">
-                <h1 className="product-title">{productDetail.title}</h1>
-                <p className="product-desc">{productDetail.description}</p>
-              </div>
-            </div>
-            <BidChart />
-          </section>
-        )}
+        <div className="product-info__header">
+          <h1>{productDetail.title}</h1>
+          <span>/ {productDetail.category}</span>
+        </div>
+        <p className="product-desc">{productDetail.description}</p>
       </div>
-    </>
+      <BidChart />
+    </div>
   );
 };
 
