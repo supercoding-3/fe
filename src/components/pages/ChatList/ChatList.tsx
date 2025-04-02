@@ -10,16 +10,16 @@ const ChatList = () => {
   const [error, setError] = useState<string | null>(null);
   const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
 
-  const getChatRooms = async () => {
-    try {
-      const response = await chatApi.getUserRooms();
-      setChatRooms(response);
-    } catch (err) {
-      setError('채팅 목록을 불러오는 중에 오류가 발생했습니다');
-    }
-  };
-
   useEffect(() => {
+    const getChatRooms = async () => {
+      try {
+        const response = await chatApi.getUserRooms();
+        setChatRooms(response);
+      } catch (err) {
+        setError('채팅 목록을 불러오는 중에 오류가 발생했습니다');
+      }
+    };
+
     getChatRooms();
   }, []);
 
@@ -30,7 +30,11 @@ const ChatList = () => {
   return (
     <ul className="chat-list">
       {chatRooms.length > 0 ? (
-        chatRooms.map((room) => <ChatCard key={room.id} roomInfo={room} />)
+        chatRooms.map((room) => (
+          <li key={room.chatRoomId}>
+            <ChatCard roomInfo={room} />
+          </li>
+        ))
       ) : (
         <EmptyState />
       )}

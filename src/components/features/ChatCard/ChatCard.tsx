@@ -1,29 +1,33 @@
+import { Link } from 'react-router-dom';
 import './chat-card.scss';
-import { ChatRoom } from '@/types';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
+import { formatLocaleString } from '@/utils/formatLocaleString';
+import { ChatRoom } from '@/types';
 
-// TODO: className 수정
 const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
+  console.log(roomInfo);
+
   return (
-    <div className="chat-card">
+    <Link to={`/chat/${roomInfo.chatRoomId}`} className="chat-card">
       <img
-        className="chat-card__thumbnail"
-        src={roomInfo.thumbnail}
+        className="chat-card__product-img"
+        src={roomInfo.productProfileImageUrl}
         alt="seller"
       />
-      <div>
-        <p className="chat-card__title">{roomInfo.title}</p>
-        <span className="chat-card__price">{roomInfo.price}</span>
+      <div className="chat-card__info">
+        <div className="chat-card__info--product">
+          <p>{roomInfo.productName}</p>
+          <span>{formatLocaleString(roomInfo.productPrice)}원</span>
+        </div>
+        <div className="chat-card__info--trader">
+          <img
+            src={roomInfo.oppositeProfileImageUrl ?? profilePlaceholder}
+            alt="trader profile image"
+          />
+          <span>{roomInfo.oppositeNickname}</span>
+        </div>
       </div>
-      <div className="chat-card__seller-info">
-        <img
-          className="chat-card__seller-img"
-          src={roomInfo.sellerImg ?? profilePlaceholder}
-          alt="seller"
-        />
-        <span className="chat-card__seller-name">{roomInfo.seller}</span>
-      </div>
-    </div>
+    </Link>
   );
 };
 

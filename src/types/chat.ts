@@ -13,10 +13,10 @@ export interface ChatData {
 }
 
 export interface ChatRoom {
-  id: number;
-  thumbnail: string;
-  title: string;
-  price: number;
-  sellerImg: string;
-  seller: string;
+  chatRoomId: number;
+  productName: string;
+  productPrice: number;
+  productProfileImageUrl: string;
+  oppositeNickname: string;
+  oppositeProfileImageUrl: string | null;
 }
