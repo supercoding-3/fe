@@ -22,13 +22,6 @@ export interface ProductForm {
   category: string;
 }
 
-export interface Bid {
-  bidId: number;
-  userNickname: string;
-  bidPrice: number;
-  bidCreatedAt: string;
-}
-
 export interface ProductDetail {
   productId: number;
   title: string;
@@ -42,4 +35,19 @@ export interface ProductDetail {
   latestBid: Bid;
   allBids: Bid[];
   isSeller: boolean;
+}
+
+export interface Bid {
+  bidId: number;
+  userNickname: string;
+  bidPrice: number;
+  bidCreatedAt: string;
+}
+
+export interface IBidOffer {
+  bidPrice: number;
+}
+
+export interface IBidAward {
+  bidId: number;
 }

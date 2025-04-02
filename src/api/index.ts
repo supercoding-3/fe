@@ -1,4 +1,10 @@
-import { AuthForm, Product, ProductDetail } from '@/types';
+import {
+  AuthForm,
+  Product,
+  ProductDetail,
+  IBidOffer,
+  IBidAward,
+} from '@/types';
 import axios from './axios';
 
 export const userApi = {
@@ -96,6 +102,20 @@ export const productApi = {
       await axios.delete(`api/products/${id}`);
     } catch (error) {
       throw new Error(`Error deleting product with ID ${id}`);
+    }
+  },
+  bidOffer: async (id: number, payload: IBidOffer) => {
+    try {
+      await axios.post(`api/products/${id}/bid`, payload);
+    } catch (error) {
+      throw new Error(`Error bidding on product with ID ${id}`);
+    }
+  },
+  bidAward: async (id: number, payload: IBidAward) => {
+    try {
+      await axios.post(`api/products/${id}/award`, payload);
+    } catch (error) {
+      throw new Error(`Error awarding bid on product with ID ${id}`);
     }
   },
 };

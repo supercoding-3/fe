@@ -20,8 +20,6 @@ const ProductHeader = ({ product }: { product?: ProductDetail }) => {
     navigate(`/product/${product?.productId}/edit`, { state: product });
   };
 
-  console.log(product);
-
   return (
     <>
       <header className="product-header">

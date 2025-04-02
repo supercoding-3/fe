@@ -62,7 +62,7 @@ const Product = () => {
         <p className="product-desc">{productDetail.description}</p>
       </div>
       <ProductBidChart allBids={productDetail.allBids} />
-      <ProductBidButton isSeller={productDetail.isSeller} />
+      <ProductBidButton productDetail={productDetail} />
     </div>
   );
 };

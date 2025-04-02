@@ -3,7 +3,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 28rem;
+  width: 70%;
   height: 2rem;
   color: $color-background;
   font-weight: 600;
@@ -11,6 +11,10 @@
   box-shadow: $shadow;
   background-color: $color-primary;
   transition: bottom 0.3s ease-in-out;
+
+  @media (min-width: $breakpoint-lg) {
+    width: 24rem;
+  }
 
   &--move-up {
     bottom: 5rem;

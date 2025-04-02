@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import './product-bid-button.scss';
+import { ProductBidOfferModal } from '@/components/features';
+import { ProductDetail } from '@/types';
 
-const ProductBidButton = ({ isSeller }: { isSeller: boolean }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+const ProductBidButton = ({
+  productDetail,
+}: {
+  productDetail: ProductDetail;
+}) => {
   const observerRef = useRef<HTMLDivElement>(null);
 
   const [isBottom, setIsBottom] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,10 +39,15 @@ const ProductBidButton = ({ isSeller }: { isSeller: boolean }) => {
         className={`product-bid-button ${
           isBottom ? 'product-bid-button--move-up' : ''
         }`}
-        ref={buttonRef}
+        onClick={() => setModalOpen(true)}
       >
-        {isSeller ? '낙찰' : '입찰'}
+        {productDetail?.isSeller ? '낙찰' : '입찰'}
       </button>
+      <ProductBidOfferModal
+        show={modalOpen}
+        setShow={setModalOpen}
+        productDetail={productDetail}
+      />
     </>
   );
 };
