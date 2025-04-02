@@ -41,8 +41,6 @@ const Product = () => {
     getProduct();
   }, []);
 
-  console.log(productDetail);
-
   if (error) {
     return <Error errorMessage={error} />;
   }
@@ -62,7 +60,7 @@ const Product = () => {
         </div>
         <p className="product-desc">{productDetail.description}</p>
       </div>
-      <ProductBidChart />
+      <ProductBidChart allBids={productDetail.allBids} />
     </div>
   );
 };

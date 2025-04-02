@@ -20,6 +20,8 @@ const ProductHeader = ({ product }: { product?: ProductDetail }) => {
     navigate(`/product/${product?.productId}/edit`, { state: product });
   };
 
+  console.log(product);
+
   return (
     <>
       <header className="product-header">
@@ -29,7 +31,7 @@ const ProductHeader = ({ product }: { product?: ProductDetail }) => {
         >
           <IoIosArrowBack />
         </button>
-        {product && (
+        {product?.isSeller && (
           <div className="product-header__modify-group">
             <button
               onClick={handleDeleteButton}
