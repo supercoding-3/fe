@@ -2,6 +2,7 @@ export { default as ChatCard } from './ChatCard/ChatCard';
 export { default as ChatDisplay } from './ChatDisplay/ChatDisplay';
 export { default as ChatInput } from './ChatInput/ChatInput';
 export { default as ChatMenu } from './ChatMenu/ChatMenu';
+export { default as ProductBidButton } from './ProductBidButton/ProductBidButton';
 export { default as ProductBidChart } from './ProductBidChart/ProductBidChart';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as ProductCategoryDropdown } from './ProductCategoryDropdown/ProductCategoryDropdown';

@@ -6,6 +6,7 @@ import {
   ProductHeader,
   ProductImageGallery,
   ProductBidChart,
+  ProductBidButton,
 } from '@/components/features';
 import { productApi } from '@/api';
 import { ProductDetail } from '@/types';
@@ -61,6 +62,7 @@ const Product = () => {
         <p className="product-desc">{productDetail.description}</p>
       </div>
       <ProductBidChart allBids={productDetail.allBids} />
+      <ProductBidButton isSeller={productDetail.isSeller} />
     </div>
   );
 };
