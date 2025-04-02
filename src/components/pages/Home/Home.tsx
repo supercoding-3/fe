@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './home.scss';
 import { Error } from '@/components/pages';
 import { Search, ProductCard } from '@/components/features';
@@ -7,6 +8,8 @@ import { productApi } from '@/api';
 import { Product } from '@/types';
 
 const Home = () => {
+  const location = useLocation();
+
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,7 +38,7 @@ const Home = () => {
     } else {
       searchProducts();
     }
-  }, [searchTerm]);
+  }, [searchTerm, location]);
 
   if (error) {
     return <Error errorMessage={error} />;

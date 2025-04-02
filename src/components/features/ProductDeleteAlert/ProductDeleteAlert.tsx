@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Alert, Button } from '@/components/ui';
 import './product-delete-alert.scss';
 import { productApi } from '@/api';
@@ -12,6 +13,8 @@ const ProductDeleteAlert = ({
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const navigate = useNavigate();
+
   const [error, setError] = useState<string>('');
 
   const deleteProduct = () => {
@@ -19,6 +22,7 @@ const ProductDeleteAlert = ({
 
     try {
       productApi.delete(productId);
+      navigate('/home');
     } catch (error) {
       setError('상품을 삭제하는 중에 오류가 발생했습니다');
     }

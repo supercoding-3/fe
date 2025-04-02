@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
 import './product-modify.scss';
@@ -11,6 +11,14 @@ import { productApi } from '@/api';
 
 const ProductModify = () => {
   const navigate = useNavigate();
+
+  const fieldRefs = useRef<{
+    [key: string]:
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
+      | null;
+  }>({});
 
   const [error, setError] = useState<string | null>(null);
   const [images, setImages] = useState<File[]>([]);
@@ -44,16 +52,33 @@ const ProductModify = () => {
       return;
     }
 
+    const requiredFields = [
+      'title',
+      'productEndDate',
+      'startingBidPrice',
+      'immediatePrice',
+      'category',
+      'description',
+    ];
+    const emptyField = requiredFields.find(
+      (field) => !formValues[field as keyof ProductForm]
+    );
+
+    if (emptyField) {
+      setError('모든 항목을 입력해야 합니다.');
+
+      if (fieldRefs.current[emptyField]) {
+        fieldRefs.current[emptyField]?.focus();
+      }
+
+      return;
+    }
+
     try {
       const formData = new FormData();
       const productData = {
         ...formValues,
-        productEndDate: new Date(formValues.productEndDate).setHours(
-          23,
-          59,
-          59,
-          999
-        ),
+        productEndDate: formValues.productEndDate + 'T23:59:59.999Z',
       };
       formData.append(
         'product',
@@ -74,7 +99,10 @@ const ProductModify = () => {
 
   return (
     <div className="product-modify">
+      {/* 헤더 */}
       <ProductHeader />
+
+      {/* 이미지 업로드 및 미리보기 */}
       <div className="product-modify__preview">
         <label>
           <LuImagePlus />
@@ -84,6 +112,8 @@ const ProductModify = () => {
           <img key={i} src={src} alt={`preview-${i}`} />
         ))}
       </div>
+
+      {/* 입력 폼 */}
       <form onSubmit={handleSubmit} className="product-modify__form">
         {PRODUCT_FORM.map(({ id, label, ...rest }) => (
           <label key={id}>
@@ -93,17 +123,24 @@ const ProductModify = () => {
               id={id}
               value={formValues[id as keyof ProductForm] || ''}
               onChange={handleFormChange}
+              ref={(el: HTMLInputElement) => (fieldRefs.current[id] = el)}
             />
           </label>
         ))}
         <div className="description">
-          <div className="description__category">
-            <label htmlFor="category">상품 소개</label>
+          <div className="description__header">
+            <label>상품 소개</label>
             <select
               id="category"
               value={formValues.category || ''}
               onChange={handleFormChange}
+              ref={(el) => {
+                fieldRefs.current['category'] = el;
+              }}
             >
+              <option value="" disabled>
+                카테고리 선택
+              </option>
               {PRODUCT_CATEGORY.map((category, i) => (
                 <option key={i} value={category}>
                   {category}
@@ -113,13 +150,16 @@ const ProductModify = () => {
           </div>
           <textarea
             id="description"
-            rows={10}
             className="description__text"
             onChange={handleFormChange}
+            ref={(el) => {
+              fieldRefs.current['description'] = el;
+            }}
           />
         </div>
         <Button>확인</Button>
       </form>
+
       {error && <FormError>{error}</FormError>}
     </div>
   );

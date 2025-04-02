@@ -59,15 +59,19 @@
 }
 
 .description {
-  &__category {
+  &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    > * {
+      font-size: 1rem;
+    }
   }
 
   &__text {
     width: 100%;
+    height: 7rem;
     border: 1px solid $color-secondary;
     border-radius: 4px;
     padding: 0.5rem;
