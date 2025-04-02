@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import './home.scss';
 import { Error } from '@/components/pages';
-import { Search, ProductCard } from '@/components/features';
+import {
+  Search,
+  ProductCategoryDropdown,
+  ProductCard,
+} from '@/components/features';
 import { EmptyState } from '@/components/ui';
 import { productApi } from '@/api';
 import { Product } from '@/types';
+import logo from '@/assets/images/logo.png';
 
 const Home = () => {
-  const location = useLocation();
-
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   const getProducts = async () => {
     try {
@@ -24,6 +27,7 @@ const Home = () => {
   };
 
   const searchProducts = async () => {
+    setSelectedCategory('');
     try {
       const fetchedProducts = await productApi.search(`title=${searchTerm}`);
       setProducts(fetchedProducts);
@@ -32,13 +36,27 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    if (searchTerm === '') {
-      getProducts();
-    } else {
-      searchProducts();
+  const filterProducts = async () => {
+    setSearchTerm('');
+    try {
+      const fetchedProducts = await productApi.filter(selectedCategory);
+      setProducts(fetchedProducts);
+    } catch (error) {
+      setError('상품 데이터를 검색하는 중에 오류가 발생했습니다');
     }
-  }, [searchTerm, location]);
+  };
+
+  useEffect(() => {
+    if (searchTerm === '' && selectedCategory === '') {
+      getProducts();
+    }
+
+    if (searchTerm) {
+      searchProducts();
+    } else if (selectedCategory) {
+      filterProducts();
+    }
+  }, [searchTerm, selectedCategory]);
 
   if (error) {
     return <Error errorMessage={error} />;
@@ -47,8 +65,16 @@ const Home = () => {
   return (
     <div className="home">
       <header className="home__header">
+        <img src={logo} alt="logo" />
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
+      <div className="home__filter">
+        <ProductCategoryDropdown
+          defaultOption="전체"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        />
+      </div>
       <section
         className={`home__content ${
           products.length > 0 ? 'home__content--has-data' : ''

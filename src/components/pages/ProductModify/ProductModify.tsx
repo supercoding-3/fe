@@ -2,10 +2,9 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
 import './product-modify.scss';
-import { ProductHeader } from '@/components/features';
+import { ProductHeader, ProductCategoryDropdown } from '@/components/features';
 import { Input, Button, FormError } from '@/components/ui';
 import { PRODUCT_FORM } from '@/constants/productForm';
-import { PRODUCT_CATEGORY } from '@/constants/productCategory';
 import { ProductForm } from '@/types';
 import { productApi } from '@/api';
 
@@ -130,23 +129,15 @@ const ProductModify = () => {
         <div className="description">
           <div className="description__header">
             <label>상품 소개</label>
-            <select
+            <ProductCategoryDropdown
+              defaultOption="카테고리 선택"
               id="category"
               value={formValues.category || ''}
               onChange={handleFormChange}
-              ref={(el) => {
+              ref={(el: HTMLSelectElement) => {
                 fieldRefs.current['category'] = el;
               }}
-            >
-              <option value="" disabled>
-                카테고리 선택
-              </option>
-              {PRODUCT_CATEGORY.map((category, i) => (
-                <option key={i} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+            />
           </div>
           <textarea
             id="description"

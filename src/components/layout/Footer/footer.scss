@@ -8,14 +8,13 @@
   justify-content: space-around;
 
   &__link {
+    color: $color-secondary;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     &--active {
-      svg {
-        color: $color-background;
-      }
+      color: $color-background;
     }
 
     svg {

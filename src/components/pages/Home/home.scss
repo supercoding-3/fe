@@ -8,6 +8,16 @@
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
+    gap: 1rem;
+
+    > img {
+      width: 3rem;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    justify-content: right;
   }
 
   &__content {

@@ -53,6 +53,14 @@ export const productApi = {
       throw new Error('Error fetching products');
     }
   },
+  filter: async (category: string): Promise<Product[]> => {
+    try {
+      const response = await axios.get(`api/products/category/${category}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error fetching products');
+    }
+  },
   getById: async (id: string): Promise<ProductDetail> => {
     try {
       const response = await axios.get(`api/products/${id}`);
