@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import { Input } from '@/components/ui';
 
-const Search = ({
+const ProductSearch = ({
   searchTerm,
   setSearchTerm,
 }: {
@@ -20,4 +20,4 @@ const Search = ({
   );
 };
 
-export default Search;
+export default ProductSearch;

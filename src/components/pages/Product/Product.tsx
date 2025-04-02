@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './product.scss';
 import { Error } from '@/components/pages';
-import { ProductHeader, ImageGallery, BidChart } from '@/components/features';
+import {
+  ProductHeader,
+  ProductImageGallery,
+  ProductBidChart,
+} from '@/components/features';
 import { productApi } from '@/api';
 import { ProductDetail } from '@/types';
 // TODO: 공용컴포넌트로 만들기
@@ -50,7 +54,7 @@ const Product = () => {
   return (
     <div className="product-container">
       <ProductHeader product={productDetail} />
-      <ImageGallery images={productDetail.imageUrls} />
+      <ProductImageGallery images={productDetail.imageUrls} />
       <div>
         <div className="product-info__header">
           <h1>{productDetail.title}</h1>
@@ -58,7 +62,7 @@ const Product = () => {
         </div>
         <p className="product-desc">{productDetail.description}</p>
       </div>
-      <BidChart />
+      <ProductBidChart />
     </div>
   );
 };

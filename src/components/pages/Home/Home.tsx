@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './home.scss';
 import { Error } from '@/components/pages';
 import {
-  Search,
+  ProductSearch,
   ProductCategoryDropdown,
   ProductCard,
 } from '@/components/features';
@@ -66,7 +66,7 @@ const Home = () => {
     <div className="home">
       <header className="home__header">
         <img src={logo} alt="logo" />
-        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <ProductSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </header>
       <div className="home__filter">
         <ProductCategoryDropdown

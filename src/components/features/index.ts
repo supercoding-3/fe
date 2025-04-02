@@ -1,13 +1,13 @@
-export { default as BidChart } from './BidChart/BidChart';
 export { default as ChatCard } from './ChatCard/ChatCard';
 export { default as ChatDisplay } from './ChatDisplay/ChatDisplay';
 export { default as ChatInput } from './ChatInput/ChatInput';
 export { default as ChatMenu } from './ChatMenu/ChatMenu';
-export { default as ImageGallery } from './ImageGallery/ImageGallery';
+export { default as ProductBidChart } from './ProductBidChart/ProductBidChart';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as ProductCategoryDropdown } from './ProductCategoryDropdown/ProductCategoryDropdown';
 export { default as ProductDeleteAlert } from './ProductDeleteAlert/ProductDeleteAlert';
 export { default as ProductDetailCard } from './ProductDetailCard/ProductDetailCard';
 export { default as ProductHeader } from './ProductHeader/ProductHeader';
-export { default as Search } from './Search/Search';
+export { default as ProductImageGallery } from './ProductImageGallery/ProductImageGallery';
+export { default as ProductSearch } from './ProductSearch/ProductSearch';
 export { default as UserProfile } from './UserProfile/UserProfile';

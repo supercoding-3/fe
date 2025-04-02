@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
-import './image-gallery.scss';
+import './product-image-gallery.scss';
 
-const ImageGallery = ({ images }: { images: string[] }) => {
+const ProductImageGallery = ({ images }: { images: string[] }) => {
   const galleryRef = useRef<HTMLDivElement | null>(null);
   const momentumRef = useRef<number | null>(null);
 
@@ -93,4 +93,4 @@ const ImageGallery = ({ images }: { images: string[] }) => {
   );
 };
 
-export default ImageGallery;
+export default ProductImageGallery;
