@@ -1,15 +1,29 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { LuImagePlus } from 'react-icons/lu';
 import './product-modify.scss';
 import { ProductHeader, ProductCategoryDropdown } from '@/components/features';
 import { Input, Button, FormError } from '@/components/ui';
 import { PRODUCT_FORM } from '@/constants/productForm';
-import { ProductForm } from '@/types';
+import { ProductDetail, ProductForm } from '@/types';
 import { productApi } from '@/api';
 
 const ProductModify = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const pathname = location.pathname;
+
+  const prevProduct = location.state as ProductDetail;
+
+  const formattedPrevProduct = {
+    title: prevProduct?.title,
+    description: prevProduct?.description,
+    startingBidPrice: prevProduct?.startingBidPrice,
+    immediatePrice: prevProduct?.immediatePrice,
+    productEndDate: '',
+    category: prevProduct?.category,
+  } as ProductForm;
 
   const fieldRefs = useRef<{
     [key: string]:
@@ -21,8 +35,12 @@ const ProductModify = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [images, setImages] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
-  const [formValues, setFormValues] = useState<ProductForm>({} as ProductForm);
+  const [previews, setPreviews] = useState<string[]>(
+    prevProduct ? prevProduct.imageUrls : []
+  );
+  const [formValues, setFormValues] = useState<ProductForm>(
+    formattedPrevProduct ?? ({} as ProductForm)
+  );
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
@@ -43,10 +61,62 @@ const ProductModify = () => {
     setFormValues((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  const createProduct = async () => {
+    try {
+      const formData = new FormData();
+
+      const productData = {
+        ...formValues,
+        productEndDate: formValues.productEndDate + 'T23:59:59.999Z',
+      };
+
+      formData.append(
+        'product',
+        new Blob([JSON.stringify(productData)], {
+          type: 'application/json',
+        })
+      );
+      images.forEach((image) => {
+        formData.append('images', image);
+      });
+
+      await productApi.create(formData);
+      navigate('/');
+    } catch (error) {
+      setError('상품 생성 중에 오류가 발생했습니다');
+    }
+  };
+
+  const editProduct = async () => {
+    try {
+      const formData = new FormData();
+
+      const productData = {
+        ...formValues,
+        productEndDate: formValues.productEndDate + 'T23:59:59.999Z',
+      };
+
+      formData.append(
+        'product',
+        new Blob([JSON.stringify(productData)], {
+          type: 'application/json',
+        })
+      );
+      images.forEach((image) => {
+        formData.append('newImages', image);
+      });
+
+      await productApi.edit(prevProduct.productId, formData);
+      navigate(`/product/${prevProduct.productId}`);
+    } catch (error) {
+      setError('상품 수정 중에 오류가 발생했습니다');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (images.length === 0) {
+    if (!pathname.includes('edit') && images.length === 0) {
       setError('최소 1장 이상의 상품 이미지가 필요합니다');
       return;
     }
@@ -62,37 +132,18 @@ const ProductModify = () => {
     const emptyField = requiredFields.find(
       (field) => !formValues[field as keyof ProductForm]
     );
-
     if (emptyField) {
       setError('모든 항목을 입력해야 합니다.');
-
       if (fieldRefs.current[emptyField]) {
         fieldRefs.current[emptyField]?.focus();
       }
-
       return;
     }
 
-    try {
-      const formData = new FormData();
-      const productData = {
-        ...formValues,
-        productEndDate: formValues.productEndDate + 'T23:59:59.999Z',
-      };
-      formData.append(
-        'product',
-        new Blob([JSON.stringify(productData)], {
-          type: 'application/json',
-        })
-      );
-      images.forEach((image) => {
-        formData.append('images', image);
-      });
-
-      await productApi.create(formData);
-      navigate('/');
-    } catch (error) {
-      setError('상품 수정 중에 오류가 발생했습니다');
+    if (pathname.includes('edit')) {
+      editProduct();
+    } else {
+      createProduct();
     }
   };
 
@@ -142,6 +193,7 @@ const ProductModify = () => {
           <textarea
             id="description"
             className="description__text"
+            value={formValues.description || ''}
             onChange={handleFormChange}
             ref={(el) => {
               fieldRefs.current['description'] = el;

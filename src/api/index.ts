@@ -80,9 +80,13 @@ export const productApi = {
       throw new Error('Error creating product');
     }
   },
-  edit: async (id: string, payload: FormData) => {
+  edit: async (id: number, payload: FormData) => {
     try {
-      await axios.patch(`api/products/${id}/edit`, payload);
+      await axios.patch(`api/products/${id}/edit`, payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
     } catch (error) {
       throw new Error(`Error editing product with ID ${id}`);
     }
