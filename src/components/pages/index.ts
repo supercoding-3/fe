@@ -1,4 +1,5 @@
 export { default as Auth } from './Auth/Auth';
+export { default as Chat } from './Chat/Chat';
 export { default as ChatList } from './ChatList/ChatList';
 export { default as Error } from './Error/Error';
 export { default as Home } from './Home/Home';

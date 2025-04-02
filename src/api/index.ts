@@ -105,4 +105,12 @@ export const chatApi = {
       throw new Error('Error fetching chat list');
     }
   },
+  getRoomMessages: async (roomId: string) => {
+    try {
+      const response = await axios.get(`api/chat/room/${roomId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(`Error fetching messages for room ID ${roomId}`);
+    }
+  },
 };

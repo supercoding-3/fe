@@ -6,12 +6,12 @@ import Layout from '@/components/layout/Layout';
 import {
   Home,
   Auth,
-  ProductModify,
   Product,
+  ProductModify,
   ChatList,
+  Chat,
   MyPage,
 } from '@/components/pages';
-import ChatPage from '@/pages/ChatPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
 const Router = () => {
@@ -29,7 +29,7 @@ const Router = () => {
             <Route path="/product/create" element={<ProductModify />} />
             <Route path="/product/:id/edit" element={<ProductModify />} />
             <Route path="/chat" element={<ChatList />} />
-            <Route path="/chat/:id" element={<ChatPage />} />
+            <Route path="/chat/:id" element={<Chat />} />
             <Route path="/mypage" element={<MyPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />

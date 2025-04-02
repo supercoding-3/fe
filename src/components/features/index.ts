@@ -1,5 +1,8 @@
 export { default as BidChart } from './BidChart/BidChart';
 export { default as ChatCard } from './ChatCard/ChatCard';
+export { default as ChatDisplay } from './ChatDisplay/ChatDisplay';
+export { default as ChatInput } from './ChatInput/ChatInput';
+export { default as ChatMenu } from './ChatMenu/ChatMenu';
 export { default as ImageGallery } from './ImageGallery/ImageGallery';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as ProductCategoryDropdown } from './ProductCategoryDropdown/ProductCategoryDropdown';

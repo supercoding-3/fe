@@ -5,8 +5,6 @@ import { formatLocaleString } from '@/utils/formatLocaleString';
 import { ChatRoom } from '@/types';
 
 const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
-  console.log(roomInfo);
-
   return (
     <Link to={`/chat/${roomInfo.chatRoomId}`} className="chat-card">
       <img
