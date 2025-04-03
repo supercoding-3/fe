@@ -21,7 +21,6 @@ function App() {
         setTimeout(() => setShowLoading(false), 2000);
       }
     };
-
     checkLogin();
   }, []);
 
