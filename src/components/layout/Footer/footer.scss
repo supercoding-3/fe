@@ -1,0 +1,28 @@
+.nav {
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__link {
+    color: $color-secondary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--active {
+      color: $color-background;
+    }
+
+    svg {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}

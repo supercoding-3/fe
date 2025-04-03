@@ -14,6 +14,7 @@ const createSocketService = () => {
       return;
     }
 
+    // TODO: 토큰 추가 필요 > 수정
     socket = new WebSocket(`${socketUrl}/chat/room/${transactionId}`);
 
     socket.onopen = () => {
@@ -21,6 +22,7 @@ const createSocketService = () => {
     };
 
     socket.onmessage = (event) => {
+      console.log('!!', event.data);
       try {
         if (messageHandler) {
           messageHandler(event.data);

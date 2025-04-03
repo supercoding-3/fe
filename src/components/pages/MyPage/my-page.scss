@@ -1,0 +1,10 @@
+.my-page {
+  min-width: 440px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__content {
+    flex: 1;
+  }
+}

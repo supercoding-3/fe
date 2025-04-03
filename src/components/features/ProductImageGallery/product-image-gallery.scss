@@ -1,0 +1,23 @@
+.image-gallery {
+  width: 100%;
+  padding: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  user-select: none;
+  scroll-behavior: smooth;
+  cursor: grab;
+  display: flex;
+  gap: 1rem;
+
+  &.dragging {
+    cursor: grabbing;
+  }
+
+  > img {
+    height: 16rem;
+    object-fit: contain;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    scroll-snap-align: center;
+  }
+}

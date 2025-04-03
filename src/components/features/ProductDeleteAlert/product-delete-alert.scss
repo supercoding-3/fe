@@ -1,0 +1,23 @@
+.product-delete-alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  &__message {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    position: relative;
+
+    &--error {
+      height: 1rem;
+      color: $color-error;
+    }
+  }
+
+  &__button-group {
+    display: flex;
+    gap: 1rem;
+  }
+}
