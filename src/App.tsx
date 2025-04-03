@@ -1,15 +1,31 @@
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import Router from '@/router/Router';
-import { __fetchUser } from '@/redux/reducers/user';
-import { AppDispatch } from '@/redux/store/store';
+import { Loading } from '@/components/pages';
+import { userApi } from '@/api';
+import { setLogin, setLogout } from '@/redux/reducers/user';
 
 function App() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
+
+  const [showLoading, setShowLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(__fetchUser());
-  }, [dispatch]);
+    const checkLogin = async () => {
+      try {
+        const response = await userApi.checkLogin();
+        dispatch(response ? setLogin(response) : setLogout());
+      } catch {
+        dispatch(setLogout());
+      } finally {
+        setTimeout(() => setShowLoading(false), 2000);
+      }
+    };
+
+    checkLogin();
+  }, []);
+
+  if (showLoading) return <Loading />;
 
   return (
     <div className="app">

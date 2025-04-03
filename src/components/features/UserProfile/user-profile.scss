@@ -1,0 +1,26 @@
+.user-profile {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: $radius;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @include mixins.border;
+
+  &__img {
+    width: 8rem;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-info {
+  flex: 1;
+
+  &__nickname {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}

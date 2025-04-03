@@ -1,0 +1,24 @@
+.button {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: $radius;
+  color: $color-background;
+
+  &--primary {
+    background-color: $color-primary;
+  }
+
+  &--secondary {
+    color: $color-primary;
+    background-color: $color-secondary;
+  }
+
+  &--disabled {
+    background-color: $color-secondary;
+    cursor: not-allowed;
+  }
+
+  &--full {
+    width: 100%;
+  }
+}
