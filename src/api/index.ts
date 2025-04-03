@@ -1,10 +1,4 @@
-import {
-  AuthForm,
-  Product,
-  ProductDetail,
-  IBidOffer,
-  IBidAward,
-} from '@/types';
+import { AuthForm, Product, ProductDetail, IBidOffer } from '@/types';
 import axios from './axios';
 
 export const userApi = {
@@ -111,11 +105,11 @@ export const productApi = {
       throw new Error(`Error bidding on product with ID ${id}`);
     }
   },
-  bidAward: async (id: number, payload: IBidAward) => {
+  bidAward: async (productId: number, bidId: number) => {
     try {
-      await axios.post(`api/products/${id}/award`, payload);
+      await axios.post(`api/products/${productId}/award`, bidId);
     } catch (error) {
-      throw new Error(`Error awarding bid on product with ID ${id}`);
+      throw new Error(`Error awarding bid on product with ID ${productId}`);
     }
   },
 };

@@ -45,9 +45,5 @@ export interface Bid {
 }
 
 export interface IBidOffer {
-  bidPrice: number;
-}
-
-export interface IBidAward {
-  bidId: number;
+  bidPrice: string;
 }

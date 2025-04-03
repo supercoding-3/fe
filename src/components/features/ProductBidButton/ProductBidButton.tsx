@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import './product-bid-button.scss';
-import { ProductBidOfferModal } from '@/components/features';
+import {
+  ProductBidAwardModal,
+  ProductBidOfferModal,
+} from '@/components/features';
 import { ProductDetail } from '@/types';
 
 const ProductBidButton = ({
@@ -35,6 +38,7 @@ const ProductBidButton = ({
   return (
     <>
       <div ref={observerRef} className="scroll-bottom-marker" />
+
       <button
         className={`product-bid-button ${
           isBottom ? 'product-bid-button--move-up' : ''
@@ -43,11 +47,20 @@ const ProductBidButton = ({
       >
         {productDetail?.isSeller ? '낙찰' : '입찰'}
       </button>
-      <ProductBidOfferModal
-        show={modalOpen}
-        setShow={setModalOpen}
-        productDetail={productDetail}
-      />
+
+      {productDetail?.isSeller ? (
+        <ProductBidAwardModal
+          show={modalOpen}
+          setShow={setModalOpen}
+          productDetail={productDetail}
+        />
+      ) : (
+        <ProductBidOfferModal
+          show={modalOpen}
+          setShow={setModalOpen}
+          productDetail={productDetail}
+        />
+      )}
     </>
   );
 };
