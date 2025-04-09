@@ -43,7 +43,6 @@ const Auth = () => {
     }
   };
 
-  // 로그인, 회원가입 페이지 이동 시 폼 리셋
   useEffect(() => {
     setFormValues({} as AuthForm);
   }, [pathname]);

@@ -14,3 +14,4 @@ export { default as ProductHeader } from './ProductHeader/ProductHeader';
 export { default as ProductImageGallery } from './ProductImageGallery/ProductImageGallery';
 export { default as ProductSearch } from './ProductSearch/ProductSearch';
 export { default as UserProfile } from './UserProfile/UserProfile';
+export { default as UserProfileEditModal } from './UserProfileEditModal/UserProfileEditModal';

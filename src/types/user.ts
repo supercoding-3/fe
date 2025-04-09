@@ -16,3 +16,10 @@ export interface User {
   userPhone: string;
   userUpdatedAt: string;
 }
+
+export interface ProfileEditForm {
+  password?: string;
+  confirmPassword?: string;
+  nickname?: string;
+  phoneNumber?: string;
+}

@@ -1,4 +1,10 @@
-import { AuthForm, Product, ProductDetail, IBidOffer } from '@/types';
+import {
+  AuthForm,
+  ProfileEditForm,
+  Product,
+  ProductDetail,
+  IBidOffer,
+} from '@/types';
 import axios from './axios';
 
 export const userApi = {
@@ -16,6 +22,14 @@ export const userApi = {
       return response.data;
     } catch (error) {
       throw new Error('Error logging in');
+    }
+  },
+  edit: async (payload: ProfileEditForm) => {
+    try {
+      const response = await axios.patch('api/user/my-page/edit', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error editing profile');
     }
   },
   checkLogin: async () => {
