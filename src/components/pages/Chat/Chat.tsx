@@ -1,27 +1,33 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { CiMenuKebab } from 'react-icons/ci';
+import { useSelector } from 'react-redux';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { IoIosArrowBack } from 'react-icons/io';
 import './chat.scss';
-import { Error } from '@/components/pages';
 import socketService from '@/services/socketService';
+import { Error } from '@/components/pages';
+import { ChatDisplay, ChatInput } from '@/components/features';
 import { chatApi } from '@/api';
 import { ChatData } from '@/types';
-import { ChatDisplay, ChatMenu, ChatInput } from '@/components/features';
+import { RootState } from '@/redux/store';
 
 const Chat = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [error, setError] = useState<string>('');
   const [messages, setMessages] = useState<ChatData[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { chatRoomId } = useParams();
+  const { id: chatRoomId } = useParams();
+  const roomInfo = location.state;
+  const { user } = useSelector((state: RootState) => state.user);
 
   const handleSendMessage = () => {
     if (inputValue.trim()) {
       const messageData = {
-        sender: 'test2@test.com',
-        receiver: 'test1@test.com',
-        message: '안녕하세요!',
+        sender: user.userEmail,
+        receiver: 'test1@test.com', //TODO: 수정 필요
+        message: inputValue,
         messageType: 'CHAT',
       };
       socketService.sendJsonMessage(messageData);
@@ -30,8 +36,8 @@ const Chat = () => {
 
   useEffect(() => {
     const getMessages = async () => {
-      if (!chatRoomId) {
-        setError('채팅 데이터를 불러오는 중에 오류가 발생했습니다');
+      if (!chatRoomId || chatRoomId != roomInfo.chatRoomId) {
+        setError('채팅방 정보를 알 수 없습니다');
         return;
       }
 
@@ -52,10 +58,9 @@ const Chat = () => {
 
   useEffect(() => {
     if (!chatRoomId) {
-      setError('채팅방 정보를 확인할 수 없습니다');
+      setError('실시간 채팅에 연결할 수 없습니다');
       return;
     }
-
     socketService.connect(chatRoomId);
 
     socketService.onMessage((data: string) => {
@@ -79,18 +84,18 @@ const Chat = () => {
   }
 
   return (
-    <div className="chat-page">
-      <ChatDisplay messages={messages} />
-      <div className="chat-page__bottom">
-        <ChatMenu isMenuOpen={isMenuOpen} />
-        <button
-          className="chat-page__bottom-button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <CiMenuKebab />
+    <div className="chat">
+      <header className="chat__header">
+        <button onClick={() => navigate(-1)}>
+          <IoIosArrowBack />
         </button>
+      </header>
+
+      <ChatDisplay messages={messages} userEmail={user.userEmail} />
+
+      <footer className="chat__bottom">
         <ChatInput onSendMessage={setInputValue} />
-      </div>
+      </footer>
     </div>
   );
 };

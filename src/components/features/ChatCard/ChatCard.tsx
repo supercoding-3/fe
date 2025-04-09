@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './chat-card.scss';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 import { toLocalNumber } from '@/utils';
 import { ChatRoom } from '@/types';
 
 const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
+  const navigate = useNavigate();
+
   return (
-    <Link to={`/chat/${roomInfo.chatRoomId}`} className="chat-card">
+    <button
+      onClick={() =>
+        navigate(`/chat/${roomInfo.chatRoomId}`, { state: roomInfo })
+      }
+      className="chat-card"
+    >
       <img
         className="chat-card__product-img"
         src={roomInfo.productProfileImageUrl}
-        alt="seller"
+        alt="product image"
       />
       <div className="chat-card__info">
         <div className="chat-card__info--product">
@@ -25,7 +32,7 @@ const ChatCard = ({ roomInfo }: { roomInfo: ChatRoom }) => {
           <span>{roomInfo.oppositeNickname}</span>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 
