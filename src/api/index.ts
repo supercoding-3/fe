@@ -1,4 +1,10 @@
-import { AuthForm, Product, ProductDetail, IBidOffer } from '@/types';
+import {
+  AuthForm,
+  ProfileEditForm,
+  Product,
+  ProductDetail,
+  IBidOffer,
+} from '@/types';
 import axios from './axios';
 
 export const userApi = {
@@ -16,6 +22,30 @@ export const userApi = {
       return response.data;
     } catch (error) {
       throw new Error('Error logging in');
+    }
+  },
+  edit: async (payload: ProfileEditForm) => {
+    try {
+      const response = await axios.patch('api/user/my-page/edit', payload);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error editing profile');
+    }
+  },
+  uploadImage: async (payload: FormData) => {
+    try {
+      const response = await axios.post(
+        'api/user/my-page/edit/profile',
+        payload,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error('Error editing profile image');
     }
   },
   checkLogin: async () => {

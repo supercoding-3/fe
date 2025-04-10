@@ -1,28 +1,32 @@
+.footer-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__menu-button {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
 .chat-input {
   flex: 1;
   display: flex;
   align-items: center;
-
-  &__textarea {
-    padding: 8px;
-    resize: none;
-    height: 40px;
-    flex: 1;
-    font-size: large;
-    border-radius: 10px;
-    border: 1px solid $color-secondary;
-  }
+  justify-content: center;
+  gap: 1rem;
 
   &__button {
-    background-color: $color-primary;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    font-size: 1.4rem;
     color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: x-large;
-    padding: 8px;
-    margin: 8px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+    background-color: $color-primary;
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

@@ -1,6 +1,8 @@
-import { IoIosSend } from 'react-icons/io';
 import { useState } from 'react';
+import { IoIosArrowDropupCircle, IoIosSend } from 'react-icons/io';
 import './chat-input.scss';
+import { Input } from '@/components/ui';
+import { ChatMenu } from '@/components/features';
 
 const ChatInput = ({
   onSendMessage,
@@ -8,6 +10,7 @@ const ChatInput = ({
   onSendMessage: (inputValue: string) => void;
 }) => {
   const [inputValue, setInputValue] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
@@ -33,17 +36,27 @@ const ChatInput = ({
   };
 
   return (
-    <div className="chat-input">
-      <textarea
-        className="chat-input__textarea"
-        value={inputValue}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-      />
-      <button className="chat-input__button" onClick={sendMessage}>
-        <IoIosSend />
-      </button>
-    </div>
+    <>
+      <ChatMenu isMenuOpen={isMenuOpen} />
+      <div className="footer-container">
+        <button
+          className="footer-container__menu-button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <IoIosArrowDropupCircle />
+        </button>
+        <div className="chat-input">
+          <Input
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+          />
+          <button className="chat-input__button" onClick={sendMessage}>
+            <IoIosSend />
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

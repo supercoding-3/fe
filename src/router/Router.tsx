@@ -11,8 +11,8 @@ import {
   ChatList,
   Chat,
   MyPage,
+  Error,
 } from '@/components/pages';
-import NotFoundPage from '@/pages/NotFoundPage';
 
 const Router = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.user);
@@ -32,7 +32,10 @@ const Router = () => {
             <Route path="/chat/:id" element={<Chat />} />
             <Route path="/mypage" element={<MyPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          <Route
+            path="*"
+            element={<Error errorMessage="페이지를 찾을 수 없습니다" />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
