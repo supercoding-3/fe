@@ -1,0 +1,38 @@
+.chat-menu {
+  width: 100%;
+  background-color: $color-primary;
+  padding: 1rem 0.5rem;
+  border-radius: $radius;
+  display: flex;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  opacity: 1;
+  transition: all 0.3s ease;
+
+  &--hidden {
+    transform: translateY(-90%);
+    opacity: 0;
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+      border-right: 1px solid $color-secondary;
+    }
+
+    > button {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

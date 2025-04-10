@@ -2,7 +2,13 @@ import { useEffect, useRef } from 'react';
 import './chat-display.scss';
 import { ChatData } from '@/types';
 
-const ChatDisplay = ({ messages }: { messages: ChatData[] }) => {
+const ChatDisplay = ({
+  messages,
+  userEmail,
+}: {
+  messages: ChatData[];
+  userEmail: string;
+}) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,14 +20,11 @@ const ChatDisplay = ({ messages }: { messages: ChatData[] }) => {
       {messages.map((message, i) => (
         <p
           key={i}
-          className={
-            'chat-display__message'
-            //   `${
-            //   message.includes('Echo')
-            //     ? 'chat-display__message-received'
-            //     : 'chat-display__message-sent'
-            // }`
-          }
+          className={`chat-display__message ${
+            message.receiver === userEmail
+              ? 'chat-display__message-received'
+              : 'chat-display__message-sent'
+          }`}
         >
           {message.message}
         </p>
