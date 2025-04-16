@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { MdAddAPhoto, MdModeEdit } from 'react-icons/md';
+import { MdAddAPhoto, MdModeEdit, MdLogout } from 'react-icons/md';
 import './user-profile.scss';
 import profilePlaceholder from '@/assets/images/placeholder-profile.jpeg';
 import { Error } from '@/components/pages';
@@ -31,6 +31,15 @@ const UserProfile = ({ user }: { user: User }) => {
       window.location.reload();
     } catch (error) {
       setErrorMessage('프로필 사진 업로드 중에 오류가 발생했습니다');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await userApi.logout();
+      window.location.reload();
+    } catch (error) {
+      setErrorMessage('로그아웃 중에 오류가 발생했습니다');
     }
   };
 
@@ -68,6 +77,10 @@ const UserProfile = ({ user }: { user: User }) => {
           <Button type="button" onClick={() => setModalOpen(true)}>
             <MdModeEdit />
             개인정보 수정
+          </Button>
+          <Button type="button" onClick={handleLogout}>
+            <MdLogout />
+            로그아웃
           </Button>
         </div>
       </div>
