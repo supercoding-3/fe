@@ -24,6 +24,13 @@ export const userApi = {
       throw new Error('Error logging in');
     }
   },
+  logout: async () => {
+    try {
+      await axios.post('api/user/logout');
+    } catch (error) {
+      throw new Error('Error logging out');
+    }
+  },
   edit: async (payload: ProfileEditForm) => {
     try {
       const response = await axios.patch('api/user/my-page/edit', payload);

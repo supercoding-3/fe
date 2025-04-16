@@ -44,11 +44,10 @@ const ProductBidOfferModal = ({
   return (
     <Modal show={show} setShow={setShow}>
       <form onSubmit={handleSubmit} className="offer-form">
-        <div className="offer-form__header">
-          <label>입찰액을 입력하세요</label>
-          <span>
-            입찰시작가: {toLocalNumber(productDetail.startingBidPrice)}원
-          </span>
+        <p className="offer-form__title">입찰액을 입력하세요</p>
+        <div className="offer-form__info">
+          <p>입찰시작가: {toLocalNumber(productDetail.startingBidPrice)}원</p>
+          <p>즉시낙찰가: {toLocalNumber(productDetail.immediatePrice)}원</p>
         </div>
         <Input type="number" required />
         <FormError>{errorMessage}</FormError>

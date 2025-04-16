@@ -3,15 +3,15 @@
   flex-direction: column;
   gap: 1rem;
 
-  &__header {
-    margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &__title {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 
-    > label {
-      font-size: 1.2rem;
-      font-weight: 600;
+  &__info {
+    > p {
+      font-size: 0.875rem;
     }
   }
 }
